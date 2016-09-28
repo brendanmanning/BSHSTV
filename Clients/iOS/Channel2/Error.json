@@ -1,0 +1,19 @@
+{
+    “items”: [
+        {
+              "snippet": {
+                “title”: “No Internet”,
+                “description”: “Please check your internet connection”,
+                “thumbnails”: {
+                    “default”: {
+                        “url”: “errorimg”,
+                        “width”: 120,
+                        “height”: 90
+                    }
+                }
+              }
+            }
+        ]
+}
+
+              
