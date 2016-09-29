@@ -1,0 +1,68 @@
+/* Added new button types: primary and destructive */
+button.primary {
+ 	color: #00AF33;
+	background: #fff;
+	text-transform: uppercase;
+	border: 2px solid #00AF33;
+}
+button.large {
+  	font-size: 18px;
+  	padding: 15px 32px;
+}
+button.round {
+  	border-radius: 6px;
+}
+button.destructive {
+	color: #00AF33;
+	background: #fff;
+	border: 2px solid #00AF33;
+	text-transform: uppercase;
+}
+
+/* Added hover effects for the buttons */
+button.primary:hover {
+	background: #00AF33;
+	color: #fff;
+	border: 2px solid #fff;
+}
+button.destructive:hover {
+	background: #00AF33;
+	color: #fff;
+	border: 2px solid #fff;;
+}
+/* Customized input tag */
+input[type=text] {
+	border: none;
+	border-bottom: solid 2px #031E2E;
+	transition: border 0.3s;
+	color: #000;
+}
+input[type=email] {
+	border: none;
+	border-bottom: solid 2px #031E2E;
+	transition: border 0.3s;
+	color: #000;
+}
+input:focus,
+input.focus {
+	border-bottom: solid 3px #00AF33;
+	color: #00AF33;
+}
+
+img.screenshot {
+	border: 3px solid #00AF33; 
+}
+
+img.portrait {
+	height: 266px;
+	width: 150px;
+}
+img.landscape {
+	height: 200px;
+	width: 266px;
+}
+
+img.screenshot:hover{
+	border: 3px solid #5DFC0A;
+	transition: border 0.3s; 
+}
