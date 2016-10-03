@@ -166,6 +166,7 @@ class VideosTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "showStarterVideo");
         NSUserDefaults.standardUserDefaults().setValue(videos[indexPath.item].getid(), forKey: "videoid")
         NSUserDefaults.standardUserDefaults().synchronize();
         self.showDetailViewController(YouTubeVideoViewController(), sender: self);

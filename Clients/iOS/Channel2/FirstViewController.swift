@@ -16,23 +16,6 @@ class FirstViewController: UIViewController {
     // Current Poll Object
     var poll:Poll!
     
-    // Socket URLs
-   /* let LAN_IP = NSURL(string: String(NSUserDefaults.standardUserDefaults().valueForKey("lanip")))
-    let WAN_IP = NSURL(string: String(NSUserDefaults.standardUserDefaults().valueForKey("hostname")))
-    
-    /* See if we can access a small static file from the server */
-    let LAN_TEST_PAGE = NSURL(string: "http://192.168.1.1" + "/hello.html")
-    let WAN_TEST_PAGE = NSURL(string: String(NSUserDefaults.standardUserDefaults().valueForKey("hostname")) + "/hello.html")
-
-    
-    // Socket connection
-    var socket:SocketIOClient!;
-    var isConnectedToMainServer = false;
-    
-    // Socket connection statuses
-    var lanConnectionFailed = false;
-    var wanConnectionFailed = false;*/
-    
     // Interface Builder
     @IBOutlet weak var reconnectButton: UIButton!
     @IBOutlet var logo: UIImageView!
@@ -86,7 +69,7 @@ class FirstViewController: UIViewController {
                 let url = NSURL(string: (host as! String) + "banner.php")
                 do {
                     let b = try String(contentsOfURL: url!)
-                    if(b.lowercaseString != "nothing")
+                    if(b.lowercaseString != "nothing" && b != "")
                     {
                         Async.main {
                             self.banner.text = b;
@@ -99,175 +82,15 @@ class FirstViewController: UIViewController {
                 } catch {}
             }
         }
-        
-        
-        /* 
- 
-            SERVER CONNECTIONS DISABLED
- 
- 
-    */
-        
-        
-        
-        // Server connection
-       // self.connectToServers()
     }
     
     @IBAction func reconnectToServer(sender: AnyObject) {
-        /*if((self.socket) != nil)
-        {
-            if(self.socket.status != SocketIOClientStatus.Connected && self.socket.status != SocketIOClientStatus.Connecting)
-            {
-                self.connectToServers();
-            }
-        } else {
-            self.connectToServers();
-        }*/
     }
     
     func connectToServers() {
-       /* let tester = SocketTester(lan: LAN_TEST_PAGE!, fallback: WAN_TEST_PAGE!);
-        Async.background {
-            if(tester.test())
-            {
-                Async.main {
-                    self.reconnectButton.hidden = true;
-                    self.reconnectButton.enabled = false;
-                }
-                
-                self.socket = tester.getWorkingSocket();
-                self.socketHandlers()
-                self.socket.connect();
-            } else {
-                //TEMP: Try again with port 443
-                let newtest = SocketTester(lan: self.LAN_TEST_PAGE!, fallback: NSURL(string: "http://ch2.brendanmanning.com:443/hello.html")!)
-                self.bottom.text = "Trying port 443";
-                if(!newtest.test())
-                {
-                    
-                
-                // UI must be updated from the main thread
-                Async.main {
-                    self.top.text = "No servers reachable"
-                    self.bottom.text = "Your are offline"
-                }
-                
-                
-                Async.main {
-                    self.reconnectButton.alpha = 0.0;
-                    
-                    self.reconnectButton.hidden = false;
-                    self.reconnectButton.enabled = true;
-                    
-                    UIView.animateWithDuration(1.0, animations: {
-                        self.reconnectButton.alpha = 1.0;
-                    })
-                }
-                } else {
-                    Async.main {
-                        self.top.text = "443 Connected"
-                        self.bottom.text = "PORT 443 WORKS!";
-                        self.socket = newtest.getWorkingSocket();
-                        self.socketHandlers();
-                        self.socket.connect();
-                        
-                        let alert = UIAlertController(title: "Connected", message: "You are connected to port 443", preferredStyle: .Alert)
-                        let dismiss = UIAlertAction(title: "Yay!", style: .Default, handler: nil)
-                        alert.addAction(dismiss)
-                        self.presentViewController(alert, animated: true, completion: nil)
-                    }
-                }
-            }
-            
-            Async.main {
-                NSUserDefaults.standardUserDefaults().setInteger(tester.socketNumber(), forKey: "servernumber");
-            }
-        }*/
     }
     // Socket handlers
     func socketHandlers() {
-        /*self.socket.on("poll") {[weak self] data, ack in
-            let components = String(data[0]).componentsSeparatedByString(",")
-            self!.poll = Poll(_choices: components, _correct: data[1].integerValue, _prompt: (data[2] as? String)!);
-            self!.displayPollPopup()
-        }
-        
-        self.socket.on("live") {[weak self] data, ack in
-            self!.logo.image = UIImage(named: "green_logo");
-            self!.top.text = "Channel 2: ON AIR!"
-            self!.bottom.text = "Thanks for watching!"
-        }
-        
-        self.socket.on("offair") {[weak self] data, ack in
-            self!.logo.image = UIImage(named: "red_logo");
-            self!.top.text = "Channel 2"
-            self!.bottom.text = "Broadcast off air"
-        }
-        
-        self.socket.on("results") {[weak self] data, ack in
-            self!.popupmessage("The vote ended!", msg: data[0] as! String);
-        }
-        
-        /*self.socket.on("videos") {[weak self] data, ack in
-            NSUserDefaults.standardUserDefaults().setObject((data[0] as! String), forKey: "videos");
-            NSNotificationCenter.defaultCenter().postNotificationName("com.brendanmanning.Channel-2.updatevideos", object: self)
-        }*/
-        self.socket.on("hello") {[weak self] data, ack in
-            self!.bottom.text = "Stay tuned for broadcast!";
-        }
-        
-        self.socket.on("announcements") {[weak self] data, ack in
-            NSUserDefaults.standardUserDefaults().setValue(String(data[0]), forKey: "announcements")
-            NSNotificationCenter.defaultCenter().postNotificationName("com.brendanmanning.Channel-2.announcements", object: self)
-        }
-        
-        self.socket.on("pollresults") {[weak self] data, ack in
-            let dataAsString = data[0] as! String;
-            // The event will emit something like this:
-            //Choice1:33.333%/Choice 2:25%
-            var values = [Double]();
-            var labels = [String]();
-            for choice in dataAsString.stringByReplacingOccurrencesOfString("%", withString: "").componentsSeparatedByString("/")
-            {
-                let choiceTitle = choice.componentsSeparatedByString(":")[0];
-                let choiceValue = choice.componentsSeparatedByString(":")[1];
-                
-                values.append((choiceValue as NSString).doubleValue);
-                labels.append(choiceTitle);
-            }
-            
-            let graphVC = GraphViewController();
-            graphVC.datalabels = labels;
-            graphVC.datavals = values;
-            graphVC.pollprompt = data[1] as! String;
-            
-            self?.presentViewController(graphVC, animated: true, completion: nil)
-        }
-         */
-    }
-    
-    // Poll UI Methods
-    func displayPollPopup() {
-        /*
-        var popupTitle = "poll!";
-        if(poll.hasCorrectAnswers())
-        {
-            popupTitle = "question!"
-        }
-        popup = PopupDialog(title: "Answer this " + popupTitle, message: poll.getprompt());
-        let buttonOne = DefaultButton(title: poll.getchoices()[0], action: { self.vote(0) });
-        let buttonTwo = DefaultButton(title: poll.getchoices()[1], action: { self.vote(1) });
-        let buttonThree = DefaultButton(title: poll.getchoices()[2], action: { self.vote(2) });
-        let buttonFour = DefaultButton(title: poll.getchoices()[3], action: { self.vote(3) });
-        
-        popup.addButtons([buttonOne, buttonTwo, buttonThree, buttonFour]);
-        if(self.presentedViewController != nil)
-        {
-            self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-        }
-        self.presentViewController(popup, animated: true, completion:nil);
- */
     }
     
     func popupmessage (t: String, msg:String) {

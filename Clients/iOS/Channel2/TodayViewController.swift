@@ -130,10 +130,10 @@ class TodayViewController: UIViewController {
                             let ok = fileManager.write(contents)
                         }
                     }
-                    
+                    print("refreshing...")
                     self.attemptedRefresh = true;
                 }
-            }.background {
+            }.main {
                 self.updateUI(NSDate());
             }
         }

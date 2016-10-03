@@ -71,6 +71,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSUserDefaults.standardUserDefaults().setBool(false, forKey: "showedVideoPopup");
         }
         
+        if(NSUserDefaults.standardUserDefaults().objectForKey("showStarterVideo") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "showStarterVideo")
+        }
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("starterVideo") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo.php", forKey: "starterVideo");
+        }
+        
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
         
         // Nav/Tab bar styling

@@ -26,7 +26,12 @@ class YouTubeVideoViewController: UIViewController, UIGestureRecognizerDelegate 
         
         // Load the webview, but hide it until device orientation is verified
         webview = UIWebView(frame: self.view.frame)
-        webview.loadRequest(NSURLRequest(URL: NSURL(string: "https://www.youtube.com/watch?v=" + self.id)!));
+        if(NSUserDefaults.standardUserDefaults().boolForKey("showStarterVideo"))
+        {
+            webview.loadRequest(NSURLRequest(URL: NSURL(string: String(NSUserDefaults.standardUserDefaults().valueForKey("starterVideo")!))!));
+        } else {
+            webview.loadRequest(NSURLRequest(URL: NSURL(string: "https://www.youtube.com/watch?v=" + self.id)!));
+        }
         view.addSubview(webview)
     }
     
