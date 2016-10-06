@@ -1,2 +1,2 @@
 <?php
-	define("EMAIL", "appsupport@brendanmanning.com");
+	define("EMAIL", "<your email here>");
