@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Update Banner Info</title>
+		<link rel="stylesheet" type="text/css" href="mainstyle.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mu/0.3.0/mu.min.css" />
+	</head>
+	
+	<body>
+		<center>
+			<h2>Update Banner</h2>
+			<i>Whatever you set here will be shown on the top the iOS apps homescreen</i>
+			<hr>
+			<form action="handlers/updateBannerInfo.php" method="POST">
+				<strong>Song Information</strong>
+				<br>
+				<label for="banner">Banner text</label><input type="text" name="banner" placeholder="The wall will be built. " id="banner">
+				<br>
+				<strong><a href="handlers/noBanner.php">No need for a banner today? Click here!</a></strong>
+				<br><br>
+				<button type="submit" class="primary outline">Update Banner</button>
+			</form>

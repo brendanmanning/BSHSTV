@@ -1,0 +1,209 @@
+/*
+| Based on The mu framework by Fabien Sa
+MIT License
+
+Copyright (c) 2016 Fabien Sa
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+
+*/
+*, *:after, *:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin: 40px auto;
+  max-width: 760px;
+  line-height: 1.6;
+  font-size: 18px;
+  color: #444;
+  padding: 0 20px;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: #06c;
+}
+
+a:hover {
+  color: #049;
+  text-decoration: underline;
+}
+
+hr {
+  border: 0;
+  margin: 20px 0;
+  border-top: 1px solid #ccc;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 16px;
+  padding-bottom: 25px;
+}
+
+td, tr {
+  border-bottom: 1px solid #ddd;
+}
+
+button {
+  background: #ddd;
+  border: 0;
+  padding: 9px 20px;
+  font-size: 14px;
+}
+
+code, pre {
+  background: #eee;
+}
+
+pre {
+  padding: 8px;
+  white-space: pre-wrap;
+}
+
+/*
+| GRID
+*/
+.row {
+  display: block;
+  width: auto;
+  min-height: 1px;
+}
+
+.row:before, .row:after {
+  content: "";
+  display: table;
+}
+
+.row:after {
+  clear: both;
+}
+
+.row .c {
+  float: left;
+}
+
+.g2, .g3, .g3-2, .m2, .m3, .m3-2 {
+  width: 100%;
+}
+
+/*
+| Media queries
+*/
+@media (min-width: 768px) {
+  .g2 {
+    width: 50%;
+  }
+
+  .m2 {
+    margin-left: 50%;
+  }
+
+  .g3 {
+    width: 33.33%;
+  }
+
+  .g3-2 {
+    width: 66.66%;
+  }
+
+  .m3 {
+    margin-left: 33.33%;
+  }
+
+  .m3-2 {
+    margin-left: 66.66%;
+  }
+}
+/* Added new button types: primary and destructive */
+button.primary {
+ 	color: #00AF33;
+	background: #fff;
+	text-transform: uppercase;
+	border: 2px solid #00AF33;
+}
+button.large {
+  	font-size: 18px;
+  	padding: 15px 32px;
+}
+button.round {
+  	border-radius: 6px;
+}
+button.destructive {
+	color: #C40500;
+	background: #fff;
+	border: 2px solid #C40500;
+	text-transform: uppercase;
+}
+
+/* Added hover effects for the buttons */
+button.primary:hover {
+	background: #00AF33;
+	color: #fff;
+	border: 2px solid #fff;
+}
+button.destructive:hover {
+	background: #C40500;
+	color: #fff;
+	border: 2px solid #fff;;
+}
+/* Customized input tag */
+input[type=text] {
+	border: none;
+	border-bottom: solid 2px #031E2E;
+	transition: border 0.3s;
+	color: #000;
+}
+input:focus,
+input.focus {
+	border-bottom: solid 3px #00AF33;
+	color: #00AF33;
+}
+input[type=text].wide {
+	width: 100%;
+}
+input[type=text].most {
+	width: 80%;
+}
+.green {
+	color: #00AF33;
+}
+input[type=text].large {
+	border-bottom: solid 2px #000;
+	color: .green;
+	font-size: 200%;
+	font-weight: bold;
+}
+input[type=text].large:focus {
+	border-top: solid 4px #00AF33;
+	border-bottom: solid 4px #00AF33;
+	border-left: solid 4px #00AF33;
+	border-right: solid 4px #00AF33;
+}

@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Update Song Info</title>
+		<link rel="stylesheet" type="text/css" href="mainstyle.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mu/0.3.0/mu.min.css" />
+	</head>
+	
+	<body>
+		<center>
+			<h2>Update Song Information</h2>
+			<i>Set the song of the day</i>
+			<hr>
+			<form action="handlers/updateDailyInfo.php" method="POST">
+				<strong>Song Information</strong>
+				<br>
+				<label for="song">Song of the Day is </label><input type="text" name="song" placeholder="Starman" id="song">
+				<br>
+				<label for="artist">Written by </label><input type="text" name="artist" placeholder="David Bowie" id="artist">
+				<br><br>
+				<button type="submit" class="primary outline">Set Song</button>
+			</form>

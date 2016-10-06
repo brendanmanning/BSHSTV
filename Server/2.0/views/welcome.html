@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Update Banner Info</title>
+		<link rel="stylesheet" type="text/css" href="mainstyle.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mu/0.3.0/mu.min.css" />
+	</head>
+	
+	<body>
+		<center>
+			<h2>Welcome!</h2>
+			You will be asked to fill in some information which will update what BSHS TV app users see. Your changes will not be applied until you hit save at the end. Ready?
+			<hr>
+			<form action="handlers/resetData.php">
+				<button type="submit" class="destructive">No, start over</button>
+			</form>
+			<form action="handlers/postWelcome.php">
+				<button type="submit" class="primary">Yes, lets go!</button>
+			</form>
+		</center>
+	</body>
+</html>	

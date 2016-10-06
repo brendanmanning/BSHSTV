@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>Update Sports Info</title>
+		<link rel="stylesheet" type="text/css" href="mainstyle.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mu/0.3.0/mu.min.css" />
+	</head>
+	
+	<body>
+		<center>
+			<h2>Update Sports Game</h2>
+			<i>Pick the most important sports event of the day & fill form below</i>
+			<hr>
+			<form action="handlers/updateSportsInfo.php" method="POST">
+				<strong>No game today? <a href="handlers/noGameToday.php">Click Here</a></strong>
+				<br>
+				<input type="text" name="game" placeholder="The <team> is playing" id="song"> <strong>at</strong> <input type="text" name="location" id="location" placeholder="Bishop Shanahan">. <strong>Time: </strong><input type="text" name="time" placeholder="7:00 PM">
+				<br><br>
+				<button type="submit" class="primary outline">Set Sporting Event</button>
+			</form>
