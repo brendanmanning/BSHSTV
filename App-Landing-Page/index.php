@@ -21,13 +21,13 @@
 			<h2>BSHS TV</h2>
 			<i>Stay up to date on all Channel 2 news, participate in community polls, and more! Forget what date that meeting was? Check BSHS TV! We've got the answer! Download the app today! It's FREE</i>
 			<hr>
-			<!--<strong><a onclick="showFeatures()">Features</a></strong> | --><strong><a onclick="showScreenshots()">Screenshots</a></strong> | <strong><a onclick="showContactForm()">Contact Support</a></strong>
+			<strong><a onclick="showFeatures()">Features</a></strong> | <strong><a onclick="showScreenshots()">Screenshots</a></strong> | <strong><a onclick="showContactForm()">Contact Support</a></strong>
 			<div id="featuresDiv" style="visibility: hidden;height:0px;">
 				<ul>
 					<strong>1.</strong> In app videos<br>
 					<strong>2.</strong> List of current announcements. Add them to your calendar, Get a notification before and share them as you please!<br>
 					<strong>3.</strong> Tells what sports games are happening on any given day</strong><br>
-					<strong>4.</strong> Banner show snow days, late arrivals etc* <br><i>Accuracy of provided information is not guarenteed nor official information from Bishop Shanahan High School </i>
+					<strong>4.</strong> Banner show snow days, late arrivals etc* <br><i>* Accuracy of provided information is not guarenteed nor official information from Bishop Shanahan High School </i>
 				</ul>
 			</div>
 			<div id="screenshotsDiv" style="visibility: hidden; height: 0px;">
