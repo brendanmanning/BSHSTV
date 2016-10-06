@@ -14,4 +14,4 @@ I'll be working on a easy setup wizard to make sure URLs hardcoded into the app 
 (c) 2016 Brendan Manning
 
 ## Third Party Attributions
-This portion of BSHS TV uses the mu framework by [Fabien Sa](https://github.com/BafS/)
+This portion of BSHS TV uses the mu framework by [Fabien Sa](https://github.com/BafS/). The license is included in mainstyle.css, or [you can read it on GitHub](https://github.com/BafS/mu/blob/gh-pages/LICENSE)
