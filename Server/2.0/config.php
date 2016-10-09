@@ -4,5 +4,5 @@
 	$pass = "{dbpass}";
 	$name = "{dbname}";
 	
-	$password = "{admin_pass};
+	$password = "{admin_pass}";
 ?>
