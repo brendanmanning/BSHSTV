@@ -1,8 +1,8 @@
 <?php
-	$host = "<your db host><usuall localhost>";
-	$user = "<MySQL User>";
-	$pass = "<MySQL User's pass>";
-	$name = "<Name of MySQL Database>";
+	$host = "{dbhost}";
+	$user = "{dbuser}";
+	$pass = "{dbpass}";
+	$name = "{dbname}";
 	
-	$password = "<Password for admin UI>";
+	$password = "{admin_pass};
 ?>
