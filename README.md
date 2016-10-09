@@ -1,7 +1,8 @@
 # BSHSTV
-This is an app I made for my school's television studio. I posted the app here primary for resume and backup purposes. 
+Unofficial app for Channel 2 (my school's television studio)
+## Information
+[You can read all about BSHSTV on it's website](http://bshstv.brendanmanning.com), or alternatively, [you can download BSHS TV on the App Store](https://www.bshstv.com)
 
-### Third Party Licenses
 * [Async](https://github.com/duemunk/Async) by Tobias Due Munk
   * MIT License - [Read the License](https://raw.githubusercontent.com/brendanmanning/BSHSTV/master/Licenses/Async/LICENSE.txt)
 * [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) by Ruoyu Fu
