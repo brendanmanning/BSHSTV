@@ -1,7 +1,7 @@
 # BSHSTV
 Unofficial app for Channel 2 (my school's television studio)
 ## Information
-[You can read all about BSHSTV on it's website](http://bshstv.brendanmanning.com), or alternatively, [you can download BSHS TV on the App Store](https://www.bshstv.com)
+[You can read all about BSHSTV on it's website](http://bshstv.brendanmanning.com), or alternatively, [you can download BSHS TV on the App Store](http://www.bshstv.com)
 
 * [Async](https://github.com/duemunk/Async) by Tobias Due Munk
   * MIT License - [Read the License](https://raw.githubusercontent.com/brendanmanning/BSHSTV/master/Licenses/Async/LICENSE.txt)
