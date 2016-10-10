@@ -1,0 +1,13 @@
+[09-Oct-2016 20:45:27 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /home/brenuzrr/public_html/brendanmanningapps/bshstv/manageannouncements.php on line 51
+[09-Oct-2016 20:46:03 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /home/brenuzrr/public_html/brendanmanningapps/bshstv/manageannouncements.php on line 52
+[09-Oct-2016 20:46:58 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /home/brenuzrr/public_html/brendanmanningapps/bshstv/manageannouncements.php on line 52
+[09-Oct-2016 20:47:01 America/New_York] PHP Warning:  Invalid argument supplied for foreach() in /home/brenuzrr/public_html/brendanmanningapps/bshstv/manageannouncements.php on line 52
+[09-Oct-2016 21:13:27 America/New_York] PHP Notice:  Undefined index: step in /home/brenuzrr/public_html/brendanmanningapps/bshstv/wiz.php on line 27
+[09-Oct-2016 21:13:27 America/New_York] PHP Notice:  Undefined index: artist in /home/brenuzrr/public_html/brendanmanningapps/bshstv/wiz.php on line 28
+[09-Oct-2016 21:13:27 America/New_York] PHP Notice:  Undefined index: song in /home/brenuzrr/public_html/brendanmanningapps/bshstv/wiz.php on line 29
+[09-Oct-2016 21:13:27 America/New_York] PHP Notice:  Undefined index: game in /home/brenuzrr/public_html/brendanmanningapps/bshstv/wiz.php on line 30
+[09-Oct-2016 21:13:27 America/New_York] PHP Notice:  Undefined index: location in /home/brenuzrr/public_html/brendanmanningapps/bshstv/wiz.php on line 35
+[09-Oct-2016 21:13:27 America/New_York] PHP Notice:  Undefined index: time in /home/brenuzrr/public_html/brendanmanningapps/bshstv/wiz.php on line 40
+[09-Oct-2016 21:13:27 America/New_York] PHP Notice:  Undefined index: banner in /home/brenuzrr/public_html/brendanmanningapps/bshstv/wiz.php on line 46
+[09-Oct-2016 21:13:41 America/New_York] PHP Notice:  A session had already been started - ignoring session_start() in /home/brenuzrr/public_html/brendanmanningapps/bshstv/views/progressHeader.php on line 2
+[09-Oct-2016 21:13:47 America/New_York] PHP Notice:  A session had already been started - ignoring session_start() in /home/brenuzrr/public_html/brendanmanningapps/bshstv/views/progressHeader.php on line 2

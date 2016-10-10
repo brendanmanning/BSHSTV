@@ -1,8 +1,8 @@
 <?php
-	$host = "{dbhost}";
-	$user = "{dbuser}";
-	$pass = "{dbpass}";
-	$name = "{dbname}";
+	$host = "localhost";
+	$user = "brenuzrr_bshstv";
+	$pass = "[Pvr.AQ]T,@x";
+	$name = "brenuzrr_bshstv";
 	
-	$password = "{admin_pass}";
+	$password = "tvstudio";
 ?>
