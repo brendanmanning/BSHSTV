@@ -398,6 +398,8 @@
 				TargetAttributes = {
 					C6FCBA471D5AC60A00DC5FC3 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 96X38HPDDK;
+						DevelopmentTeamName = "Kelly Manning";
 					};
 					C6FCBA5D1D5AC60B00DC5FC3 = {
 						CreatedOnToolsVersion = 7.3;
