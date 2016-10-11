@@ -21,7 +21,15 @@ public class SetupWizardHandler
         File appDelegate = new File(appDelegateString);
         
         FileEditor fe = new FileEditor(appDelegate);
-        return fe.replace("{server_url}",with);
+        boolean one =  fe.replace("{server_url}",with);
+        
+        String infoPlistString = addTrailingSlash(baseDir.getAbsolutePath()) + "BSHSTV-master" + File.separator + "Clients" +
+        File.separator + "iOS" + File.separator + "Channel2" + File.separator + "Info.plist";
+        File infoPlist = new File(infoPlistString);
+        FileEditor fe2 = new FileEditor(infoPlist);
+        boolean two = fe2.replace("{server_url}",with);
+        
+        return (one && two);
     }
     public boolean replaceServerDBConstants(String user, String pass, String name,String uiPass)
     {

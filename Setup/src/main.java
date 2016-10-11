@@ -4,11 +4,18 @@ import java.io.*;
 import java.nio.*;
 import java.net.*;
 import java.nio.channels.*;
+import javax.swing.*;
 public class main {
     private static String zipPath = System.getProperty("user.home") + File.separator + "BSHS_TV_SETUP" + File.separator + "master.zip";
     private static String zipOutputFolder = System.getProperty("user.home") + File.separator + "BSHS_TV_SETUP" + File.separator + "UNZIPPED";
     public static void main(String[] args)
     {
+       /* Check if the source folder already exists */
+       if(new File(System.getProperty("user.home") + File.separator + "BSHS_TV_SETUP" + File.separator).exists())
+       {
+           deleteExisting();
+           System.out.println("Removed...");
+       }
        System.out.println("Downloading source...");
        downloadSource();
        System.out.println("Unzipping archive...");
@@ -71,6 +78,36 @@ public class main {
         } catch (Exception e) {
             System.out.println("Error unzipping");
             System.out.println(e.getMessage());
+        }
+    }
+    private static void deleteExisting()
+    {
+        int response = JOptionPane.showConfirmDialog(null, "Data has already been downloaded\nWould you like to remove it and start fresh?", "Reset Data?",JOptionPane.YES_NO_OPTION);
+        if(response == JOptionPane.YES_OPTION) {
+            String setupFolderString = System.getProperty("user.home") + File.separator + "BSHS_TV_SETUP" + File.separator;
+            File setupFolder = new File(setupFolderString);
+            System.out.println("Removing existing setup data...");
+            removeFolder(setupFolder);
+        }
+    }
+    private static void removeFolder(File folder)
+    {
+        if(folder.exists())
+        {
+            if(folder.isDirectory())
+            {
+                File[] files = folder.listFiles();
+                if(files != null && files.length > 0)
+                {
+                    for(File f : files)
+                    {
+                        removeFolder(f);
+                    }
+                }
+                folder.delete();
+            } else {
+                folder.delete();
+            }
         }
     }
 }
