@@ -620,6 +620,26 @@
 						DevelopmentTeam = 96X38HPDDK;
 						DevelopmentTeamName = "Kelly Manning";
 					};
+					72B51664BEF733D3EE074143FB70580E = {
+						DevelopmentTeam = 96X38HPDDK;
+						DevelopmentTeamName = "Kelly Manning";
+					};
+					BDD0FFBC566C6AE5AE334B3B44F181FC = {
+						DevelopmentTeam = 96X38HPDDK;
+						DevelopmentTeamName = "Kelly Manning";
+					};
+					C8493D535F67CF4ADF9D2B8ECE73FB05 = {
+						DevelopmentTeam = 96X38HPDDK;
+						DevelopmentTeamName = "Kelly Manning";
+					};
+					D563DDCC297CD6279ECEE73D6A175EC2 = {
+						DevelopmentTeam = 96X38HPDDK;
+						DevelopmentTeamName = "Kelly Manning";
+					};
+					D6A12D7A4450A059935D8940BD8BF6C3 = {
+						DevelopmentTeam = 96X38HPDDK;
+						DevelopmentTeamName = "Kelly Manning";
+					};
 				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;

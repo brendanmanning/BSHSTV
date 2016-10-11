@@ -34,9 +34,6 @@
 		C651EFD81D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
 		C651EFD91D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
 		C651EFDA1D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
-		C669F3DA1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */; };
-		C669F3DB1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */; };
-		C669F3DC1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */; };
 		C67D48001D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
 		C67D48011D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
 		C67D48021D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
@@ -137,50 +134,49 @@
 		2659F1B49B06DEC8CF656272 /* Pods-Channel 2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Channel 2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Channel 2/Pods-Channel 2.release.xcconfig"; sourceTree = "<group>"; };
 		41E337D6D22FF4159C3571EE /* Pods-Channel 2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Channel 2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Channel 2Tests/Pods-Channel 2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A1B2EE7AA49D60798CE6F01D /* Pods-Channel 2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Channel 2UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Channel 2UITests/Pods-Channel 2UITests.release.xcconfig"; sourceTree = "<group>"; };
-		C606A19B1D75C3A1001150A2 /* SocketTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTester.swift; sourceTree = "<group>"; };
-		C606A3541D5E46D800DEBD8F /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
-		C6082F671D934A41001A879C /* PollsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsDownloader.swift; sourceTree = "<group>"; };
-		C6082F6B1D936E34001A879C /* PollDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollDownloader.swift; sourceTree = "<group>"; };
-		C60E36131D983108005E3EB9 /* TodayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayItem.swift; sourceTree = "<group>"; };
-		C60E36171D985554005E3EB9 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
-		C64623281D8EF24500D832D3 /* VideoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloader.swift; sourceTree = "<group>"; };
-		C651EFD71D5E05F400802575 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
-		C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementDownloader.swift; sourceTree = "<group>"; };
-		C67D48031D8F621C00319A68 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		C67EADDB1D5CC878003185F8 /* VideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewController.swift; sourceTree = "<group>"; };
-		C67EADDF1D5CCC9D003185F8 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
-		C67EADE91D5CDD36003185F8 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
-		C68344031D621C290021DFAA /* Error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Error.json; sourceTree = "<group>"; };
-		C69194B31D9499FD00A3E6E8 /* OnlineVoter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineVoter.swift; sourceTree = "<group>"; };
-		C69B21CB1D91E3CB00BC6547 /* OnlinePoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlinePoll.swift; sourceTree = "<group>"; };
-		C69B21CF1D91F6E400BC6547 /* VotingViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotingViewControllerTableViewController.swift; sourceTree = "<group>"; };
-		C6AB5C611D6754EE0056F042 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		C6BF413B1D5F4BE4008C517A /* NSUserDefaultsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaultsList.swift; sourceTree = "<group>"; };
-		C6CD79CB1D5EC68B00BA277D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		C6D8B8F61D992FF00044B258 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
-		C6E4C0151D600B9C00DE6F85 /* AnnouncementsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementsTableViewController.swift; sourceTree = "<group>"; };
-		C6E4C0191D600BD400DE6F85 /* AnnouncementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementTableViewCell.swift; sourceTree = "<group>"; };
-		C6E4C01D1D600C4800DE6F85 /* Announcement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
-		C6E4C0211D60BF1E00DE6F85 /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
-		C6E939E71D5D1D7B00112834 /* YouTubeVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeVideoViewController.swift; sourceTree = "<group>"; };
-		C6F58E6F1D6525DA00C7D19B /* FM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FM.swift; sourceTree = "<group>"; };
-		C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineByLineDownloader.swift; sourceTree = "<group>"; };
-		C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsTableViewController.swift; sourceTree = "<group>"; };
-		C6FC7EF51D90AEEE00D342E2 /* PollTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollTableViewCell.swift; sourceTree = "<group>"; };
+		C606A19B1D75C3A1001150A2 /* SocketTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketTester.swift; path = Channel2/SocketTester.swift; sourceTree = "<group>"; };
+		C606A3541D5E46D800DEBD8F /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Async.swift; path = Channel2/Async.swift; sourceTree = "<group>"; };
+		C6082F671D934A41001A879C /* PollsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PollsDownloader.swift; path = Channel2/PollsDownloader.swift; sourceTree = "<group>"; };
+		C6082F6B1D936E34001A879C /* PollDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PollDownloader.swift; path = Channel2/PollDownloader.swift; sourceTree = "<group>"; };
+		C60E36131D983108005E3EB9 /* TodayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayItem.swift; path = Channel2/TodayItem.swift; sourceTree = "<group>"; };
+		C60E36171D985554005E3EB9 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingViewController.swift; path = Channel2/LoadingViewController.swift; sourceTree = "<group>"; };
+		C64623281D8EF24500D832D3 /* VideoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoDownloader.swift; path = Channel2/VideoDownloader.swift; sourceTree = "<group>"; };
+		C651EFD71D5E05F400802575 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstViewController.swift; path = Channel2/FirstViewController.swift; sourceTree = "<group>"; };
+		C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnouncementDownloader.swift; path = Channel2/AnnouncementDownloader.swift; sourceTree = "<group>"; };
+		C67D48031D8F621C00319A68 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkError.swift; path = Channel2/NetworkError.swift; sourceTree = "<group>"; };
+		C67EADDB1D5CC878003185F8 /* VideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideosTableViewController.swift; path = Channel2/VideosTableViewController.swift; sourceTree = "<group>"; };
+		C67EADDF1D5CCC9D003185F8 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Video.swift; path = Channel2/Video.swift; sourceTree = "<group>"; };
+		C67EADE91D5CDD36003185F8 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoTableViewCell.swift; path = Channel2/VideoTableViewCell.swift; sourceTree = "<group>"; };
+		C68344031D621C290021DFAA /* Error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Error.json; path = Channel2/Error.json; sourceTree = "<group>"; };
+		C69194B31D9499FD00A3E6E8 /* OnlineVoter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnlineVoter.swift; path = Channel2/OnlineVoter.swift; sourceTree = "<group>"; };
+		C69B21CB1D91E3CB00BC6547 /* OnlinePoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnlinePoll.swift; path = Channel2/OnlinePoll.swift; sourceTree = "<group>"; };
+		C69B21CF1D91F6E400BC6547 /* VotingViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VotingViewControllerTableViewController.swift; path = Channel2/VotingViewControllerTableViewController.swift; sourceTree = "<group>"; };
+		C6AB5C611D6754EE0056F042 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TodayViewController.swift; path = Channel2/TodayViewController.swift; sourceTree = "<group>"; };
+		C6BF413B1D5F4BE4008C517A /* NSUserDefaultsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSUserDefaultsList.swift; path = Channel2/NSUserDefaultsList.swift; sourceTree = "<group>"; };
+		C6CD79CB1D5EC68B00BA277D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewController.swift; path = Channel2/SettingsTableViewController.swift; sourceTree = "<group>"; };
+		C6D8B8F61D992FF00044B258 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CacheManager.swift; path = Channel2/CacheManager.swift; sourceTree = "<group>"; };
+		C6E4C0151D600B9C00DE6F85 /* AnnouncementsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnouncementsTableViewController.swift; path = Channel2/AnnouncementsTableViewController.swift; sourceTree = "<group>"; };
+		C6E4C0191D600BD400DE6F85 /* AnnouncementTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnouncementTableViewCell.swift; path = Channel2/AnnouncementTableViewCell.swift; sourceTree = "<group>"; };
+		C6E4C01D1D600C4800DE6F85 /* Announcement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Announcement.swift; path = Channel2/Announcement.swift; sourceTree = "<group>"; };
+		C6E4C0211D60BF1E00DE6F85 /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Popup.swift; path = Channel2/Popup.swift; sourceTree = "<group>"; };
+		C6E939E71D5D1D7B00112834 /* YouTubeVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = YouTubeVideoViewController.swift; path = Channel2/YouTubeVideoViewController.swift; sourceTree = "<group>"; };
+		C6F58E6F1D6525DA00C7D19B /* FM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FM.swift; path = Channel2/FM.swift; sourceTree = "<group>"; };
+		C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineByLineDownloader.swift; path = Channel2/LineByLineDownloader.swift; sourceTree = "<group>"; };
+		C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PollsTableViewController.swift; path = Channel2/PollsTableViewController.swift; sourceTree = "<group>"; };
+		C6FC7EF51D90AEEE00D342E2 /* PollTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PollTableViewCell.swift; path = Channel2/PollTableViewCell.swift; sourceTree = "<group>"; };
 		C6FCBA481D5AC60A00DC5FC3 /* Channel 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Channel 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C6FCBA4B1D5AC60A00DC5FC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C6FCBA4B1D5AC60A00DC5FC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Channel2/AppDelegate.swift; sourceTree = "<group>"; };
 		C6FCBA521D5AC60A00DC5FC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C6FCBA541D5AC60A00DC5FC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C6FCBA541D5AC60A00DC5FC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Channel2/Assets.xcassets; sourceTree = "<group>"; };
 		C6FCBA571D5AC60A00DC5FC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C6FCBA591D5AC60A00DC5FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C6FCBA591D5AC60A00DC5FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Channel2/Info.plist; sourceTree = "<group>"; };
 		C6FCBA5E1D5AC60B00DC5FC3 /* Channel 2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Channel 2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FCBA621D5AC60B00DC5FC3 /* Channel_2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel_2Tests.swift; sourceTree = "<group>"; };
 		C6FCBA641D5AC60B00DC5FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6FCBA691D5AC60B00DC5FC3 /* Channel 2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Channel 2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6FCBA6D1D5AC60B00DC5FC3 /* Channel_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel_2UITests.swift; sourceTree = "<group>"; };
 		C6FCBA6F1D5AC60B00DC5FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C6FDA17E1D669D9100BED432 /* DayDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayDownloader.swift; sourceTree = "<group>"; };
+		C6FDA17E1D669D9100BED432 /* DayDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DayDownloader.swift; path = Channel2/DayDownloader.swift; sourceTree = "<group>"; };
 		D1136E97429B1761AD87EE67 /* Pods-Channel 2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Channel 2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Channel 2/Pods-Channel 2.debug.xcconfig"; sourceTree = "<group>"; };
 		D601BCC7DEC53FFBD2BF330B /* Pods_Channel_2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Channel_2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98984CC2AFA29776A65FDBD /* Pods-Channel 2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Channel 2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Channel 2Tests/Pods-Channel 2Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -281,7 +277,6 @@
 				C6FC7EF51D90AEEE00D342E2 /* PollTableViewCell.swift */,
 				C69B21CF1D91F6E400BC6547 /* VotingViewControllerTableViewController.swift */,
 				C69B21CB1D91E3CB00BC6547 /* OnlinePoll.swift */,
-				C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */,
 				C6AB5C611D6754EE0056F042 /* TodayViewController.swift */,
 				C60E36131D983108005E3EB9 /* TodayItem.swift */,
 				C6F58E6F1D6525DA00C7D19B /* FM.swift */,
@@ -589,7 +584,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C669F3DA1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */,
 				C6E4C0221D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C67EADDC1D5CC878003185F8 /* VideosTableViewController.swift in Sources */,
 				C6AB5C621D6754EE0056F042 /* TodayViewController.swift in Sources */,
@@ -628,7 +622,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C669F3DB1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */,
 				C6E4C01F1D600C4800DE6F85 /* Announcement.swift in Sources */,
 				C6E4C0231D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C6F58E711D6525DA00C7D19B /* FM.swift in Sources */,
@@ -667,7 +660,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C669F3DC1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */,
 				C6E4C0201D600C4800DE6F85 /* Announcement.swift in Sources */,
 				C6E4C0241D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C6F58E721D6525DA00C7D19B /* FM.swift in Sources */,
@@ -724,6 +716,7 @@
 				C6FCBA521D5AC60A00DC5FC3 /* Base */,
 			);
 			name = Main.storyboard;
+			path = Channel2;
 			sourceTree = "<group>";
 		};
 		C6FCBA561D5AC60A00DC5FC3 /* LaunchScreen.storyboard */ = {
@@ -732,6 +725,7 @@
 				C6FCBA571D5AC60A00DC5FC3 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = Channel2;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -827,7 +821,7 @@
 			baseConfigurationReference = D1136E97429B1761AD87EE67 /* Pods-Channel 2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Channel 2/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Channel2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brendanmanning.channel2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -839,7 +833,7 @@
 			baseConfigurationReference = 2659F1B49B06DEC8CF656272 /* Pods-Channel 2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Channel 2/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Channel2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brendanmanning.channel2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
