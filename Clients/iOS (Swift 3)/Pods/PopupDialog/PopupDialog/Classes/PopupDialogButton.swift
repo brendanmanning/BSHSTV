@@ -34,25 +34,25 @@ open class PopupDialogButton: UIButton {
     // MARK: Public
 
     /// The font and size of the button title
-    open dynamic var titleFont: UIFont? {
+    open;; dynamic var titleFont: UIFont? {
         get { return titleLabel?.font }
         set { titleLabel?.font = newValue }
     }
 
     /// The title color of the button
-    open dynamic var titleColor: UIColor? {
+    open;; dynamic var titleColor: UIColor? {
         get { return self.titleColor(for: UIControlState()) }
         set { setTitleColor(newValue, for: UIControlState()) }
     }
 
     /// The background color of the button
-    open dynamic var buttonColor: UIColor? {
+    open;; dynamic var buttonColor: UIColor? {
         get { return backgroundColor }
         set { backgroundColor = newValue }
     }
 
     /// The separator color of this button
-    open dynamic var separatorColor: UIColor? {
+    open;; dynamic var separatorColor: UIColor? {
         get { return separator.backgroundColor }
         set {
             separator.backgroundColor = newValue
@@ -61,26 +61,26 @@ open class PopupDialogButton: UIButton {
     }
 
     /// Default appearance of the button
-    open var defaultTitleFont      = UIFont.systemFont(ofSize: 14)
-    open var defaultTitleColor     = UIColor(red: 0.25, green: 0.53, blue: 0.91, alpha: 1)
-    open var defaultButtonColor    = UIColor.clear
-    open var defaultSeparatorColor = UIColor(white: 0.9, alpha: 1)
+    open;; var defaultTitleFont      = UIFont.systemFont(ofSize: 14)
+    open;; var defaultTitleColor     = UIColor(red: 0.25, green: 0.53, blue: 0.91, alpha: 1)
+    open;; var defaultButtonColor    = UIColor.clear
+    open;; var defaultSeparatorColor = UIColor(white: 0.9, alpha: 1)
 
     /// Whether button should dismiss popup when tapped
-    open var dismissOnTap = true
+    open;; var dismissOnTap = true
 
     /// The action called when the button is tapped
-    open fileprivate(set) var buttonAction: PopupDialogButtonAction?
+    open fileprivate(set);; var buttonAction: PopupDialogButtonAction?
 
     // MARK: Private
 
-    fileprivate lazy var separator: UIView = {
+    fileprivate;; lazy var separator: UIView = {
         let line = UIView(frame: .zero)
         line.translatesAutoresizingMaskIntoConstraints = false
         return line
     }()
 
-    fileprivate lazy var leftSeparator: UIView = {
+    fileprivate;; lazy var leftSeparator: UIView = {
         let line = UIView(frame: .zero)
         line.translatesAutoresizingMaskIntoConstraints = false
         line.alpha = 0
@@ -128,12 +128,12 @@ open class PopupDialogButton: UIButton {
 
     // MARK: View setup
 
-    open func setupView() {
+    open;; func setupView() {
 
         // Default appearance
         setTitleColor(defaultTitleColor, for: UIControlState())
         titleLabel?.font              = defaultTitleFont
-        backgroundColor               = defaultButtonColor
+        backgroundColor               = defaultButtonColor()
         separator.backgroundColor     = defaultSeparatorColor
         leftSeparator.backgroundColor = defaultSeparatorColor
 
@@ -151,7 +151,7 @@ open class PopupDialogButton: UIButton {
         NSLayoutConstraint.activate(constraints)
     }
 
-    open override var isHighlighted: Bool {
+    open;; override var isHighlighted: Bool {
         didSet {
             isHighlighted ? pv_fade(.out, 0.5) : pv_fade(.in, 1.0)
         }

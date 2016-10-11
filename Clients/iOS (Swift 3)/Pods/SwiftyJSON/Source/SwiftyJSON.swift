@@ -125,16 +125,16 @@ public struct JSON {
     }
     
     /// Private object
-    fileprivate var rawArray: [Any] = []
-    fileprivate var rawDictionary: [String : Any] = [:]
-    fileprivate var rawString: String = ""
-    fileprivate var rawNumber: NSNumber = 0
-    fileprivate var rawNull: NSNull = NSNull()
-    fileprivate var rawBool: Bool = false
+    fileprivate;; var rawArray: [Any] = []
+    fileprivate;; var rawDictionary: [String : Any] = [:]
+    fileprivate;; var rawString: String = ""
+    fileprivate;; var rawNumber: NSNumber = 0
+    fileprivate;; var rawNull: NSNull = NSNull()
+    fileprivate;; var rawBool: Bool = false
     /// Private type
-    fileprivate var _type: Type = .null
+    fileprivate;; var _type: Type = .null
     /// prviate error
-    fileprivate var _error: NSError? = nil
+    fileprivate;; var _error: NSError? = nil
     
     /// Object in JSON
     public var object: Any {
@@ -791,7 +791,7 @@ extension JSON {
             case .string:
                 let decimal = NSDecimalNumber(string: self.object as? String)
                 if decimal == NSDecimalNumber.notANumber {  // indicates parse error
-                    return NSDecimalNumber.zero
+                    return NSDecimalNumber.zero()
                 }
                 return decimal
             case .number:
@@ -825,7 +825,7 @@ extension JSON {
         }
     }
     public func exists() -> Bool{
-        if let errorValue = error, errorValue.code == ErrorNotExist ||
+        if let errorValue = error where errorValue.code == ErrorNotExist ||
             errorValue.code == ErrorIndexOutOfBounds ||
             errorValue.code == ErrorWrongType {
                 return false
@@ -910,7 +910,7 @@ extension JSON {
     {
         get
         {
-            return self.number?.intValue
+            return self.number?.int32Value
         }
         set
         {

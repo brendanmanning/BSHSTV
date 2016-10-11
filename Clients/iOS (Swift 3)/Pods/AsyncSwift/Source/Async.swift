@@ -46,10 +46,10 @@ private enum GCD {
     var queue: DispatchQueue {
         switch self {
         case .main: return .main
-        case .userInteractive: return .global(qos: .userInteractive)
-        case .userInitiated: return .global(qos: .userInitiated)
-        case .utility: return .global(qos: .utility)
-        case .background: return .global(qos: .background)
+        case .userInteractive: return .global(attributes: .userInteractive)
+        case .userInitiated: return .global(attributes: .userInitiated)
+        case .utility: return .global(attributes: .utility)
+        case .background: return .global(attributes: .background)
         case .custom(let queue): return queue
         }
     }
@@ -612,7 +612,7 @@ public struct AsyncGroup {
 
      - SeeAlso: dispatch_group_async, dispatch_group_create
      */
-    private func async(block: @escaping @convention(block) () -> Swift.Void, queue: GCD) {
+    private func async(block: @escaping _: @convention(block) () -> Swift.Void, queue: GCD) {
         queue.queue.async(group: group, execute: block)
     }
 
@@ -643,7 +643,7 @@ public struct AsyncGroup {
     - parameters:
         - block: The block that is to be passed to be run on the main queue
     */
-    public func main(_ block: @escaping @convention(block) () -> Swift.Void) {
+    public func main(_ block: @escaping _: @convention(block) () -> Swift.Void) {
         async(block: block, queue: .main)
     }
 
@@ -653,7 +653,7 @@ public struct AsyncGroup {
      - parameters:
         - block: The block that is to be passed to be run on the queue
      */
-    public func userInteractive(_ block: @escaping @convention(block) () -> Swift.Void) {
+    public func userInteractive(_ block: @escaping _: @convention(block) () -> Swift.Void) {
         async(block: block, queue: .userInteractive)
     }
 
@@ -663,7 +663,7 @@ public struct AsyncGroup {
      - parameters:
         - block: The block that is to be passed to be run on the queue
      */
-    public func userInitiated(_ block: @escaping @convention(block) () -> Swift.Void) {
+    public func userInitiated(_ block: @escaping _: @convention(block) () -> Swift.Void) {
         async(block: block, queue: .userInitiated)
     }
 
@@ -674,7 +674,7 @@ public struct AsyncGroup {
      - parameters:
         - block: The block that is to be passed to be run on the queue
      */
-    public func utility(_ block: @escaping @convention(block) () -> Swift.Void) {
+    public func utility(_ block: @escaping _: @convention(block) () -> Swift.Void) {
         async(block: block, queue: .utility)
     }
 
@@ -684,7 +684,7 @@ public struct AsyncGroup {
      - parameters:
          - block: The block that is to be passed to be run on the queue
      */
-    public func background(_ block: @escaping @convention(block) () -> Swift.Void) {
+    public func background(_ block: @escaping _: @convention(block) () -> Swift.Void) {
         async(block: block, queue: .background)
     }
 
@@ -695,7 +695,7 @@ public struct AsyncGroup {
          - queue: Custom queue where the block will be run.
          - block: The block that is to be passed to be run on the queue
      */
-    public func custom(queue: DispatchQueue, block: @escaping @convention(block) () -> Swift.Void) {
+    public func custom(queue: DispatchQueue, block: @escaping _: @convention(block) () -> Swift.Void) {
         async(block: block, queue: .custom(queue: queue))
     }
 

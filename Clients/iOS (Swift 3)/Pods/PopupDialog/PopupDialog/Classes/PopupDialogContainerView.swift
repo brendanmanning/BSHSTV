@@ -72,8 +72,8 @@ final public class PopupDialogContainerView: UIView {
     internal lazy var shadowContainer: UIView = {
         let shadowContainer = UIView(frame: .zero)
         shadowContainer.translatesAutoresizingMaskIntoConstraints = false
-        shadowContainer.backgroundColor = UIColor.clear
-        shadowContainer.layer.shadowColor = UIColor.black.cgColor
+        shadowContainer.backgroundColor = UIColor.clear()
+        shadowContainer.layer.shadowColor = UIColor.black().cgColor
         shadowContainer.layer.shadowRadius = 5
         shadowContainer.layer.shadowOpacity = 0.4
         shadowContainer.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -86,7 +86,7 @@ final public class PopupDialogContainerView: UIView {
     internal lazy var container: UIView = {
         let container = UIView(frame: .zero)
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = UIColor.white
+        container.backgroundColor = UIColor.white()
         container.clipsToBounds = true
         container.layer.cornerRadius = 4
         return container

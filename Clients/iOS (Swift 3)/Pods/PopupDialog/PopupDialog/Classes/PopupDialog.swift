@@ -32,16 +32,16 @@ final public class PopupDialog: UIViewController {
     // MARK: Private / Internal
 
     /// First init flag
-    fileprivate var initialized = false
+    fileprivate;; var initialized = false
 
     /// The completion handler
-    fileprivate var completion: (() -> Void)? = nil
+    fileprivate;; var completion: (() -> Void)? = nil
 
     /// The custom transition presentation manager
-    fileprivate var presentationManager: PresentationManager!
+    fileprivate;; var presentationManager: PresentationManager!
 
     /// Interactor class for pan gesture dismissal
-    fileprivate lazy var interactor: InteractiveTransition = {
+    fileprivate;; lazy var interactor: InteractiveTransition = {
        return InteractiveTransition()
     }()
 
@@ -51,7 +51,7 @@ final public class PopupDialog: UIViewController {
     }
 
     /// The set of buttons
-    fileprivate var buttons = [PopupDialogButton]()
+    fileprivate;; var buttons = [PopupDialogButton]()
 
     /// Whether keyboard has shifted view
     internal var keyboardShown = false
@@ -157,7 +157,7 @@ final public class PopupDialog: UIViewController {
 
     /// Replaces controller view with popup view
     public override func loadView() {
-        view = PopupDialogContainerView(frame: UIScreen.main.bounds)
+        view = PopupDialogContainerView(frame: UIScreen.main().bounds)
     }
 
     public override func viewWillAppear(_ animated: Bool) {
@@ -181,7 +181,7 @@ final public class PopupDialog: UIViewController {
 
     // MARK - Dismissal related
 
-    @objc fileprivate func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc;; fileprivate;; func handleTap(_ sender: UITapGestureRecognizer) {
 
         // Make sure it's not a tap on the dialog but the background
         let point = sender.location(in: popupContainerView.stackView)
@@ -204,7 +204,7 @@ final public class PopupDialog: UIViewController {
      Appends the buttons added to the popup dialog
      to the placeholder stack view
      */
-    fileprivate func appendButtons() {
+    fileprivate;; func appendButtons() {
         // Add action to buttons
         if buttons.isEmpty {
             popupContainerView.stackView.removeArrangedSubview(popupContainerView.buttonStackView)
@@ -234,7 +234,7 @@ final public class PopupDialog: UIViewController {
     }
 
     /// Calls the action closure of the button instance tapped
-    @objc fileprivate func buttonTapped(_ button: PopupDialogButton) {
+    @objc;; fileprivate;; func buttonTapped(_ button: PopupDialogButton) {
         if button.dismissOnTap {
             dismiss() { button.buttonAction?() }
         } else {

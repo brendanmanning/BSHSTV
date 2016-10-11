@@ -64,7 +64,7 @@ final internal class BounceUpTransition: TransitionAnimator {
                 self.from.view.bounds.origin = CGPoint(x: 0, y: -self.from.view.bounds.size.height)
                 self.from.view.alpha = 0.0
             }) { (completed) in
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }
         }
     }
@@ -94,7 +94,7 @@ final internal class BounceDownTransition: TransitionAnimator {
                 self.from.view.bounds.origin = CGPoint(x: 0, y: self.from.view.bounds.size.height)
                 self.from.view.alpha = 0.0
             }) { (completed) in
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }
         }
     }
@@ -123,7 +123,7 @@ final internal class ZoomTransition: TransitionAnimator {
                 self.from.view.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                 self.from.view.alpha = 0.0
             }) { (completed) in
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }
         }
     }
@@ -152,7 +152,7 @@ final internal class FadeTransition: TransitionAnimator {
             UIView.animate(withDuration: outDuration, delay: 0.0, options: [.curveEaseIn], animations: {
                 self.from.view.alpha = 0.0
             }) { (completed) in
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
             }
         }
     }
@@ -171,7 +171,7 @@ final internal class DismissInteractiveTransition: TransitionAnimator {
             self.from.view.bounds.origin = CGPoint(x: 0, y: -self.from.view.bounds.size.height)
             self.from.view.alpha = 0.0
         }) { (completed) in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
         }
     }
 }
