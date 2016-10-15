@@ -9,6 +9,7 @@
 import UIKit
 import PopupDialog
 import AVFoundation
+import SwiftyJSON
 class FirstViewController: UIViewController {
 
     // Banner
@@ -34,6 +35,28 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if NSUserDefaults.standardUserDefaults().objectForKey("userid") == nil {
+            /* Prepare an alert to show the user while we're perfoming setup */
+            let alert = UIAlertController(title: "Performing initial setup", message: "This is usually very quick", preferredStyle: .Alert)
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            if let baseUrl = NSUserDefaults.standardUserDefaults().valueForKey("phpserver") as? String {
+                if let key = NSUserDefaults.standardUserDefaults().valueForKey("API_KEY") as? String {
+                    if let secret = NSUserDefaults.standardUserDefaults().valueForKey("API_SECRET") as? String {
+                        if let url = NSURL(string: baseUrl + "generateUserID.php?key=" + key + "&secret=" + secret) {
+                            if let data = NSData(contentsOfURL: url) {
+                                let json = JSON(data: data);
+                                NSUserDefaults.standardUserDefaults().setValue(json["id"].stringValue, forKey: "userid")
+                                NSUserDefaults.standardUserDefaults().synchronize();
+                            }
+                        }
+                    }
+                }
+            }
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
         let topY = top.frame.origin.y;
         let logoX = logo.frame.origin.x;
         let bottomX = bottom.frame.origin.x;
@@ -53,9 +76,14 @@ class FirstViewController: UIViewController {
         
         // Setup the UI Before updating via sockets
         top.text = "Channel 2"
-        bottom.text = "Use the tabs below to navigate. 👇 Landscape mode works best.";
+        if(UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
+             bottom.text = "Use the tabs below to navigate. 👇 Portrait mode works best.";
+        } else {
+            bottom.text = "Use the tabs below to navigate. 👇 Landscape mode works best.";
+        }
         
         self.logo.image = UIImage(named: "green_logo");
+        
         // Reconnect button setup
         reconnectButton.enabled = false;
         reconnectButton.hidden = true;
@@ -80,6 +108,18 @@ class FirstViewController: UIViewController {
                         
                     }
                 } catch {}
+            }
+        }
+        
+        Async.background {
+            /* Make sure the app is on an accepted version */
+            let versionChecker = FeatureChecker();
+            if(!versionChecker.check(String(NSUserDefaults.standardUserDefaults().valueForKey("version_feature")!))) {
+                Async.main {
+                    let updateOption = LockViewControllerOption(optionTitle: "Update BSHS TV", optionUrl: "itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8")
+                    let lvc = LockViewController(viewController: self, selections: [updateOption], lockedTitle: "App update needed", lockedMessage: versionChecker.message);
+                    lvc.present();
+                }
             }
         }
     }

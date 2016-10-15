@@ -5,7 +5,7 @@
 //  Created by Brendan Manning on 9/26/16.
 //  Copyright © 2016 BrendanManning. All rights reserved.
 //
-
+/*
 import UIKit
 import Foundation
 class CacheManager: NSObject {
@@ -34,3 +34,4 @@ class CacheManager: NSObject {
         return NSURL(string: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]);
     }
 }
+ */

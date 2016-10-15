@@ -8,7 +8,7 @@
 
 import UIKit
 import PopupDialog
-class YouTubeVideoViewController: UIViewController, UIGestureRecognizerDelegate {
+class YouTubeVideoViewController: UIViewController, UIGestureRecognizerDelegate, UIWebViewDelegate {
     private var id:String!
     var defaults = NSUserDefaults.standardUserDefaults();
     var webview = UIWebView();
@@ -18,6 +18,8 @@ class YouTubeVideoViewController: UIViewController, UIGestureRecognizerDelegate 
        //let webview = UIWebView(frame: view.frame)
         //webview.loadRequest(NSURLRequest(URL: NSURL(string: "https://www.youtube.com/watch?v=" + self.id)!));
         //view.addSubview(webview)
+        
+        webview.delegate = self;
     }
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -58,6 +60,10 @@ class YouTubeVideoViewController: UIViewController, UIGestureRecognizerDelegate 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        return !((navigationType == UIWebViewNavigationType.FormResubmitted) || (navigationType == UIWebViewNavigationType.FormSubmitted) || (navigationType == UIWebViewNavigationType.LinkClicked));
     }
     /*
     // MARK: - Navigation

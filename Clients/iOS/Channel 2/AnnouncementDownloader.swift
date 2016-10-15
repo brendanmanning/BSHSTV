@@ -35,6 +35,13 @@ class AnnouncementDownloader: NSObject {
                 announcement.date = date;
                 let text = subJson["text"].stringValue
                 announcement.text = text;
+                announcement.id = Int(subJson["id"].stringValue);
+                
+                if(subJson["hideCheckins"].boolValue) {
+                    announcement.peopleGoing = -1;
+                } else {
+                    announcement.peopleGoing = subJson["checkins"].intValue;
+                }
                 
                 announcements.append(announcement)
             }

@@ -7,11 +7,10 @@
 //
 
 import UIKit
-//import SocketIOClientSwift
 import Async
 import EventKit
 import PopupDialog
-
+import SwiftyJSON
 class AnnouncementsTableViewController: UITableViewController {
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     var announcements = [Announcement]();
@@ -24,9 +23,9 @@ class AnnouncementsTableViewController: UITableViewController {
         
         /* Setup UIRefreshControl */
         //self.presentViewController(LoadingViewController(), animated: false, completion: nil)
-       // Async.background {
+        //Async.background {
             self.refreshTableData()
-     //   }
+        //}
     }
     
     @IBAction func refreshButtonPressed(sender: AnyObject) {
@@ -88,7 +87,7 @@ class AnnouncementsTableViewController: UITableViewController {
         return announcements.count;
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    /*override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // Confirm check what the default event for a click is
         // 0 = none
         // 1 = calendar
@@ -162,6 +161,84 @@ class AnnouncementsTableViewController: UITableViewController {
                 print("said no")
             }
         }
+    }*/
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        Async.background {
+            if(self.sayImGoingToEvent(indexPath))
+            {
+                self.refreshTableData()
+            } else {
+                Async.main {
+                    if let eventsAlreadyGoingTo = NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") as? [String]
+                    {
+                        /* IF THE USER TRIED TO VOTE ON SOMETHING THEY ALREADY VOTED ON, DON'T BOTHER TO SHOW A POPUP */
+                         
+                        if(!eventsAlreadyGoingTo.contains(String(self.announcements[indexPath.row].id))) {
+                            Popup().show("Network Error", message: "The app failed to connect with the server", button: "Dismiss", viewController: self as UIViewController)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func sayImGoingToEvent(indexPath:NSIndexPath) -> Bool
+    {
+        if let eventsAlreadyGoingTo = NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") as? [String]
+        {
+            /* The app saves an array containing every event the user has already committed to. This way they can't say they're going twice.
+             * The server would stop that anyway
+             */
+            if(!eventsAlreadyGoingTo.contains(String(announcements[indexPath.row].id)))
+            {
+                /* Safely get the API key and secret */
+                if let key = NSUserDefaults.standardUserDefaults().valueForKey("API_KEY") as? String {
+                    if let secret = NSUserDefaults.standardUserDefaults().valueForKey("API_SECRET") as? String {
+                        /* Get the base url of the server */
+                        if let server = NSUserDefaults.standardUserDefaults().valueForKey("phpserver") as? String {
+                            /* Prepare a template we'll insert the real values into */
+                            var template = server + "imgoing.php?key={api_key}&secret={api_secret}&event={event}&user={user}";
+                            
+                            /* Insert the real values */
+                            var realUrl = template;
+                            realUrl = realUrl.stringByReplacingOccurrencesOfString("{api_key}", withString: key)
+                            realUrl = realUrl.stringByReplacingOccurrencesOfString("{api_secret}", withString: secret)
+                            realUrl = realUrl.stringByReplacingOccurrencesOfString("{event}", withString: String(announcements[indexPath.row].id))
+                            
+                            /* A user id may not be setup yet (If the user didn't have internet when they installed the app) */
+                            if let useridobject = NSUserDefaults.standardUserDefaults().valueForKey("userid") {
+                                if let userid = useridobject as? String {
+                                    /* Put in the final value */
+                                    realUrl = realUrl.stringByReplacingOccurrencesOfString("{user}", withString: userid)
+                                    
+                                    /* If we get to this point, we're okay to make our request */
+                                    if let url = NSURL(string: realUrl) {
+                                        /* Actually make the request */
+                                        if let data = NSData(contentsOfURL: url) {
+                                            /* Cast it to JSON */
+                                            let json = JSON(data: data);
+                                            /* Now read the status key */
+                                            if json["status"].stringValue == "ok" {
+                                                
+                                                /* Sync the array */
+                                                var newarr = eventsAlreadyGoingTo;
+                                                newarr.append(String(announcements[indexPath.row].id))
+                                                NSUserDefaults.standardUserDefaults().setObject(newarr, forKey: "alreadyGoingToArray")
+                                                NSUserDefaults.standardUserDefaults().synchronize();
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return false;
     }
     
     @IBAction func longpressgesture(sender: AnyObject) {
@@ -227,12 +304,28 @@ class AnnouncementsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AnnouncementCell", forIndexPath: indexPath) as! AnnouncementTableViewCell
         
+        /* Make the cell green if the user already committed to this event */
+        if let eventsAlreadyGoingTo = NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") as? [String]
+        {
+            /* The app saves an array containing every event the user has already committed to. This way they can't say they're going twice.
+             * The server would stop that anyway
+             */
+            if(eventsAlreadyGoingTo.contains(String(announcements[indexPath.row].id)))
+            {
+                cell.backgroundColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:0.5);
+            }
+        }
+        
         var image = UIImage(named: "loading")
         Async.main {
             cell.img.image = image;
-            cell.announcementdate.text = "Tap to share, hold to set reminder";//self.announcements[indexPath.item].date
+            //cell.announcementdate.text = "Tap to share, hold to set reminder";//self.announcements[indexPath.item].date
             cell.announcementtitle.text = self.announcements[indexPath.item].eventtitle
+            print(self.announcements[indexPath.item].peopleGoing);
             cell.fulltext.text = self.announcements[indexPath.item].text;
+            if(self.announcements[indexPath.item].peopleGoing != -1) {
+                cell.fulltext.text = self.announcements[indexPath.item].text + "\n" + String(self.announcements[indexPath.item].peopleGoing) + "+ people are attending";
+            }
             cell.creator.text = self.announcements[indexPath.item].creator;
             }.background {
                 image = self.imageFromURL(self.announcements[indexPath.item].imagelink)

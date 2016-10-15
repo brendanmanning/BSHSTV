@@ -12,7 +12,7 @@ import SwiftyJSON
 class Video: NSObject {
     // Youtube API Constants
     private let API_URL = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id={video_id}&key=";
-    private let API_KEY = "AIzaSyBvYcQtI1J5zsGMdeHFhAWiWjyH2NllRv8";
+    private let API_KEY = String(NSUserDefaults.standardUserDefaults().valueForKey("YTKEY")!);
     
     // JSON constants
     private var json:JSON = nil;

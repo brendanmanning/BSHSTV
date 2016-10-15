@@ -67,13 +67,9 @@ class TodayViewController: UIViewController {
             contentLabel.text = items[current].content;
             pageLabel.text = "Page " + String(current + 1) + " of " + String(items.count);
         } else {
-            slideTitleLabel.text = "Swipe left to see today's info"
-            contentLabel.text = "...Or press next to see information"
+            slideTitleLabel.text = "Loading...."
+            contentLabel.text = "This should take no more than a few seconds. Taking longer? Check your network connection"
         }
-        
-        /*print(items[current].title)
-        print(items[current].content)
-        print(current);*/
     }
     
     func updateUI(date:NSDate) {

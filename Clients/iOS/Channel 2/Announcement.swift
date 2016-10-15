@@ -15,6 +15,8 @@ class Announcement: NSObject {
     internal var date:String!;
     internal var imagelink:String!;
     internal var datevalid = true;
+    internal var id:Int!;
+    internal var peopleGoing:Int!;
     internal func getDate() -> NSDate
     {
         

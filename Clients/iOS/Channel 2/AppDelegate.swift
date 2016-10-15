@@ -17,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        /* VERY IMPORTANT SECTION READ BEFORE ARCHIVING
+         * To ensure the app version isn't too old, it will periodically call FeatureChecker() in the background
+         * Below we define the identifier for this version as setup on the web interface
+         * Typically I use iOS_APP_VX.X
+         * If the test for this feature returns false we know the user must update the app
+         * Simply by enabling or disabling features on the web interface, we can decide which user MUST update the app */
+        
+         /* Right below is where we define the constant */
+         NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1", forKey: "version_feature");
+        
+        
+        
+        
         if(NSUserDefaults.standardUserDefaults().objectForKey("videos") == nil)
         {
             NSUserDefaults.standardUserDefaults().setObject("", forKey: "videos")
@@ -68,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if(NSUserDefaults.standardUserDefaults().objectForKey("showedVideoPopup") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "showedVideoPopup");
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "showedVideoPopup");
         }
         
         if(NSUserDefaults.standardUserDefaults().objectForKey("showStarterVideo") == nil)
@@ -78,8 +91,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if(NSUserDefaults.standardUserDefaults().objectForKey("starterVideo") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo.php", forKey: "starterVideo");
+            switch(UIDevice.currentDevice().userInterfaceIdiom)
+            {
+                /* iPads have their own page */
+                case .Pad: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPad.html", forKey: "starterVideo");
+                /* For everything else use the iPhone page */
+                default: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPhone.html", forKey: "starterVideo");
+            }
         }
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("YTKEY") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue("AIzaSyBvYcQtI1J5zsGMdeHFhAWiWjyH2NllRv8", forKey: "YTKEY")
+        }
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("API_KEY") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue("1936420174", forKey: "API_KEY")
+        }
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("API_SECRET") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue("1183717499", forKey: "API_SECRET");
+        }
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue([String](), forKey: "alreadyGoingToArray");
+        }
+        
+        //NSUserDefaults.standardUserDefaults().setValue("11111111", forKey: "userid")
         
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
         

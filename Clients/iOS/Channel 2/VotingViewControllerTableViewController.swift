@@ -119,10 +119,11 @@ class VotingViewControllerTableViewController: UITableViewController {
     }
     func updateUserInterface()
     {
+        titleLabel.text = poll.prompt;
         if(!voter.didAlreadyVotedInPoll()) {
-            titleLabel.text = "Title: " + poll.prompt;
+            pleaseVoteLabel.text = "Please vote!"
         } else {
-            titleLabel.text = "The question was: " + poll.prompt;
+            pleaseVoteLabel.text = "Alredy voted! The question is below";
         }
         
         l1.text = poll.choice(1) + " (" + votesToVoteString(String(Int(poll.getPercents()[0] * Float(poll.totalvotes))) + " votes)");
@@ -187,17 +188,29 @@ class VotingViewControllerTableViewController: UITableViewController {
         return 4; // Ironically, all sections are 4
     }
 
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+            if(UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
+                if(indexPath.row == 1 || indexPath.row == 2) {
+                    return 90;
+                }
+            }
+        
+        return 45;
+    }
+    
     @IBAction func doVote(sender: AnyObject) {
     }
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    /*override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
+        cell.sele
+        
         // Configure the cell...
 
         return cell
-    }
-    */
+    }*/
+    
 
     /*
     // Override to support conditional editing of the table view.

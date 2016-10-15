@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PopupDialog
+import PopupDialog;
 
 class Popup: NSObject {
     internal func show(title:String, message:String, button:String,viewController:UIViewController)

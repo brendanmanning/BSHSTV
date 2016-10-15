@@ -5,7 +5,7 @@
 //  Created by Brendan Manning on 9/25/16.
 //  Copyright © 2016 BrendanManning. All rights reserved.
 //
-
+/*
 import UIKit
 
 class LoadingViewController: UIViewController {
@@ -76,3 +76,4 @@ class LoadingViewController: UIViewController {
     */
 
 }
+*/

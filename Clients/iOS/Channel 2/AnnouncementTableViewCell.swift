@@ -14,7 +14,13 @@ class AnnouncementTableViewCell: UITableViewCell {
     @IBOutlet weak var announcementtitle: UILabel!
     @IBOutlet weak var fulltext: UITextView!
     @IBOutlet weak var announcementdate: UILabel!
-
+    @IBOutlet weak var checkinButton: UIButton!
+    @IBOutlet weak var checkinsLabel: UILabel!
+    internal var checkins = -1;
+    
+    @IBAction func doCheckin(sender: AnyObject) {
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
