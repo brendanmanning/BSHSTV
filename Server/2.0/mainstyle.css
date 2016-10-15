@@ -186,7 +186,7 @@ input.focus {
 	border-bottom: solid 3px #00AF33;
 	color: #00AF33;
 }
-input[type=text].wide {
+.wide {
 	width: 100%;
 }
 input[type=text].most {
@@ -195,11 +195,18 @@ input[type=text].most {
 .green {
 	color: #00AF33;
 }
+.red {
+	color: #C40500;
+}
+p.big {
+	font-size: 200%;
+}
 input[type=text].large {
-	border-bottom: solid 2px #000;
+	border:none;
 	color: .green;
 	font-size: 200%;
 	font-weight: bold;
+	width: 100%;
 }
 input[type=text].large:focus {
 	border-top: solid 4px #00AF33;

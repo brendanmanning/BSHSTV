@@ -8,6 +8,7 @@
 			foreach ($conn->query($sql) as $row) {
 				$checkins = checkinsForID($conn, $row['internalid']);
 				$arr[] = array(
+					"id" => $row['internalid'],
 					"title" => $row['title'],
 					"creator" => $row['creator'],
 					"text" => $row['text'],
