@@ -11,9 +11,9 @@
 	try {
 		if(isComplete($_POST['id'],$_POST['newstatus'],$_POST['type']))
 		{
-			if(($_POST['type'] != 0) && ($_POST['type'] != 1))
+			if(($_POST['type'] != 0) && ($_POST['type'] != 1) && ($_POST['type'] != 2))
 			{
-				header("Location: manage.php?error&type=0");
+				header("Location: manage.php?error");
 				exit(-1);
 			}
 			$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name , $user, $pass);
@@ -25,9 +25,11 @@
     				$sql = $conn->prepare("UPDATE `announcements` SET `enabled` = :new WHERE `internalid` = :i;");
     			} else if($_POST['type'] == 1) {
     				$sql = $conn->prepare("UPDATE `polls` SET `enabled` = :new WHERE `id` = :i;");
+    			} else if($_POST['type'] == 2) {
+    				$sql = $conn->prepare("UPDATE `features` SET `enabled` = :new WHERE `internalid` = :i;");
     			}
     			$sql->bindParam(':new', $_POST['newstatus']);
-    			$sql->bindParam(':i', $_POST['id']);
+			$sql->bindParam(':i', $_POST['id']);
     		
     			$sql->execute();
     			header("Location: manage.php?type=" . $_POST['type']);

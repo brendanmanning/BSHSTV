@@ -72,6 +72,14 @@ td, tr {
   border-bottom: 1px solid #ddd;
 }
 
+td.on {
+  background-color: .green;
+}
+
+td.off {
+  background-color: .red;
+}
+
 button {
   background: #ddd;
   border: 0;

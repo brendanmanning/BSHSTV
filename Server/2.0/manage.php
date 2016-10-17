@@ -15,6 +15,10 @@
 		{
 			$url .= "?polls";
 		}
+		if($_GET['type'] == 2)
+		{
+			$url .= "?features";
+		}
 		if(isset($_GET['error']))
 		{
 			$url .= "&error";			
@@ -26,8 +30,10 @@
 <?php
 	if(!isset($_GET['announcements'])) {
 		if(!isset($_GET['polls'])) {
-			echo "A URL parameter was missing. <a href='manage.php?announcements'>Manage Announcements</a> | <a href='manage.php?polls'>Manage Polls</a>";
-			exit(-1);
+			if(!isset($_GET['features'])) {
+				echo "A URL parameter was missing. <a href='manage.php?announcements'>Manage Announcements</a> | <a href='manage.php?polls'>Manage Polls</a> | <a href='manage.php?features'>Manage App Features</a>";
+				exit(-1);
+			}
 		}
 	}
 ?>
@@ -40,6 +46,8 @@
 					echo "Announcements";
 				} else if(isset($_GET['polls'])) {
 					echo "Polls";
+				} else if(isset($_GET['features'])) {
+					echo "Features";
 				}
 			?>
 		</title>
@@ -55,6 +63,8 @@
 					echo "Announcements";
 				} else if(isset($_GET['polls'])) {
 					echo "Polls";
+				} else if(isset($_GET['features'])) {
+					echo "Features";
 				}
 		?></h2>
 		
@@ -72,6 +82,8 @@
 							echo '<th>Title</th><th>Full Text</th><th>Creator</th><th>Delete</th>';
 						} else if(isset($_GET['polls'])){
 							echo '<th>Prompt</th><th>Description</th><th>Creator</th><th>Delete</th>';
+						} else if(isset($_GET['features'])) {
+							echo '<th>Feature Name</th><th>Message when unavailable</th><th>Delete</th>';
 						}
 					?>
 				</tr>
@@ -87,6 +99,8 @@
 			$sql = "SELECT creator,title,text,internalid,enabled FROM announcements";
 		} else if(isset($_GET['polls'])){
 			$sql = "SELECT prompt,description,creator,id,enabled FROM polls";	
+		} else if(isset($_GET['features'])) {
+			$sql = "SELECT * FROM features";
 		}
 		foreach ($conn->query($sql) as $row) {
 			if(isset($_GET['announcements'])) {
@@ -104,7 +118,15 @@
 				if($row['enabled'] == 0) {
 					echo "<tr><td>" . $row['prompt'] . "</td><td>" . $row['description'] . "</td><td>" . $row['creator'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='primary'>Show</button><input type='hidden' name='id' value='" . $row['id'] . "'><input type='hidden' name='newstatus' value='1'><input type='hidden' name='type' value='1'></form></td></tr>";
 				}
+			} else if(isset($_GET['features'])) {
+				if($row['enabled'] == 1) {
+					echo "<tr><td>" . $row['name'] . "</td><td>" . $row['disabledMessage'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='destructive'>Disable Feature</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='0'><input type='hidden' name='type' value='2'></form></td></tr>";
+				}
+				if($row['enabled'] == 0) {
+					echo "<tr><td>" . $row['name'] . "</td><td>" . $row['disabledMessage'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='primary'>Enable Feature</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='1'><input type='hidden' name='type' value='2'></form></td></tr>";
+				}
 			}
+			
 		}
 	} catch (PDOException $e) {
 		echo "ERROR";
