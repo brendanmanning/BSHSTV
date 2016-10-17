@@ -24,7 +24,9 @@ class YouTubeVideoViewController: UIViewController, UIGestureRecognizerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad();
         // Get the video to display
-        self.id = NSUserDefaults.standardUserDefaults().valueForKey("videoid") as! String;
+        if let videoID = NSUserDefaults.standardUserDefaults().valueForKey("videoid") as? String {
+            self.id = videoID;
+        }
         
         // Load the webview, but hide it until device orientation is verified
         webview = UIWebView(frame: self.view.frame)

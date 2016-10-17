@@ -189,11 +189,6 @@ class VotingViewControllerTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-            if(UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
-                if(indexPath.row == 1 || indexPath.row == 2) {
-                    return 90;
-                }
-            }
         
         return 45;
     }

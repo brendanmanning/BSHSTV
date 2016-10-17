@@ -6,7 +6,7 @@
 //  Copyright © 2016 BrendanManning. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Announcement: NSObject {
     internal var creator:String!;
@@ -17,6 +17,7 @@ class Announcement: NSObject {
     internal var datevalid = true;
     internal var id:Int!;
     internal var peopleGoing:Int!;
+    internal var uiimg = UIImage(named: "loading");
     internal func getDate() -> NSDate
     {
         

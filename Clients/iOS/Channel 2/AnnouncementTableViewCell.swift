@@ -25,7 +25,7 @@ class AnnouncementTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        fulltext.userInteractionEnabled = false;
+        //fulltext.userInteractionEnabled = false;
     }
        
     override func setSelected(selected: Bool, animated: Bool) {

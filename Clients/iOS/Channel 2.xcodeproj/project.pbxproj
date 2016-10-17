@@ -103,6 +103,9 @@
 		C6F58E741D652CB200C7D19B /* LineByLineDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */; };
 		C6F58E751D652CB200C7D19B /* LineByLineDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */; };
 		C6F58E761D652CB200C7D19B /* LineByLineDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */; };
+		C6F7E61A1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */; };
+		C6F7E61B1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */; };
+		C6F7E61C1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */; };
 		C6FC7EF21D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */; };
 		C6FC7EF31D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */; };
 		C6FC7EF41D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */; };
@@ -174,6 +177,7 @@
 		C6E939E71D5D1D7B00112834 /* YouTubeVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeVideoViewController.swift; sourceTree = "<group>"; };
 		C6F58E6F1D6525DA00C7D19B /* FM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FM.swift; sourceTree = "<group>"; };
 		C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineByLineDownloader.swift; sourceTree = "<group>"; };
+		C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailViewController.swift; sourceTree = "<group>"; };
 		C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsTableViewController.swift; sourceTree = "<group>"; };
 		C6FC7EF51D90AEEE00D342E2 /* PollTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollTableViewCell.swift; sourceTree = "<group>"; };
 		C6FCBA481D5AC60A00DC5FC3 /* Channel 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Channel 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -297,6 +301,7 @@
 				C6D8B8F61D992FF00044B258 /* CacheManager.swift */,
 				C6E4C0191D600BD400DE6F85 /* AnnouncementTableViewCell.swift */,
 				C6E4C0151D600B9C00DE6F85 /* AnnouncementsTableViewController.swift */,
+				C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */,
 				C60E36171D985554005E3EB9 /* LoadingViewController.swift */,
 				C6E4C0211D60BF1E00DE6F85 /* Popup.swift */,
 				C6E4C01D1D600C4800DE6F85 /* Announcement.swift */,
@@ -605,6 +610,7 @@
 				C60E36141D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C64623291D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C67EADE01D5CCC9D003185F8 /* Video.swift in Sources */,
+				C6F7E61A1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6FDA17F1D669D9100BED432 /* DayDownloader.swift in Sources */,
 				C67EADEA1D5CDD36003185F8 /* VideoTableViewCell.swift in Sources */,
 				C6082F681D934A41001A879C /* PollsDownloader.swift in Sources */,
@@ -646,6 +652,7 @@
 				C60E36151D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C646232A1D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C6E939E91D5D1D7B00112834 /* YouTubeVideoViewController.swift in Sources */,
+				C6F7E61B1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6E4C01B1D600BD400DE6F85 /* AnnouncementTableViewCell.swift in Sources */,
 				C6AB5C631D6754EE0056F042 /* TodayViewController.swift in Sources */,
 				C6082F691D934A41001A879C /* PollsDownloader.swift in Sources */,
@@ -687,6 +694,7 @@
 				C60E36161D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C646232B1D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C6E939EA1D5D1D7B00112834 /* YouTubeVideoViewController.swift in Sources */,
+				C6F7E61C1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6E4C01C1D600BD400DE6F85 /* AnnouncementTableViewCell.swift in Sources */,
 				C6AB5C641D6754EE0056F042 /* TodayViewController.swift in Sources */,
 				C6082F6A1D934A41001A879C /* PollsDownloader.swift in Sources */,

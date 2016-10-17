@@ -176,6 +176,10 @@ class AnnouncementsTableViewController: UITableViewController {
                          
                         if(!eventsAlreadyGoingTo.contains(String(self.announcements[indexPath.row].id))) {
                             Popup().show("Network Error", message: "The app failed to connect with the server", button: "Dismiss", viewController: self as UIViewController)
+                        } else {
+                            let popup = PopupDialog(title: self.announcements[indexPath.row].eventtitle, message: "You and at least " + String(self.announcements[indexPath.row].peopleGoing - 1) + " other people are attending", image: self.announcements[indexPath.row].uiimg, gestureDismissal: true, completion: nil)
+                            popup.addButton(PopupDialogButton(title: "Dismiss", action: nil))
+                            self.presentViewController(popup, animated: true, completion: nil)
                         }
                     }
                 }
@@ -241,7 +245,7 @@ class AnnouncementsTableViewController: UITableViewController {
         return false;
     }
     
-    @IBAction func longpressgesture(sender: AnyObject) {
+    /*@IBAction func longpressgesture(sender: AnyObject) {
        let recognizer = sender as! UIGestureRecognizer
         
         //if(recognizer.state == UIGestureRecognizerState.Ended)
@@ -300,9 +304,14 @@ class AnnouncementsTableViewController: UITableViewController {
                 self.presentViewController(alert, animated: true, completion: nil)
             }
         }
-    }
+    }*/
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AnnouncementCell", forIndexPath: indexPath) as! AnnouncementTableViewCell
+        
+        /* Make sure the cell stays green even after selection */
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:0.4)
+        cell.selectedBackgroundView = bgColorView
         
         /* Make the cell green if the user already committed to this event */
         if let eventsAlreadyGoingTo = NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") as? [String]
@@ -322,15 +331,17 @@ class AnnouncementsTableViewController: UITableViewController {
             //cell.announcementdate.text = "Tap to share, hold to set reminder";//self.announcements[indexPath.item].date
             cell.announcementtitle.text = self.announcements[indexPath.item].eventtitle
             print(self.announcements[indexPath.item].peopleGoing);
-            cell.fulltext.text = self.announcements[indexPath.item].text;
+           // cell.fulltext.text = self.announcements[indexPath.item].text;
             if(self.announcements[indexPath.item].peopleGoing != -1) {
-                cell.fulltext.text = self.announcements[indexPath.item].text + "\n" + String(self.announcements[indexPath.item].peopleGoing) + "+ people are attending";
+                //cell.fulltext.text = self.announcements[indexPath.item].text + "\n" + String(self.announcements[indexPath.item].peopleGoing) + "+ people are attending";
             }
             cell.creator.text = self.announcements[indexPath.item].creator;
             }.background {
                 image = self.imageFromURL(self.announcements[indexPath.item].imagelink)
+                self.announcements[indexPath.row].uiimg = image;
             }.main {
                 cell.img.image = image;
+                //print(cell.fulltext.text);
             }
         
         return cell;
@@ -456,4 +467,71 @@ class AnnouncementsTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        var shareAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Share" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            let formatter = NSDateFormatter();
+            formatter.dateFormat = "EEEE, MMMM d, yyyy at h:mm:a"
+            let text = "Event: " + self.announcements[indexPath.item].eventtitle + " / " + "About: " + self.announcements[indexPath.item].text +  " / Date: " + formatter.stringFromDate(self.announcements[indexPath.item].getDate())
+            let activityVC = UIActivityViewController(activityItems: [text as AnyObject],applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = self.view
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        });
+        shareAction.backgroundColor = UIColor.blueColor();
+        
+        var addToCalendarAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Add to Calendar" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+            self.addToCalendar(indexPath.item)
+        });
+        addToCalendarAction.backgroundColor = UIColor.greenColor();
+        
+        return [shareAction,addToCalendarAction]
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueToAnnouncementDetail" || segue.identifier == "segueToAnnouncementDetailPeek"{
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                print(announcements[indexPath.row].eventtitle);
+                
+                /* The data for this segue gets saved to NSUserDefaults
+                 * Below is what index each value will be saved in 
+                 * [0] title
+                 * [1] date
+                 * [2] creator
+                 * [3] full text
+                 * [4] people going
+                */
+                
+                let vc = segue.destinationViewController as! AnnouncementDetailViewController;
+                vc.titleLabel.text = announcements[indexPath.row].eventtitle;
+                vc.creatorLabel.text = announcements[indexPath.row].creator;
+                
+                /*let file = FM(l:"Documents", name: "announcementDetailImage.png")
+                if(file.exists()) {
+                    file.delete()
+                }
+                file.writeData(UIImageJPEGRepresentation( announcements[indexPath.row].uiimg!, CGFloat(1))!);
+                
+                var peoplestring = "";
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "EEEE MMM d, yyyy [h:mm a]"
+                let dateString = formatter.stringFromDate(announcements[indexPath.row].getDate())
+                if(announcements[indexPath.row].peopleGoing != -1) {
+                    peoplestring = String(announcements[indexPath.row].peopleGoing) + "+"
+                } else {
+                    peoplestring = "MANY";
+                }
+                var array = [String]();
+                array.append(announcements[indexPath.row].eventtitle);
+                array.append(dateString)
+                array.append(announcements[indexPath.row].creator);
+                array.append(announcements[indexPath.row].text)
+                array.append(peoplestring)
+                
+                NSUserDefaults.standardUserDefaults().setObject(array, forKey: "announcementsDetailArray")
+                NSUserDefaults.standardUserDefaults().synchronize();*/
+            }
+        }
+    }
 }

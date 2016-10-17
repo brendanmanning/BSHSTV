@@ -116,7 +116,7 @@ class FirstViewController: UIViewController {
             let versionChecker = FeatureChecker();
             if(!versionChecker.check(String(NSUserDefaults.standardUserDefaults().valueForKey("version_feature")!))) {
                 Async.main {
-                    let updateOption = LockViewControllerOption(optionTitle: "Update BSHS TV", optionUrl: "itms://itunes.apple.com/us/app/apple-store/id375380948?mt=8")
+                    let updateOption = LockViewControllerOption(optionTitle: "Update BSHS TV", optionUrl: "itms://https://itunes.apple.com/us/app/bshs-tv/id1148603412?mt=8")
                     let lvc = LockViewController(viewController: self, selections: [updateOption], lockedTitle: "App update needed", lockedMessage: versionChecker.message);
                     lvc.present();
                 }

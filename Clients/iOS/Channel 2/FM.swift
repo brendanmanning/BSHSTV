@@ -63,6 +63,16 @@ class FM: NSObject {
         }
     }
     
+    internal func delete() -> Bool {
+        let fileManager = NSFileManager.defaultManager();
+        do {
+            try fileManager.removeItemAtPath(self.filepath)
+            return true;
+        } catch {
+            return false;
+        }
+    }
+    
     internal func write(string:String) -> Bool {
         if(self.filename == "") { return false }
         do {
@@ -71,5 +81,19 @@ class FM: NSObject {
         } catch {
             return false;
         }
+    }
+    
+    internal func writeData(data:NSData) -> Bool {
+        if(self.filename == "") { return false }
+        do {
+            try data.writeToFile(self.filepath, atomically: true)
+            return true;
+        } catch {
+            return false;
+        }
+    }
+    
+    internal func read() -> NSData? {
+        return NSData(contentsOfFile: self.filepath)
     }
 }

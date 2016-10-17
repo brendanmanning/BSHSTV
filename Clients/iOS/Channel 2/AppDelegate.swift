@@ -24,12 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          * If the test for this feature returns false we know the user must update the app
          * Simply by enabling or disabling features on the web interface, we can decide which user MUST update the app */
         
-         /* Right below is where we define the constant */
-         NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1", forKey: "version_feature");
-        
-        
-        
-        
+        /* Right below is where we define the constant */
+        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1", forKey: "version_feature");
+    
         if(NSUserDefaults.standardUserDefaults().objectForKey("videos") == nil)
         {
             NSUserDefaults.standardUserDefaults().setObject("", forKey: "videos")
@@ -94,25 +91,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch(UIDevice.currentDevice().userInterfaceIdiom)
             {
                 /* iPads have their own page */
-                case .Pad: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPad.html", forKey: "starterVideo");
+            case .Pad: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPad.html", forKey: "starterVideo");
                 /* For everything else use the iPhone page */
-                default: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPhone.html", forKey: "starterVideo");
+            default: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPhone.html", forKey: "starterVideo");
             }
         }
         
         if(NSUserDefaults.standardUserDefaults().objectForKey("YTKEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("AIzaSyBvYcQtI1J5zsGMdeHFhAWiWjyH2NllRv8", forKey: "YTKEY")
+            NSUserDefaults.standardUserDefaults().setValue("AIzaSyCTg-10REls_-wJ3q1_Y-UZD28MB_Tw43U", forKey: "YTKEY")
         }
         
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_KEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("1936420174", forKey: "API_KEY")
+            NSUserDefaults.standardUserDefaults().setValue("692699421", forKey: "API_KEY")
         }
         
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_SECRET") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("1183717499", forKey: "API_SECRET");
+            NSUserDefaults.standardUserDefaults().setValue("ECVKf6caxDTEfUw6HJUY", forKey: "API_SECRET");
         }
         
         if(NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") == nil)
@@ -156,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.titleColor     = UIColor.whiteColor()
         db.buttonColor    = UIColor(red:0.14, green:0.55, blue:0.06, alpha:1.0)
         db.separatorColor = UIColor(red:0.44, green:0.49, blue:0.44, alpha:1.0)
-
+        
         return true
     }
 
@@ -185,6 +182,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         UIApplication.sharedApplication().applicationIconBadgeNumber -= 1;
     }
-
 }
 
