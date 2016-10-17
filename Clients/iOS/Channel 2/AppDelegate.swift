@@ -154,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.buttonColor    = UIColor(red:0.14, green:0.55, blue:0.06, alpha:1.0)
         db.separatorColor = UIColor(red:0.44, green:0.49, blue:0.44, alpha:1.0)
 
-        return true
+        return true;
     }
 
     func applicationWillResignActive(application: UIApplication) {
