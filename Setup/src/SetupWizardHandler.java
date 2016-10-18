@@ -1,5 +1,6 @@
 import java.io.*;
 import javax.swing.*;
+import java.util.Random;
 /**
  * Write a description of class SetupWizard here.
  * 
@@ -43,6 +44,19 @@ public class SetupWizardHandler
         /* If they were all sucessful, return true, else return false */
         return (host_w && user_w && pass_w && name_w && uipass_w);
     }
+    public String replaceServerSetupConstants(String code)
+    {
+        String installConfigFileString = addTrailingSlash(baseDir.getAbsolutePath()) + "BSHSTV-master" + File.separator
+        + "Server" + File.separator + "2.0" + File.separator + "__installation" + File.separator + "__setup_key.php";
+        File setupKeyFile = new File(installConfigFileString);
+        
+        FileEditor fe = new FileEditor(setupKeyFile);
+        
+        /* Generate a random setup key */
+        String randomKey = randomAlpha(30);
+        fe.replace("{setup_key}", randomKey);
+        return randomKey;
+    }
     private String addTrailingSlash(String s)
     {
         if(!s.endsWith(File.separator))
@@ -50,5 +64,25 @@ public class SetupWizardHandler
             s += File.separator;
         }
         return s;
+    }
+    private String randomAlpha(int length)
+    {
+        String alphabet = "";
+        for(int c = 65; c < 90; c++)
+        {
+            alphabet += Character.toString((char) c);
+        }
+        for(int c = 97; c < 122; c++)
+        {
+            alphabet += Character.toString((char) c);
+        }
+        String randomString = "";
+        Random rand = new Random();
+        for(int i = 0; i < length; i++)
+        {
+            randomString += Character.toString(alphabet.charAt(rand.nextInt(((alphabet.length()-1) - 0) + 1) + 0));
+        }
+        
+        return randomString;
     }
 }
