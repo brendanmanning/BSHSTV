@@ -10,43 +10,62 @@ import UIKit
 
 class AnnouncementDetailViewController: UIViewController {
 
-    @IBOutlet weak var peopleCountLabel: UILabel!
-    @IBOutlet weak var creatorLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var fullTextView: UITextView!
-    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet var peopleCountLabel: UILabel!
+    @IBOutlet var creatorLabel: UILabel!
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var fullTextView: UITextView!
+    @IBOutlet var iconImageView: UIImageView!
     var isGoing = false;
     override func viewDidLoad() {
         super.viewDidLoad();
         
         // Get array of information from NSUserDefaults
-       /* var informationArray = NSUserDefaults.standardUserDefaults().objectForKey("announcementsDetailArray") as! [String];
-        titleLabel.text = informationArray[0];
-        dateLabel.text = informationArray[1];
-        creatorLabel.text = informationArray[2];
-        fullTextView.text = informationArray[3];
-        peopleCountLabel.text = informationArray[4];
-        
+        if let informationArrayNS = NSUserDefaults.standardUserDefaults().objectForKey("announcementsDetailArray") as? [AnyObject] {
+            if let informationArray = informationArrayNS as? [NSString] {
+                titleLabel.text = informationArray[0] as String;
+                dateLabel.text = informationArray[1] as String;
+                creatorLabel.text = informationArray[2] as String;
+                fullTextView.text = informationArray[3] as String;
+                peopleCountLabel.text = informationArray[4] as String;
+            } else {
+                print("f1")
+            }
+        } else {
+            print("f2")
+        }
         let file = FM(l:"Documents", name: "announcementDetailImage.png")
-        iconImageView.image = UIImage(data: file.read()!);*/
+        if let data = file.read()
+        {
+            iconImageView.image = UIImage(data: data);
+        } else {
+            print("f3")
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-   /* override func previewActionItems() -> [UIPreviewActionItem] {
-        let regularAction = UIPreviewAction(title: "Regular", style: .Default) { (action: UIPreviewAction, vc: UIViewController) -> Void in
+    internal func setAnnouncementTitle(t:String) {
+        self.titleLabel.text = t;
+    }
+    
+   override func previewActionItems() -> [UIPreviewActionItem] {
+        let regularAction = UIPreviewAction(title: "Hello", style: .Default) { (action: UIPreviewAction, vc: UIViewController) -> Void in
             
         }
         
-        let destructiveAction = UIPreviewAction(title: "Destructive", style: .Destructive) { (action: UIPreviewAction, vc: UIViewController) -> Void in
+        let destructiveAction = UIPreviewAction(title: "World", style: .Destructive) { (action: UIPreviewAction, vc: UIViewController) -> Void in
             
         }
         
-        let actionGroup = UIPreviewActionGroup(title: "Group...", style: .Default, actions: [regularAction, destructiveAction])
+        let actionGroup = UIPreviewActionGroup(title: "!!!!...", style: .Default, actions: [regularAction, destructiveAction])
         
         return [regularAction, destructiveAction, actionGroup]
-    }*/
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //
+    }
 }

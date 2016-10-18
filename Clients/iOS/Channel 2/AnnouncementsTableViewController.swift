@@ -481,7 +481,7 @@ class AnnouncementsTableViewController: UITableViewController {
         });
         shareAction.backgroundColor = UIColor.blueColor();
         
-        var addToCalendarAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Add to Calendar" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
+        let addToCalendarAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Add to Calendar" , handler: { (action:UITableViewRowAction!, indexPath:NSIndexPath!) -> Void in
             self.addToCalendar(indexPath.item)
         });
         addToCalendarAction.backgroundColor = UIColor.greenColor();
@@ -503,11 +503,34 @@ class AnnouncementsTableViewController: UITableViewController {
                  * [4] people going
                 */
                 
-                let vc = segue.destinationViewController as! AnnouncementDetailViewController;
-                vc.titleLabel.text = announcements[indexPath.row].eventtitle;
+                /*let vco = segue.destinationViewController
+                if let vc = (segue.destinationViewController as! UINavigationController).topViewController as? AnnouncementDetailViewController {
+                    
+                    
+                vc.setAnnouncementTitle(announcements[indexPath.row].eventtitle)
                 vc.creatorLabel.text = announcements[indexPath.row].creator;
                 
-                /*let file = FM(l:"Documents", name: "announcementDetailImage.png")
+                /* Format the date */
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "EEEE MMM d, yyyy [h:mm a]"
+                let dateString = formatter.stringFromDate(announcements[indexPath.row].getDate())
+                vc.dateLabel.text = dateString;
+                
+                vc.iconImageView.image = announcements[indexPath.row].uiimg;
+                vc.fullTextView.text = announcements[indexPath.row].text;
+                
+                /* Format the count of people going */
+                if(announcements[indexPath.row].peopleGoing != -1) {
+                    vc.peopleCountLabel.text = String(announcements[indexPath.row].peopleGoing) + "+"
+                } else {
+                    vc.peopleCountLabel.text = "MANY";
+                }
+                }  else {
+                    print("vc conversion failed")
+                }*/
+                
+                
+                let file = FM(l:"Documents", name: "announcementDetailImage.png")
                 if(file.exists()) {
                     file.delete()
                 }
@@ -522,7 +545,7 @@ class AnnouncementsTableViewController: UITableViewController {
                 } else {
                     peoplestring = "MANY";
                 }
-                var array = [String]();
+                var array = [NSString]();
                 array.append(announcements[indexPath.row].eventtitle);
                 array.append(dateString)
                 array.append(announcements[indexPath.row].creator);
@@ -530,7 +553,9 @@ class AnnouncementsTableViewController: UITableViewController {
                 array.append(peoplestring)
                 
                 NSUserDefaults.standardUserDefaults().setObject(array, forKey: "announcementsDetailArray")
-                NSUserDefaults.standardUserDefaults().synchronize();*/
+                NSUserDefaults.standardUserDefaults().synchronize();
+            } else {
+                print("count not get indexath")
             }
         }
     }
