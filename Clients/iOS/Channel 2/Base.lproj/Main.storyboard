@@ -272,7 +272,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="w3v-vr-zY6">
-                                <rect key="frame" x="0.0" y="420" width="136" height="136"/>
+                                <rect key="frame" x="0.0" y="415" width="136" height="136"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1280+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="4yz-0t-jOs">
                                 <rect key="frame" x="144" y="431" width="436" height="80"/>
@@ -299,32 +299,13 @@
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkE-0t-jqo">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="3kz-dn-OL1"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem title="Add to Calendar" id="nEk-A4-ftz">
-                                        <color key="tintColor" red="0.0" green="0.54901960780000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rIq-Xb-Am6"/>
-                                    <barButtonItem systemItem="action" id="WkD-9R-HsS">
-                                        <color key="tintColor" red="0.0" green="0.54901960780000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </barButtonItem>
-                                </items>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wkE-0t-jqo" firstAttribute="leading" secondItem="E4m-Hl-2yr" secondAttribute="leadingMargin" constant="-20" id="Ahe-gG-9fU"/>
                             <constraint firstItem="hzc-vi-pWB" firstAttribute="leading" secondItem="SO9-Yt-IWo" secondAttribute="trailing" constant="8" id="JZ1-Xn-3CR"/>
                             <constraint firstItem="7NA-3i-1OJ" firstAttribute="trailing" secondItem="E4m-Hl-2yr" secondAttribute="trailingMargin" id="KYo-Qy-TmJ"/>
                             <constraint firstItem="hzc-vi-pWB" firstAttribute="trailing" secondItem="E4m-Hl-2yr" secondAttribute="trailingMargin" id="NhF-Ns-U2a"/>
-                            <constraint firstItem="wkE-0t-jqo" firstAttribute="bottom" secondItem="E4m-Hl-2yr" secondAttribute="bottomMargin" id="Wlg-qT-AKJ"/>
                             <constraint firstItem="SO9-Yt-IWo" firstAttribute="leading" secondItem="E4m-Hl-2yr" secondAttribute="leadingMargin" constant="-20" id="eGJ-oV-FFI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wkE-0t-jqo" secondAttribute="trailing" constant="-20" id="hOR-nH-s86"/>
                             <constraint firstItem="7NA-3i-1OJ" firstAttribute="leading" secondItem="SO9-Yt-IWo" secondAttribute="trailing" constant="8" id="pah-AB-Hv8"/>
                         </constraints>
                     </view>
