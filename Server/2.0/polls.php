@@ -2,7 +2,7 @@
 	include 'config.php';
 	try {
 	$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name,$user,$pass);
-	$sql = "SELECT id,prompt,description,icon FROM polls";
+	$sql = "SELECT id,prompt,description,icon FROM polls WHERE enabled=1";
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$arr = array();
 	

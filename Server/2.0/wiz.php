@@ -66,7 +66,12 @@
 		} else {
 			if($_POST['pwd'] == $password) {
 				$_SESSION['authed'] = true;
-				header("Location: wiz.php?step=-1");
+				if(isset($_POST['sender']))
+				{
+					header("Location: " . $_POST['sender']);
+				} else {
+					header("Location: wiz.php?step=-1");
+				}
 			} else {
 				header("Location: wizard.php?wrong");
 			}

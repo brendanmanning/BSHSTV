@@ -1,2 +1,2 @@
 <?php
-	define("EMAIL", "<your email here>");
+	define("EMAIL", "{support_email}");

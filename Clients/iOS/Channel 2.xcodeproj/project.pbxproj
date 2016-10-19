@@ -28,15 +28,24 @@
 		C60E36181D985554005E3EB9 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E36171D985554005E3EB9 /* LoadingViewController.swift */; };
 		C60E36191D985554005E3EB9 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E36171D985554005E3EB9 /* LoadingViewController.swift */; };
 		C60E361A1D985554005E3EB9 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E36171D985554005E3EB9 /* LoadingViewController.swift */; };
+		C61FFE8B1DAED79600201285 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8A1DAED79600201285 /* Extensions.swift */; };
+		C61FFE8C1DAED79600201285 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8A1DAED79600201285 /* Extensions.swift */; };
+		C61FFE8D1DAED79600201285 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8A1DAED79600201285 /* Extensions.swift */; };
+		C61FFE8F1DAEDE9600201285 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8E1DAEDE9600201285 /* LockViewController.swift */; };
+		C61FFE901DAEDE9600201285 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8E1DAEDE9600201285 /* LockViewController.swift */; };
+		C61FFE911DAEDE9600201285 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8E1DAEDE9600201285 /* LockViewController.swift */; };
+		C63E96801DB6F2A9009BFB3B /* InitialSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63E967F1DB6F2A9009BFB3B /* InitialSetup.swift */; };
+		C63E96811DB6F2A9009BFB3B /* InitialSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63E967F1DB6F2A9009BFB3B /* InitialSetup.swift */; };
+		C63E96821DB6F2A9009BFB3B /* InitialSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63E967F1DB6F2A9009BFB3B /* InitialSetup.swift */; };
+		C642F4C61DB29CE800E17153 /* FeatureChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C642F4C51DB29CE800E17153 /* FeatureChecker.swift */; };
+		C642F4C71DB29CE800E17153 /* FeatureChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C642F4C51DB29CE800E17153 /* FeatureChecker.swift */; };
+		C642F4C81DB29CE800E17153 /* FeatureChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C642F4C51DB29CE800E17153 /* FeatureChecker.swift */; };
 		C64623291D8EF24500D832D3 /* VideoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64623281D8EF24500D832D3 /* VideoDownloader.swift */; };
 		C646232A1D8EF24500D832D3 /* VideoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64623281D8EF24500D832D3 /* VideoDownloader.swift */; };
 		C646232B1D8EF24500D832D3 /* VideoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64623281D8EF24500D832D3 /* VideoDownloader.swift */; };
 		C651EFD81D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
 		C651EFD91D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
 		C651EFDA1D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
-		C669F3DA1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */; };
-		C669F3DB1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */; };
-		C669F3DC1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */; };
 		C67D48001D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
 		C67D48011D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
 		C67D48021D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
@@ -97,6 +106,9 @@
 		C6F58E741D652CB200C7D19B /* LineByLineDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */; };
 		C6F58E751D652CB200C7D19B /* LineByLineDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */; };
 		C6F58E761D652CB200C7D19B /* LineByLineDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */; };
+		C6F7E61A1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */; };
+		C6F7E61B1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */; };
+		C6F7E61C1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */; };
 		C6FC7EF21D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */; };
 		C6FC7EF31D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */; };
 		C6FC7EF41D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */; };
@@ -143,9 +155,12 @@
 		C6082F6B1D936E34001A879C /* PollDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollDownloader.swift; sourceTree = "<group>"; };
 		C60E36131D983108005E3EB9 /* TodayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayItem.swift; sourceTree = "<group>"; };
 		C60E36171D985554005E3EB9 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		C61FFE8A1DAED79600201285 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C61FFE8E1DAEDE9600201285 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
+		C63E967F1DB6F2A9009BFB3B /* InitialSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialSetup.swift; sourceTree = "<group>"; };
+		C642F4C51DB29CE800E17153 /* FeatureChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureChecker.swift; sourceTree = "<group>"; };
 		C64623281D8EF24500D832D3 /* VideoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloader.swift; sourceTree = "<group>"; };
 		C651EFD71D5E05F400802575 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementDownloader.swift; sourceTree = "<group>"; };
 		C67D48031D8F621C00319A68 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C67EADDB1D5CC878003185F8 /* VideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +181,7 @@
 		C6E939E71D5D1D7B00112834 /* YouTubeVideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeVideoViewController.swift; sourceTree = "<group>"; };
 		C6F58E6F1D6525DA00C7D19B /* FM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FM.swift; sourceTree = "<group>"; };
 		C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineByLineDownloader.swift; sourceTree = "<group>"; };
+		C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementDetailViewController.swift; sourceTree = "<group>"; };
 		C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsTableViewController.swift; sourceTree = "<group>"; };
 		C6FC7EF51D90AEEE00D342E2 /* PollTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollTableViewCell.swift; sourceTree = "<group>"; };
 		C6FCBA481D5AC60A00DC5FC3 /* Channel 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Channel 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,6 +281,9 @@
 			children = (
 				C6FCBA4B1D5AC60A00DC5FC3 /* AppDelegate.swift */,
 				C651EFD71D5E05F400802575 /* FirstViewController.swift */,
+				C63E967F1DB6F2A9009BFB3B /* InitialSetup.swift */,
+				C642F4C51DB29CE800E17153 /* FeatureChecker.swift */,
+				C61FFE8E1DAEDE9600201285 /* LockViewController.swift */,
 				C606A19B1D75C3A1001150A2 /* SocketTester.swift */,
 				C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */,
 				C6FDA17E1D669D9100BED432 /* DayDownloader.swift */,
@@ -281,17 +300,18 @@
 				C6FC7EF51D90AEEE00D342E2 /* PollTableViewCell.swift */,
 				C69B21CF1D91F6E400BC6547 /* VotingViewControllerTableViewController.swift */,
 				C69B21CB1D91E3CB00BC6547 /* OnlinePoll.swift */,
-				C669F3D91D6DFC5800E5BD7B /* GraphViewController.swift */,
 				C6AB5C611D6754EE0056F042 /* TodayViewController.swift */,
 				C60E36131D983108005E3EB9 /* TodayItem.swift */,
 				C6F58E6F1D6525DA00C7D19B /* FM.swift */,
 				C6D8B8F61D992FF00044B258 /* CacheManager.swift */,
 				C6E4C0191D600BD400DE6F85 /* AnnouncementTableViewCell.swift */,
 				C6E4C0151D600B9C00DE6F85 /* AnnouncementsTableViewController.swift */,
+				C6F7E6191DB3D12100F6D5EB /* AnnouncementDetailViewController.swift */,
 				C60E36171D985554005E3EB9 /* LoadingViewController.swift */,
 				C6E4C0211D60BF1E00DE6F85 /* Popup.swift */,
 				C6E4C01D1D600C4800DE6F85 /* Announcement.swift */,
 				C6E939E71D5D1D7B00112834 /* YouTubeVideoViewController.swift */,
+				C61FFE8A1DAED79600201285 /* Extensions.swift */,
 				C67EADDB1D5CC878003185F8 /* VideosTableViewController.swift */,
 				C67EADE91D5CDD36003185F8 /* VideoTableViewCell.swift */,
 				C67EADDF1D5CCC9D003185F8 /* Video.swift */,
@@ -587,7 +607,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C669F3DA1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */,
 				C6E4C0221D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C67EADDC1D5CC878003185F8 /* VideosTableViewController.swift in Sources */,
 				C6AB5C621D6754EE0056F042 /* TodayViewController.swift in Sources */,
@@ -596,10 +615,12 @@
 				C60E36141D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C64623291D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C67EADE01D5CCC9D003185F8 /* Video.swift in Sources */,
+				C6F7E61A1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6FDA17F1D669D9100BED432 /* DayDownloader.swift in Sources */,
 				C67EADEA1D5CDD36003185F8 /* VideoTableViewCell.swift in Sources */,
 				C6082F681D934A41001A879C /* PollsDownloader.swift in Sources */,
 				C6F58E701D6525DA00C7D19B /* FM.swift in Sources */,
+				C61FFE8F1DAEDE9600201285 /* LockViewController.swift in Sources */,
 				C651EFD81D5E05F400802575 /* FirstViewController.swift in Sources */,
 				C6E4C0161D600B9C00DE6F85 /* AnnouncementsTableViewController.swift in Sources */,
 				C69B21D01D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
@@ -614,7 +635,10 @@
 				C6E4C01A1D600BD400DE6F85 /* AnnouncementTableViewCell.swift in Sources */,
 				C60E36181D985554005E3EB9 /* LoadingViewController.swift in Sources */,
 				C6FCBA4C1D5AC60A00DC5FC3 /* AppDelegate.swift in Sources */,
+				C63E96801DB6F2A9009BFB3B /* InitialSetup.swift in Sources */,
 				C6FC7EF61D90AEEE00D342E2 /* PollTableViewCell.swift in Sources */,
+				C642F4C61DB29CE800E17153 /* FeatureChecker.swift in Sources */,
+				C61FFE8B1DAED79600201285 /* Extensions.swift in Sources */,
 				C6D8B8F71D992FF00044B258 /* CacheManager.swift in Sources */,
 				C67D48041D8F621C00319A68 /* NetworkError.swift in Sources */,
 				C6CD79CC1D5EC68B00BA277D /* SettingsTableViewController.swift in Sources */,
@@ -626,7 +650,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C669F3DB1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */,
 				C6E4C01F1D600C4800DE6F85 /* Announcement.swift in Sources */,
 				C6E4C0231D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C6F58E711D6525DA00C7D19B /* FM.swift in Sources */,
@@ -635,10 +658,12 @@
 				C60E36151D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C646232A1D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C6E939E91D5D1D7B00112834 /* YouTubeVideoViewController.swift in Sources */,
+				C6F7E61B1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6E4C01B1D600BD400DE6F85 /* AnnouncementTableViewCell.swift in Sources */,
 				C6AB5C631D6754EE0056F042 /* TodayViewController.swift in Sources */,
 				C6082F691D934A41001A879C /* PollsDownloader.swift in Sources */,
 				C67EADEB1D5CDD36003185F8 /* VideoTableViewCell.swift in Sources */,
+				C61FFE901DAEDE9600201285 /* LockViewController.swift in Sources */,
 				C606A3561D5E46D800DEBD8F /* Async.swift in Sources */,
 				C6CD79CD1D5EC68B00BA277D /* SettingsTableViewController.swift in Sources */,
 				C69B21D11D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
@@ -653,7 +678,10 @@
 				C651EFD91D5E05F400802575 /* FirstViewController.swift in Sources */,
 				C60E36191D985554005E3EB9 /* LoadingViewController.swift in Sources */,
 				C67EADE11D5CCC9D003185F8 /* Video.swift in Sources */,
+				C63E96811DB6F2A9009BFB3B /* InitialSetup.swift in Sources */,
 				C6FC7EF71D90AEEE00D342E2 /* PollTableViewCell.swift in Sources */,
+				C642F4C71DB29CE800E17153 /* FeatureChecker.swift in Sources */,
+				C61FFE8C1DAED79600201285 /* Extensions.swift in Sources */,
 				C6D8B8F81D992FF00044B258 /* CacheManager.swift in Sources */,
 				C67D48051D8F621C00319A68 /* NetworkError.swift in Sources */,
 				C67EADDD1D5CC878003185F8 /* VideosTableViewController.swift in Sources */,
@@ -665,7 +693,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C669F3DC1D6DFC5800E5BD7B /* GraphViewController.swift in Sources */,
 				C6E4C0201D600C4800DE6F85 /* Announcement.swift in Sources */,
 				C6E4C0241D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C6F58E721D6525DA00C7D19B /* FM.swift in Sources */,
@@ -674,10 +701,12 @@
 				C60E36161D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C646232B1D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C6E939EA1D5D1D7B00112834 /* YouTubeVideoViewController.swift in Sources */,
+				C6F7E61C1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6E4C01C1D600BD400DE6F85 /* AnnouncementTableViewCell.swift in Sources */,
 				C6AB5C641D6754EE0056F042 /* TodayViewController.swift in Sources */,
 				C6082F6A1D934A41001A879C /* PollsDownloader.swift in Sources */,
 				C67EADEC1D5CDD36003185F8 /* VideoTableViewCell.swift in Sources */,
+				C61FFE911DAEDE9600201285 /* LockViewController.swift in Sources */,
 				C606A3571D5E46D800DEBD8F /* Async.swift in Sources */,
 				C6CD79CE1D5EC68B00BA277D /* SettingsTableViewController.swift in Sources */,
 				C69B21D21D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
@@ -692,7 +721,10 @@
 				C651EFDA1D5E05F400802575 /* FirstViewController.swift in Sources */,
 				C60E361A1D985554005E3EB9 /* LoadingViewController.swift in Sources */,
 				C67EADE21D5CCC9D003185F8 /* Video.swift in Sources */,
+				C63E96821DB6F2A9009BFB3B /* InitialSetup.swift in Sources */,
 				C6FC7EF81D90AEEE00D342E2 /* PollTableViewCell.swift in Sources */,
+				C642F4C81DB29CE800E17153 /* FeatureChecker.swift in Sources */,
+				C61FFE8D1DAED79600201285 /* Extensions.swift in Sources */,
 				C6D8B8F91D992FF00044B258 /* CacheManager.swift in Sources */,
 				C67D48061D8F621C00319A68 /* NetworkError.swift in Sources */,
 				C67EADDE1D5CC878003185F8 /* VideosTableViewController.swift in Sources */,

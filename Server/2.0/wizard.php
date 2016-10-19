@@ -30,10 +30,16 @@
 						</form>
 					";
 				} else {
-					echo '
+					$loginform = '
 			<form action="wiz.php" method="POST">
-				<input type="text" placeholder="Type the password to confirm" name="pwd"> <button type="submit" class="primary outline">Login</button> <input type="hidden" name="slide" value="1">
-			</form>';
+				<input type="text" placeholder="Type the password to confirm" name="pwd"> <button type="submit" class="primary outline">Login</button> <input type="hidden" name="slide" value="1">';
+				if(isset($_GET['sender'])) {
+					$loginform .= '<input type="hidden" name="sender" value="' . $_GET['sender'] . '">';
+				}
+				
+				$loginform .= "</form>";
+				
+				echo $loginform;
 			}
 			?>
 		</center>

@@ -4,5 +4,5 @@
 	$pass = "[Pvr.AQ]T,@x";
 	$name = "brenuzrr_bshstv";
 	
-	$password = "tvstudio";
+	$password = "{password here}";
 ?>
