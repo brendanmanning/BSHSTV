@@ -1,13 +1,13 @@
 <?php
 	// Include database constants
 	require 'config.php';
-
+	
 	// Make sure this request was authorized
 	require 'apivalidator.php';
-
+	
 	/* Make sure API token is correct */
 	if(call($_GET['key'],$_GET['secret'],$host,$name,$user,$pass)) {
-
+	
 	try {
 		$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name,$user,$pass);
 		$loops = 0;
@@ -22,16 +22,15 @@
 				$existing++;
 				break;
 			}
-
-<<<<<<< HEAD
+			
 			if($existing == 0)
 			{
 				$loops = 21;
 			}
-
+			
 			$loops++;
 		}
-
+		
 		if($userid != 0) {
 			/* Now that we've got a user ID that's random, put it in the database */
 			$sql = $conn->prepare("INSERT INTO userids (userid) VALUES (:userid)");
@@ -54,5 +53,5 @@
 	} else {
 		$arr = array("status" => "error");
 		echo json_encode($arr);
-	}
+	}	
 ?>

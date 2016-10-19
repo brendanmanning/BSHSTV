@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("phpserver") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{server_url}", forKey: "phpserver");
+            NSUserDefaults.standardUserDefaults().setValue("http://apps.brendanmanning.com/bshstv/", forKey: "phpserver");
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("pollid") == nil)
