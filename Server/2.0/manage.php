@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 	/* Make sure user is logged in or redirect */
 	include 'auth.php';
 ?>
@@ -21,9 +22,9 @@
 		}
 		if(isset($_GET['error']))
 		{
-			$url .= "&error";			
+			$url .= "&error";
 		}
-		
+
 		header($url);
 	}
 ?>
@@ -39,7 +40,7 @@
 ?>
 <html>
 	<head>
-		<title>Manage 
+		<title>Manage
 			<?php
 				if(isset($_GET['announcements']))
 				{
@@ -51,11 +52,11 @@
 				}
 			?>
 		</title>
-		
+
 		<link rel="stylesheet" type="text/css" href="mainstyle.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mu/0.3.0/mu.min.css" />
 	</head>
-	
+
 	<body>
 		<h2>Manage <?php
 				if(isset($_GET['announcements']))
@@ -67,7 +68,7 @@
 					echo "Features";
 				}
 		?></h2>
-		
+
 		<?php
 			if(isset($_GET['error'])) {
 				echo "<font color='red'>An error occured changing status</font>";
@@ -88,7 +89,7 @@
 					?>
 				</tr>
 			<tbody>
-			
+
 <?php
 	$arr = array();
 	include 'config.php';
@@ -98,7 +99,7 @@
 		if(isset($_GET['announcements'])) {
 			$sql = "SELECT creator,title,text,internalid,enabled FROM announcements";
 		} else if(isset($_GET['polls'])){
-			$sql = "SELECT prompt,description,creator,id,enabled FROM polls";	
+			$sql = "SELECT prompt,description,creator,id,enabled FROM polls";
 		} else if(isset($_GET['features'])) {
 			$sql = "SELECT * FROM features";
 		}
@@ -107,7 +108,7 @@
 				if($row['enabled'] == 1) {
 					echo "<tr><td>" . $row['title'] . "</td><td>" . $row['text'] . "</td><td>" . $row['creator'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='destructive'>Hide</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='0'><input type='hidden' name='type' value='0'></form></td></tr>";
 				}
-			
+
 				if($row['enabled'] == 0) {
 					echo "<tr><td>" . $row['title'] . "</td><td>" . $row['text'] . "</td><td>" . $row['creator'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='primary'>Show</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='1'><input type='hidden' name='type' value='0'></form></td></tr>";
 				}
@@ -126,7 +127,6 @@
 					echo "<tr><td>" . $row['name'] . "</td><td>" . $row['disabledMessage'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='primary'>Enable Feature</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='1'><input type='hidden' name='type' value='2'></form></td></tr>";
 				}
 			}
-			
 		}
 	} catch (PDOException $e) {
 		echo "ERROR";
@@ -136,4 +136,3 @@
 </table>
 </body>
 </html>
-	
