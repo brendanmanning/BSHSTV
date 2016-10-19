@@ -24,9 +24,9 @@ class LockViewController: NSObject {
     internal func present()
     {
         /* Blur the view controller an d hide all nav bars */
-        self.vc.navigationController?.navigationBarHidden = true;
-        self.vc.tabBarController?.tabBar.hidden = true;
-        self.vc.view.blur();
+       // self.vc.navigationController?.navigationBarHidden = true;
+        //self.vc.tabBarController?.tabBar.hidden = true;
+        //self.vc.view.blur();
         
         /* Create a popup dialog */
         let dialog = UIAlertController(title: self.title, message: self.message, preferredStyle: .Alert)
@@ -35,6 +35,7 @@ class LockViewController: NSObject {
                 option.choose();
             }));
         }
+        if vc.presentingViewController != nil { vc.dismissViewControllerAnimated(false, completion: nil) }
         self.vc.presentViewController(dialog, animated: true, completion: nil)
     }
 }

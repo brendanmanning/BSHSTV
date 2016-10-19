@@ -99,17 +99,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("YTKEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{YT_API_KEY}", forKey: "YTKEY")
+            NSUserDefaults.standardUserDefaults().setValue("{YT_KEY}", forKey: "YTKEY")
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_KEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{api_key}", forKey: "API_KEY")
+            NSUserDefaults.standardUserDefaults().setValue("{API_KEY}", forKey: "API_KEY")
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_SECRET") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{api_secret}", forKey: "API_SECRET");
+            NSUserDefaults.standardUserDefaults().setValue("{API_SECRET}", forKey: "API_SECRET");
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") == nil)

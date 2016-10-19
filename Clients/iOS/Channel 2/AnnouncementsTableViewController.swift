@@ -16,6 +16,7 @@ class AnnouncementsTableViewController: UITableViewController {
     var announcements = [Announcement]();
     var shouldShowNone = false;
     var refreshButtonDefaultColor = UIColor.blackColor();
+    var firsttime = true;
     override func viewDidLoad() {
         super.viewDidLoad();
         
@@ -24,12 +25,23 @@ class AnnouncementsTableViewController: UITableViewController {
         /* Setup UIRefreshControl */
         //self.presentViewController(LoadingViewController(), animated: false, completion: nil)
         //Async.background {
+        Async.background {
             self.refreshTableData()
+            self.firsttime = false;
+        }
         //}
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if(!firsttime) {
+            self.refreshTableData();
+        }
+    }
+    
     @IBAction func refreshButtonPressed(sender: AnyObject) {
-        self.refreshTableData();
+        Async.background {
+            self.refreshTableData();
+        }
     }
     func refresh(sender:AnyObject)
     {
@@ -164,6 +176,7 @@ class AnnouncementsTableViewController: UITableViewController {
     }*/
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        updatedefaults();
         /*Async.background {
             if(self.sayImGoingToEvent(indexPath))
             {
@@ -474,34 +487,46 @@ class AnnouncementsTableViewController: UITableViewController {
                 }
                 
                 */
-                let file = FM(l:"Documents", name: "announcementDetailImage.png")
-                if(file.exists()) {
-                    file.delete()
-                }
-                file.writeData(UIImageJPEGRepresentation( announcements[indexPath.row].uiimg!, CGFloat(1))!);
                 
-                var peoplestring = "";
-                let formatter = NSDateFormatter()
-                formatter.dateFormat = "EEEE MMM d, yyyy [h:mm a]"
-                let dateString = formatter.stringFromDate(announcements[indexPath.row].getDate())
-                if(announcements[indexPath.row].peopleGoing != -1) {
-                    peoplestring = String(announcements[indexPath.row].peopleGoing) + "+"
-                } else {
-                    peoplestring = "MANY";
-                }
-                var array = [NSString]();
-                array.append(announcements[indexPath.row].eventtitle);
-                array.append(dateString)
-                array.append(announcements[indexPath.row].creator);
-                array.append(announcements[indexPath.row].text)
-                array.append(peoplestring)
-                array.append(String(announcements[indexPath.row].id) as NSString);
-                
-                NSUserDefaults.standardUserDefaults().setObject(array, forKey: "announcementsDetailArray")
-                NSUserDefaults.standardUserDefaults().synchronize();
             } else {
                 print("count not get indexath")
             }
+        }
+    }
+    
+    func updatedefaults() {
+        if let indexPath = self.tableView.indexPathForSelectedRow {
+        let file = FM(l:"Documents", name: "announcementDetailImage.png")
+        if(file.exists()) {
+            file.delete()
+        }
+        file.writeData(UIImageJPEGRepresentation( announcements[indexPath.row].uiimg!, CGFloat(1))!);
+        
+        var peoplestring = "";
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "EEEE MMM d, yyyy [h:mm a]"
+        let dateString = formatter.stringFromDate(announcements[indexPath.row].getDate())
+        if(announcements[indexPath.row].peopleGoing != -1) {
+            peoplestring = String(announcements[indexPath.row].peopleGoing) + "+"
+        } else {
+            peoplestring = "MANY";
+        }
+        var array = [NSString]();
+        array.append(announcements[indexPath.row].eventtitle);
+        array.append(dateString)
+        array.append(announcements[indexPath.row].creator);
+        array.append(announcements[indexPath.row].text)
+        array.append(peoplestring)
+        //array.append(String(announcements[indexPath.row].id) as NSString);
+        
+        NSUserDefaults.standardUserDefaults().setObject(array, forKey: "announcementsDetailArray")
+        
+        
+        NSUserDefaults.standardUserDefaults().setInteger(announcements[indexPath.row].id, forKey: "announcementID")
+        
+            print(NSUserDefaults.standardUserDefaults().synchronize());
+        } else {
+            print("index path fail")
         }
     }
 }

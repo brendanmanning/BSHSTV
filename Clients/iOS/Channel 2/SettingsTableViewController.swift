@@ -17,7 +17,7 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        eventaction.selectedSegmentIndex = defaults.integerForKey("announcementaction")
+        //eventaction.selectedSegmentIndex = defaults.integerForKey("announcementaction")
         easterEggsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("eastereggs")
     }
 

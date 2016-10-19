@@ -10,6 +10,7 @@ import UIKit
 import SwiftyJSON
 class AnnouncementDetailViewController: UIViewController {
 
+    @IBOutlet weak var goingButton: UIButton!
     @IBOutlet var peopleCountLabel: UILabel!
     @IBOutlet var creatorLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
@@ -21,6 +22,8 @@ class AnnouncementDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        goingButton.contentHorizontalAlignment = .Left
+        
         // Get array of information from NSUserDefaults
         if let informationArrayNS = NSUserDefaults.standardUserDefaults().objectForKey("announcementsDetailArray") as? [AnyObject] {
             if let informationArray = informationArrayNS as? [NSString] {
@@ -29,7 +32,12 @@ class AnnouncementDetailViewController: UIViewController {
                 creatorLabel.text = informationArray[2] as String;
                 fullTextView.text = informationArray[3] as String;
                 peopleCountLabel.text = informationArray[4] as String;
-                id = Int(informationArray[5] as String)!;
+                
+                if NSUserDefaults.standardUserDefaults().objectForKey("announcementID") != nil {
+                    let defaultsId = NSUserDefaults.standardUserDefaults().integerForKey("announcementID")
+                    self.id = defaultsId;
+                }
+                
             } else {
                 print("f1")
             }
@@ -42,6 +50,12 @@ class AnnouncementDetailViewController: UIViewController {
             iconImageView.image = UIImage(data: data);
         } else {
             print("f3")
+        }
+        
+        if(self.attendingEvent(self.id)) {
+            goingButton.enabled = false;
+            goingButton.tintColor = UIColor.blackColor();
+            goingButton.setTitle("people are attending", forState: .Normal)
         }
     }
     
@@ -57,7 +71,8 @@ class AnnouncementDetailViewController: UIViewController {
         if(!attendingEvent(id)) {
             let attendAction = UIPreviewAction(title: "I'm going!", style: .Default) { (action: UIPreviewAction, vc: UIViewController) -> Void in
                 Async.background {
-                    self.sayImGoingToEvent(self.id)
+                    let res = self.sayImGoingToEvent(self.id)
+                    print(res);
                 }
             }
             
@@ -75,6 +90,12 @@ class AnnouncementDetailViewController: UIViewController {
     {
         if let eventsAlreadyGoingTo = NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") as? [String]
         {
+            /* Make sure id isn't -1 because of an error */
+            guard eventId != -1 else {
+                print("id -1")
+                return false;
+            }
+            
             /* The app saves an array containing every event the user has already committed to. This way they can't say they're going twice.
              * The server would stop that anyway
              */
@@ -101,12 +122,14 @@ class AnnouncementDetailViewController: UIViewController {
                                     realUrl = realUrl.stringByReplacingOccurrencesOfString("{user}", withString: userid)
                                     
                                     /* If we get to this point, we're okay to make our request */
+                                    print(realUrl);
                                     if let url = NSURL(string: realUrl) {
                                         /* Actually make the request */
                                         if let data = NSData(contentsOfURL: url) {
                                             /* Cast it to JSON */
                                             let json = JSON(data: data);
                                             /* Now read the status key */
+                                            
                                             if json["status"].stringValue == "ok" {
                                                 
                                                 /* Sync the array */
@@ -114,11 +137,17 @@ class AnnouncementDetailViewController: UIViewController {
                                                 newarr.append(String(eventId))
                                                 NSUserDefaults.standardUserDefaults().setObject(newarr, forKey: "alreadyGoingToArray")
                                                 NSUserDefaults.standardUserDefaults().synchronize();
+                                                
+                                                self.peopleCountLabel.text = String(Int((self.peopleCountLabel.text?.stringByReplacingOccurrencesOfString("+", withString: ""))!)! + 1) + "+";
+                                                
                                                 return true;
                                             }
                                         }
                                     }
                                 }
+                            } else {
+                                print("No user id")
+                                let setup = InitialSetup(vc: self as UIViewController, message: "Error fixed!", subMessage: "Try that again and it should work!", wait: true);
                             }
                         }
                     }
@@ -127,6 +156,16 @@ class AnnouncementDetailViewController: UIViewController {
         }
         
         return false;
+    }
+    @IBAction func imGoing(sender: AnyObject) {
+        if(self.sayImGoingToEvent(self.id))
+        {
+            goingButton.enabled = false;
+            goingButton.tintColor = UIColor.blackColor();
+            goingButton.setTitle("people are attending", forState: .Normal)
+        } else {
+            print("no workey")
+        }
     }
     
     func attendingEvent(eventId: Int) -> Bool {
