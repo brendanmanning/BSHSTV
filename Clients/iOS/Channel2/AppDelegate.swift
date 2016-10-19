@@ -16,7 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
+
+        /* VERY IMPORTANT SECTION READ BEFORE ARCHIVING
+         * To ensure the app version isn't too old, it will periodically call FeatureChecker() in the background
+         * Below we define the identifier for this version as setup on the web interface
+         * Typically I use iOS_APP_VX.X
+         * If the test for this feature returns false we know the user must update the app
+         * Simply by enabling or disabling features on the web interface, we can decide which user MUST update the app */
+
+        /* Right below is where we define the constant */
+        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1", forKey: "version_feature");
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("videos") == nil)
         {
             NSUserDefaults.standardUserDefaults().setObject("", forKey: "videos")
@@ -25,68 +35,96 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             NSUserDefaults.standardUserDefaults().setObject("Pn3gp-Ch2kk", forKey: "videoid")
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("announcementaction") == nil)
         {
             NSUserDefaults.standardUserDefaults().setInteger(2, forKey: "announcementaction")
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("announcements") == nil)
         {
             NSUserDefaults.standardUserDefaults().setValue("", forKey: "announcements");
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("notifications") == nil)
         {
             NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "notifications");
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("phpserver") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{server_url}", forKey: "phpserver");
+            NSUserDefaults.standardUserDefaults().setValue("http://apps.brendanmanning.com/bshstv/", forKey: "phpserver");
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("pollid") == nil)
         {
             NSUserDefaults.standardUserDefaults().setInteger(0, forKey: "pollid")
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("votedin") == nil)
         {
             NSUserDefaults.standardUserDefaults().setObject([String](), forKey: "votedin");
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("shouldRecheckPolls") == nil)
         {
             NSUserDefaults.standardUserDefaults().setBool(false, forKey: "shouldRecheckPolls");
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("eastereggs") == nil)
         {
             NSUserDefaults.standardUserDefaults().setBool(false, forKey: "eastereggs");
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("showedVideoPopup") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "showedVideoPopup");
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "showedVideoPopup");
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("showStarterVideo") == nil)
         {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "showStarterVideo")
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("starterVideo") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo.php", forKey: "starterVideo");
+            switch(UIDevice.currentDevice().userInterfaceIdiom)
+            {
+                /* iPads have their own page */
+            case .Pad: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPad.html", forKey: "starterVideo");
+                /* For everything else use the iPhone page */
+            default: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPhone.html", forKey: "starterVideo");
+            }
         }
-        
+
+        if(NSUserDefaults.standardUserDefaults().objectForKey("YTKEY") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue("{YT_KEY}", forKey: "YTKEY")
+        }
+
+        if(NSUserDefaults.standardUserDefaults().objectForKey("API_KEY") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue("{API_KEY}", forKey: "API_KEY")
+        }
+
+        if(NSUserDefaults.standardUserDefaults().objectForKey("API_SECRET") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue("{API_SECRET}", forKey: "API_SECRET");
+        }
+
+        if(NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setValue([String](), forKey: "alreadyGoingToArray");
+        }
+
+        //NSUserDefaults.standardUserDefaults().setValue("11111111", forKey: "userid")
+
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
-        
+
         // Nav/Tab bar styling
         UITabBar.appearance().tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0)]
-        
+
         // Popup customization
         let pv = PopupDialogDefaultView.appearance()
         pv.titleFont    = UIFont(name: "HelveticaNeue-Light", size: 16)!
@@ -100,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         pcv.cornerRadius    = 2
         pcv.shadowEnabled   = true
         pcv.shadowColor     = UIColor.blackColor()
-        
+
         // Overlay
         let ov = PopupDialogOverlayView.appearance()
         ov.blurEnabled = true
@@ -108,7 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ov.liveBlur    = true
         ov.opacity     = 0.5
         ov.color       = UIColor.blackColor()
-        
+
         // Customize default button appearance
         let db = DefaultButton.appearance()
         db.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 14)!
@@ -116,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.buttonColor    = UIColor(red:0.14, green:0.55, blue:0.06, alpha:1.0)
         db.separatorColor = UIColor(red:0.44, green:0.49, blue:0.44, alpha:1.0)
 
-        return true
+        return true;
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -144,6 +182,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         UIApplication.sharedApplication().applicationIconBadgeNumber -= 1;
     }
-
 }
-
