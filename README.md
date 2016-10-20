@@ -8,3 +8,5 @@ This is an app I made for my school's television studio. I posted the app here p
  * MIT License - [Read the License](https://raw.githubusercontent.com/brendanmanning/BSHSTV/master/Licenses/SwiftyJSON/LICENSE)
 * [PopupDialog](https://github.com/Orderella/PopupDialog) by Orderella Ltd.
   * MIT License - [Read the License](https://raw.githubusercontent.com/brendanmanning/BSHSTV/master/Licenses/PopupDialog/LICENSE)
+* The mu framework by [Fabien Sa](https://github.com/BafS/)
+  * [Read the license](https://raw.githubusercontent.com/brendanmanning/BSHSTV/master/Licenses/mu/LICENSE)
