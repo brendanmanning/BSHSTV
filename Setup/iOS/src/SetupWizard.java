@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.io.*;
+import java.awt.Desktop;
 /**
  * Write a description of class SetupWizard here.
  * 
@@ -24,6 +25,7 @@ public class SetupWizard
     {
         this.setupIOSServer();
         this.setupServerDBConstants();
+        this.setupSetupInfo();
     }
     private boolean setupIOSServer()
     {
@@ -164,5 +166,21 @@ public class SetupWizard
         } while(!ok);
         
         return true;
+    }
+    public boolean setupSetupInfo()
+    {
+        int code = handler.setupServerSetupCode();
+        String[] info = handler.setupServerAPIKeys();
+        int apiKey = Integer.parseInt(info[0]);
+        String apiSecret = info[1];
+        JOptionPane.showMessageDialog(null, "Step 2 Finished! Please upload the server files to your webserver.\nOpen the files?", "Step 2: Finished", JOptionPane.WARNING_MESSAGE);
+        try {
+            Desktop.getDesktop().open(new File(baseDir.getAbsolutePath() + File.separator + "BSHSTV-master" + File.separator + "Server" + File.separator + "2.0"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error! We couldn't show you the files in your file browser", "Step 2: Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        System.out.println(new File(baseDir.getAbsolutePath() + File.separator + "BSHSTV-master" + File.separator + "Server" + File.separator + "2.0").getAbsolutePath());
+        return false;
     }
 }
