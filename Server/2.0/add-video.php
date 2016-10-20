@@ -1,13 +1,10 @@
 <?php
-
-
-		if($_POST['pwd'] != "deannoestaaqui")
-		{
-			die("404");
-		}
-		
-		
+		include 'auth.php';		
 		include 'config.php';
+		if(!isset($_POST['url'])) {
+			header("addvideo.php");
+			exit(-1);
+		}
 		$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name , $user, $pass);
 	
 		// set the PDO error mode to exception

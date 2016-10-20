@@ -1,3 +1,6 @@
+<?php
+	include 'auth.php';
+?>
 <html>
 	<head>
 		<title>Add Announcment</title>
@@ -7,6 +10,15 @@
 	
 	<body>
 		<center>
+		<?php
+			if(isset($_GET['ok'])) {
+				echo "<p class='green'>Successfully added " . $_GET['event'] . "</p>";
+			}
+			
+			if(isset($_GET['error'])) {
+				echo "<p class='red'>Error adding " . $_GET['event'] . "</p>";
+			}
+		?>
 		<h2>Add an Announcement</h2>
 		<i>Users will see this in the BSHS TV app</i>
 		<hr>

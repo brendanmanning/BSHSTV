@@ -19,6 +19,10 @@
 		{
 			$url .= "?features";
 		}
+		if($_GET['type'] == 3)
+		{
+			$url .= "?videos";
+		}
 		if(isset($_GET['error']))
 		{
 			$url .= "&error";			
@@ -31,10 +35,26 @@
 	if(!isset($_GET['announcements'])) {
 		if(!isset($_GET['polls'])) {
 			if(!isset($_GET['features'])) {
-				echo "A URL parameter was missing. <a href='manage.php?announcements'>Manage Announcements</a> | <a href='manage.php?polls'>Manage Polls</a> | <a href='manage.php?features'>Manage App Features</a>";
-				exit(-1);
+				if(!isset($_GET['videos'])) {
+					echo "A URL parameter was missing. <a href='manage.php?announcements'>Manage Announcements</a> | <a href='manage.php?polls'>Manage Polls</a> | <a href='manage.php?features'>Manage App Features</a>";
+					exit(-1);
+				}
 			}
 		}
+	}
+?>
+<?php
+	$types = array("announcements", "polls", "features", "videos");
+	$getParamsSet = 0;
+	for($i = 0; $i < count($types); $i++) {
+		if(isset($_GET[$types[$i]])) {
+			$getParamsSet++;
+		}
+	}
+	
+	if($getParamsSet != 1) {
+		header("Location: manage.php");
+		exit(-1);
 	}
 ?>
 <html>
@@ -48,6 +68,8 @@
 					echo "Polls";
 				} else if(isset($_GET['features'])) {
 					echo "Features";
+				} else if(isset($_GET['videos'])) {
+					echo "Videos";
 				}
 			?>
 		</title>
@@ -65,6 +87,8 @@
 					echo "Polls";
 				} else if(isset($_GET['features'])) {
 					echo "Features";
+				} else if(isset($_GET['videos'])) {
+					echo "Videos";
 				}
 		?></h2>
 		
@@ -84,6 +108,8 @@
 							echo '<th>Prompt</th><th>Description</th><th>Creator</th><th>Delete</th>';
 						} else if(isset($_GET['features'])) {
 							echo '<th>Feature Name</th><th>Message when unavailable</th><th>Delete</th>';
+						} else if(isset($_GET['videos'])) {
+							echo '<th>Video Preview</th><th>Hide/Show</th>';
 						}
 					?>
 				</tr>
@@ -101,6 +127,8 @@
 			$sql = "SELECT prompt,description,creator,id,enabled FROM polls";	
 		} else if(isset($_GET['features'])) {
 			$sql = "SELECT * FROM features";
+		} else if(isset($_GET['videos'])) {
+			$sql = "SELECT * FROM videos";
 		}
 		foreach ($conn->query($sql) as $row) {
 			if(isset($_GET['announcements'])) {
@@ -124,6 +152,13 @@
 				}
 				if($row['enabled'] == 0) {
 					echo "<tr><td>" . $row['name'] . "</td><td>" . $row['disabledMessage'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='primary'>Enable Feature</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='1'><input type='hidden' name='type' value='2'></form></td></tr>";
+				}
+			} else if(isset($_GET['videos'])) {
+				if($row['enabled'] == 1) {
+					echo "<tr><td><iframe width='200' height='112' src='https://www.youtube.com/embed/" . $row['id'] . "' frameborder='0' allowfullscreen></iframe></td><td><form action='toggle.php' method='POST'><button type='submit' class='destructive'>Hide video</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='0'><input type='hidden' name='type' value='3'></form></td></tr>";
+				}
+				if($row['enabled'] == 0) {
+					echo "<tr><td><iframe width='200' height='112' src='https://www.youtube.com/embed/" . $row['id'] . "' frameborder='0' allowfullscreen></iframe></td><td><form action='toggle.php' method='POST'><button type='submit' class='primary'>Show video</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='1'><input type='hidden' name='type' value='3'></form></td></tr>";
 				}
 			}
 			

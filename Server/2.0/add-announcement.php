@@ -79,7 +79,12 @@
     		$sql->bindParam(':image', $_POST['image']);
     		$sql->bindParam(':date', $date);
     	
-    		$sql->execute();
+    		if($sql->execute())
+    		{
+    			header("Location: addannouncement.php?ok&event=" . $_POST['title']);
+    		} else {
+    			header("Location: addannouncement.php?error&event=" . $_POST['title']);
+    		}
     	} else {
     		header("Location: addannouncement.php?title=" . $_POST['title'] . "&text=" . $_POST['text'] . "&image=" . $_POST['image'] . "&creator=" . $_POST['creator']);
     	}

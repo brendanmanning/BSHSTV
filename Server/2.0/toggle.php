@@ -11,7 +11,7 @@
 	try {
 		if(isComplete($_POST['id'],$_POST['newstatus'],$_POST['type']))
 		{
-			if(($_POST['type'] != 0) && ($_POST['type'] != 1) && ($_POST['type'] != 2))
+			if(($_POST['type'] != 0) && ($_POST['type'] != 1) && ($_POST['type'] != 2) && ($_POST['type'] != 3))
 			{
 				header("Location: manage.php?error");
 				exit(-1);
@@ -27,6 +27,8 @@
     				$sql = $conn->prepare("UPDATE `polls` SET `enabled` = :new WHERE `id` = :i;");
     			} else if($_POST['type'] == 2) {
     				$sql = $conn->prepare("UPDATE `features` SET `enabled` = :new WHERE `internalid` = :i;");
+    			} else if($_POST['type'] == 3) {
+    				$sql = $conn->prepare("UPDATE `videos` SET `enabled` = :new WHERE `internalid` = :i;");
     			}
     			$sql->bindParam(':new', $_POST['newstatus']);
 			$sql->bindParam(':i', $_POST['id']);
