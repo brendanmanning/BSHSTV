@@ -95,9 +95,16 @@ class FirstViewController: UIViewController {
             /* Make sure the app is on an accepted version */
             let versionChecker = FeatureChecker();
             if(!versionChecker.check(String(NSUserDefaults.standardUserDefaults().valueForKey("version_feature")!))) {
+                var forceUpdate:Bool = versionChecker.check("ForcedUpgrades")
                 Async.main {
+                    var selections = [LockViewControllerOption]();
                     let updateOption = LockViewControllerOption(optionTitle: "Update BSHS TV", optionUrl: "http://bshstv.com/update/index.php")
-                    let lvc = LockViewController(viewController: self, selections: [updateOption], lockedTitle: "App update needed", lockedMessage: versionChecker.message);
+                    selections.append(updateOption)
+                    if(!forceUpdate) {
+                        let closeOption = LockViewControllerOption(optionTitle: "Dismiss", optionUrl: nil)
+                        selections.append(closeOption);
+                    }
+                    let lvc = LockViewController(viewController: self, selections: selections, lockedTitle: "App update needed", lockedMessage: versionChecker.message);
                     lvc.present();
                 }
             }

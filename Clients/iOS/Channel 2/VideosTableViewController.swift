@@ -22,8 +22,8 @@ class VideosTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad();
+    
         
-       
         
         refreshButtonDefaultColor = refreshButton.tintColor!;
         
@@ -73,8 +73,8 @@ class VideosTableViewController: UITableViewController {
     
     func refreshTableData()
     {
-        if(!isrefreshing && isDoneRefreshingVideos()) {
-            self.isrefreshing = true;
+        //if(!isrefreshing && isDoneRefreshingVideos()) {
+         //   self.isrefreshing = true;
             Async.background {
                 self.updateVideosFromNSUserDefaults()
             }.main {
@@ -89,9 +89,10 @@ class VideosTableViewController: UITableViewController {
                     //self.refreshButton.enabled = true;
                     self.refreshButton.tintColor = self.refreshButtonDefaultColor;
                     self.isrefreshing = false;
+                    self.refreshButton.enabled = true;
                 }
             }
-        }
+       // }
     }
     
     @IBAction override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

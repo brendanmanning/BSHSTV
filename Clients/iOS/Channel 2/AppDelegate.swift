@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          * Simply by enabling or disabling features on the web interface, we can decide which user MUST update the app */
 
         /* Right below is where we define the constant */
-        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1", forKey: "version_feature");
+        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1.1", forKey: "version_feature");
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("videos") == nil)
         {

@@ -43,7 +43,7 @@ class LockViewControllerOption: NSObject {
     private var title:String!;
     private var urlString:String!;
     
-    init(optionTitle:String,optionUrl:String)
+    init(optionTitle:String,optionUrl:String?)
     {
         self.title = optionTitle;
         self.urlString = optionUrl;
@@ -51,6 +51,7 @@ class LockViewControllerOption: NSObject {
     
     internal func choose()
     {
+        if self.urlString == nil { return }
         if let u = self.urlString {
             if let url = NSURL(string: u) {
                 if UIApplication.sharedApplication().canOpenURL(url) {

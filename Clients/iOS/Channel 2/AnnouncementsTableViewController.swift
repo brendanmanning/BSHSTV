@@ -17,6 +17,7 @@ class AnnouncementsTableViewController: UITableViewController {
     var shouldShowNone = false;
     var refreshButtonDefaultColor = UIColor.blackColor();
     var firsttime = true;
+    var reloadMetadata = true;
     override func viewDidLoad() {
         super.viewDidLoad();
         
@@ -34,12 +35,14 @@ class AnnouncementsTableViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         if(!firsttime) {
+            reloadMetadata = false;
             self.refreshTableData();
         }
     }
     
     @IBAction func refreshButtonPressed(sender: AnyObject) {
         Async.background {
+            self.reloadMetadata = true;
             self.refreshTableData();
         }
     }
@@ -282,24 +285,26 @@ class AnnouncementsTableViewController: UITableViewController {
             }
         }
         
-        var image = UIImage(named: "loading")
-        Async.main {
-            cell.img.image = image;
-            //cell.announcementdate.text = "Tap to share, hold to set reminder";//self.announcements[indexPath.item].date
-            cell.announcementtitle.text = self.announcements[indexPath.item].eventtitle
-            print(self.announcements[indexPath.item].peopleGoing);
-           // cell.fulltext.text = self.announcements[indexPath.item].text;
-            if(self.announcements[indexPath.item].peopleGoing != -1) {
-                //cell.fulltext.text = self.announcements[indexPath.item].text + "\n" + String(self.announcements[indexPath.item].peopleGoing) + "+ people are attending";
-            }
-            cell.creator.text = self.announcements[indexPath.item].creator;
-            }.background {
-                image = self.imageFromURL(self.announcements[indexPath.item].imagelink)
-                self.announcements[indexPath.row].uiimg = image;
-            }.main {
+        if(reloadMetadata) {
+            var image = UIImage(named: "loading")
+            Async.main {
                 cell.img.image = image;
-                //print(cell.fulltext.text);
-            }
+                //cell.announcementdate.text = "Tap to share, hold to set reminder";//self.announcements[indexPath.item].date
+                cell.announcementtitle.text = self.announcements[indexPath.item].eventtitle
+                print(self.announcements[indexPath.item].peopleGoing);
+                // cell.fulltext.text = self.announcements[indexPath.item].text;
+                if(self.announcements[indexPath.item].peopleGoing != -1) {
+                    //cell.fulltext.text = self.announcements[indexPath.item].text + "\n" + String(self.announcements[indexPath.item].peopleGoing) + "+ people are attending";
+                }
+                cell.creator.text = self.announcements[indexPath.item].creator;
+                }.background {
+                    image = self.imageFromURL(self.announcements[indexPath.item].imagelink)
+                    self.announcements[indexPath.row].uiimg = image;
+                }.main {
+                    cell.img.image = image;
+                    //print(cell.fulltext.text);
+                }
+        }
         
         return cell;
     }
@@ -524,6 +529,8 @@ class AnnouncementsTableViewController: UITableViewController {
         
         NSUserDefaults.standardUserDefaults().setInteger(announcements[indexPath.row].id, forKey: "announcementID")
         
+        NSUserDefaults.standardUserDefaults().setValue(announcements[indexPath.row].imagelink, forKey: "announcementImageLink")
+            
             print(NSUserDefaults.standardUserDefaults().synchronize());
         } else {
             print("index path fail")

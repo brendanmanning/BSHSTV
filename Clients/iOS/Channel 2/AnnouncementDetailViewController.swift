@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import Async
 class AnnouncementDetailViewController: UIViewController {
 
     @IBOutlet weak var goingButton: UIButton!
@@ -23,6 +24,8 @@ class AnnouncementDetailViewController: UIViewController {
         super.viewDidLoad();
         
         goingButton.contentHorizontalAlignment = .Left
+        
+        goingButton.titleLabel?.adjustsFontSizeToFitWidth = true;
         
         // Get array of information from NSUserDefaults
         if let informationArrayNS = NSUserDefaults.standardUserDefaults().objectForKey("announcementsDetailArray") as? [AnyObject] {
@@ -56,6 +59,22 @@ class AnnouncementDetailViewController: UIViewController {
             goingButton.enabled = false;
             goingButton.tintColor = UIColor.blackColor();
             goingButton.setTitle("people are attending", forState: .Normal)
+        }
+        
+        Async.background {
+            if let urlstr = NSUserDefaults.standardUserDefaults().valueForKey("announcementImageLink") as? String {
+                if urlstr.hasPrefix("local:") == false {
+                    if let url = NSURL(string: urlstr) {
+                        if let data = NSData(contentsOfURL: url) {
+                            if let icnimg = UIImage(data: data) {
+                                Async.main {
+                                    self.iconImageView.image = icnimg;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -137,9 +156,9 @@ class AnnouncementDetailViewController: UIViewController {
                                                 newarr.append(String(eventId))
                                                 NSUserDefaults.standardUserDefaults().setObject(newarr, forKey: "alreadyGoingToArray")
                                                 NSUserDefaults.standardUserDefaults().synchronize();
-                                                
-                                                self.peopleCountLabel.text = String(Int((self.peopleCountLabel.text?.stringByReplacingOccurrencesOfString("+", withString: ""))!)! + 1) + "+";
-                                                
+                                                Async.main {
+                                                    self.peopleCountLabel.text = String(Int((self.peopleCountLabel.text?.stringByReplacingOccurrencesOfString("+", withString: ""))!)! + 1) + "+";
+                                                }
                                                 return true;
                                             }
                                         }
@@ -158,13 +177,17 @@ class AnnouncementDetailViewController: UIViewController {
         return false;
     }
     @IBAction func imGoing(sender: AnyObject) {
-        if(self.sayImGoingToEvent(self.id))
-        {
-            goingButton.enabled = false;
-            goingButton.tintColor = UIColor.blackColor();
-            goingButton.setTitle("people are attending", forState: .Normal)
-        } else {
-            print("no workey")
+        Async.background {
+            if(self.sayImGoingToEvent(self.id))
+            {
+                Async.main {
+                    self.goingButton.enabled = false;
+                    self.goingButton.tintColor = UIColor.blackColor();
+                    self.goingButton.setTitle("people are attending", forState: .Normal)
+                }
+            } else {
+                //print("no workey")
+            }
         }
     }
     
