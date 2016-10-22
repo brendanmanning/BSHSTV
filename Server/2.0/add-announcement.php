@@ -72,12 +72,18 @@
     			echo 'AM/PM Field was incorrect. <a href="addannouncement.php?title=' . $_POST['title'] . "&text=" . $_POST['text'] . "&image=" . $_POST['image'] . "&creator=" . $_POST['creator'] . '">Go back</a>';
     		}
     		
-    		$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date) VALUES(:creator,:title,:text,:image,:date)");
+    		$min = -1;
+    		if($_POST['minvisitors'] == "no") {
+    			$min = 999999999; // Set it to a number so high we can never realistically reach it.
+    		}
+    		
+    		$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors) VALUES(:creator,:title,:text,:image,:date,:m)");
     		$sql->bindParam(':creator', $_POST['creator']);
     		$sql->bindParam(':title', $_POST['title']);
     		$sql->bindParam(':text', $_POST['text']);
     		$sql->bindParam(':image', $_POST['image']);
     		$sql->bindParam(':date', $date);
+    		$sql->bindParam(':m', $min);
     	
     		if($sql->execute())
     		{
