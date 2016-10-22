@@ -61,11 +61,11 @@
 			<br>
 			<br>
 			<p class="green">Override Attendee Function</p>
-			<i>The Channel 2 Events section lets peole quickly say what events theyre going to. If an event is unpopular, but you dont want people to know, hide the count form users using the form below.</i>
+			<i>The Channel 2 Events section lets peole quickly say what events theyre going to. If an announcement isnt really something you can attend, you can disable that feature here.</i>
 			<br>
 		</center>
-			<input type="radio" name="minvisitors" value="-1" checked>No miniumum<br>
-			<input type="radio" name="minvisitors" value="userInput">Hide until equal to <input type="text" name="userMinVis" value="10"> visitors.<br>
+			<input type="radio" name="minvisitors" value="yes" checked>Allow Attendee Function<br>
+			<input type="radio" name="minvisitors" value="no">Hide function<br>
 		<center>
 			<br>
 			<button type="submit" class="primary">Submit</button>
