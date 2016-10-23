@@ -58,6 +58,13 @@
                                 <color key="textColor" red="0.035845501949999997" green="0.3629596665" blue="0.0030831109330000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Music" translatesAutoresizingMaskIntoConstraints="NO" id="8gQ-WP-J2T">
+                                <rect key="frame" x="20" y="109" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Baa-rh-ciD"/>
+                                    <constraint firstAttribute="width" constant="48" id="es2-0l-RzP"/>
+                                </constraints>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipeup" translatesAutoresizingMaskIntoConstraints="NO" id="6ZX-IF-TvO">
                                 <rect key="frame" x="146" y="557" width="83" height="36"/>
                                 <constraints>
@@ -80,6 +87,11 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="76h-cg-bfx">
+                                <rect key="frame" x="76" y="118" width="504" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -93,14 +105,19 @@
                             <constraint firstItem="6ZX-IF-TvO" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="Etv-xn-2L1"/>
                             <constraint firstItem="np2-4B-Skg" firstAttribute="top" secondItem="hUS-bJ-aw9" secondAttribute="bottom" constant="8" id="Hwz-kT-idA"/>
                             <constraint firstItem="hUS-bJ-aw9" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="KLY-hs-mam"/>
+                            <constraint firstItem="76h-cg-bfx" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="KcO-Kf-4cj"/>
+                            <constraint firstItem="76h-cg-bfx" firstAttribute="top" secondItem="JcS-0F-yg4" secondAttribute="bottom" constant="17" id="Ng3-rt-xRB"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6ZX-IF-TvO" secondAttribute="bottom" constant="25" id="Ra0-gS-AkX"/>
                             <constraint firstItem="n95-Q2-YtQ" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="Skk-Ov-GZT"/>
                             <constraint firstItem="JcS-0F-yg4" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="WnT-1u-0OD"/>
                             <constraint firstItem="hUS-bJ-aw9" firstAttribute="top" secondItem="n95-Q2-YtQ" secondAttribute="bottom" constant="8" id="aoB-TK-Bua"/>
                             <constraint firstItem="np2-4B-Skg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="bGF-cp-zJS"/>
+                            <constraint firstItem="76h-cg-bfx" firstAttribute="leading" secondItem="8gQ-WP-J2T" secondAttribute="trailing" constant="8" id="dUY-CI-NDr"/>
                             <constraint firstItem="n95-Q2-YtQ" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="g0r-AX-AWv"/>
                             <constraint firstItem="hUS-bJ-aw9" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="j7p-hz-AVb"/>
                             <constraint firstItem="n95-Q2-YtQ" firstAttribute="top" secondItem="JcS-0F-yg4" secondAttribute="bottom" constant="94" id="pEO-Bu-Fy1"/>
+                            <constraint firstItem="8gQ-WP-J2T" firstAttribute="top" secondItem="JcS-0F-yg4" secondAttribute="bottom" constant="8" id="sMP-QY-fEh"/>
+                            <constraint firstItem="8gQ-WP-J2T" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="xJX-Al-lHk"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -137,7 +154,9 @@
                         <outlet property="banner" destination="JcS-0F-yg4" id="o2F-QF-sdK"/>
                         <outlet property="bottom" destination="np2-4B-Skg" id="4pc-jL-ZyS"/>
                         <outlet property="logo" destination="hUS-bJ-aw9" id="cer-e5-RNW"/>
+                        <outlet property="musicIcon" destination="8gQ-WP-J2T" id="RB5-HC-9cR"/>
                         <outlet property="reconnectButton" destination="aVh-1I-gmG" id="Ei7-6j-neC"/>
+                        <outlet property="songOfTheDay" destination="76h-cg-bfx" id="05c-VC-ttj"/>
                         <outlet property="swipeupimage" destination="6ZX-IF-TvO" id="gDT-iC-4AD"/>
                         <outlet property="top" destination="n95-Q2-YtQ" id="GFf-gD-cCM"/>
                     </connections>
@@ -145,7 +164,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="up" id="bOj-NR-OhH">
                     <connections>
-                        <segue destination="jph-ex-kHD" kind="presentation" identifier="segueToToday" modalTransitionStyle="flipHorizontal" id="Bhf-cR-GZI"/>
+                        <segue destination="jph-ex-kHD" kind="presentation" identifier="segueToToday" modalTransitionStyle="coverVertical" id="Bhf-cR-GZI"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -342,7 +361,9 @@
                         <outlet property="fullTextView" destination="CBN-A6-BNs" id="D44-wI-ugt"/>
                         <outlet property="goingButton" destination="7q6-QK-SBb" id="PgK-os-A5F"/>
                         <outlet property="iconImageView" destination="SO9-Yt-IWo" id="Kpn-sP-lrk"/>
+                        <outlet property="peopleAttendingTitleLabel" destination="lE8-kj-zaw" id="6x3-Qs-6jx"/>
                         <outlet property="peopleCountLabel" destination="4yz-0t-jOs" id="gZe-WL-waw"/>
+                        <outlet property="profileIcon" destination="w3v-vr-zY6" id="CSQ-Yo-dIn"/>
                         <outlet property="titleLabel" destination="7NA-3i-1OJ" id="qCt-Ej-60i"/>
                     </connections>
                 </viewController>
@@ -2181,6 +2202,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Music" width="609" height="609"/>
         <image name="calendar" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
         <image name="polls" width="30" height="30"/>

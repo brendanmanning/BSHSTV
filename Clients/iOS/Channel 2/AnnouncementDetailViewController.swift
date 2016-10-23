@@ -11,6 +11,8 @@ import SwiftyJSON
 import Async
 class AnnouncementDetailViewController: UIViewController {
 
+    @IBOutlet weak var profileIcon: UIImageView!
+    @IBOutlet weak var peopleAttendingTitleLabel: UILabel!
     @IBOutlet weak var goingButton: UIButton!
     @IBOutlet var peopleCountLabel: UILabel!
     @IBOutlet var creatorLabel: UILabel!
@@ -34,7 +36,17 @@ class AnnouncementDetailViewController: UIViewController {
                 dateLabel.text = informationArray[1] as String;
                 creatorLabel.text = informationArray[2] as String;
                 fullTextView.text = informationArray[3] as String;
-                peopleCountLabel.text = informationArray[4] as String;
+                
+                let peopleAsString = informationArray[4] as String;
+                if peopleAsString == "MANY" {
+                    peopleCountLabel.alpha = 0;
+                    goingButton.enabled = false;
+                    goingButton.alpha = 0;
+                    profileIcon.alpha = 0;
+                    peopleAttendingTitleLabel.alpha = 0;
+                } else {
+                        peopleCountLabel.text = peopleAsString;
+                }
                 
                 if NSUserDefaults.standardUserDefaults().objectForKey("announcementID") != nil {
                     let defaultsId = NSUserDefaults.standardUserDefaults().integerForKey("announcementID")
@@ -156,6 +168,7 @@ class AnnouncementDetailViewController: UIViewController {
                                                 newarr.append(String(eventId))
                                                 NSUserDefaults.standardUserDefaults().setObject(newarr, forKey: "alreadyGoingToArray")
                                                 NSUserDefaults.standardUserDefaults().synchronize();
+                                                
                                                 Async.main {
                                                     self.peopleCountLabel.text = String(Int((self.peopleCountLabel.text?.stringByReplacingOccurrencesOfString("+", withString: ""))!)! + 1) + "+";
                                                 }

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          * Simply by enabling or disabling features on the web interface, we can decide which user MUST update the app */
 
         /* Right below is where we define the constant */
-        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1.1", forKey: "version_feature");
+        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1.2", forKey: "version_feature");
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("videos") == nil)
         {
@@ -153,6 +153,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.titleColor     = UIColor.whiteColor()
         db.buttonColor    = UIColor(red:0.14, green:0.55, blue:0.06, alpha:1.0)
         db.separatorColor = UIColor(red:0.44, green:0.49, blue:0.44, alpha:1.0)
+
+
 
         return true;
     }

@@ -11,15 +11,23 @@ import Async
 import EventKit
 import PopupDialog
 import SwiftyJSON
-class AnnouncementsTableViewController: UITableViewController {
+import WatchConnectivity
+class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate {
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     var announcements = [Announcement]();
     var shouldShowNone = false;
     var refreshButtonDefaultColor = UIColor.blackColor();
     var firsttime = true;
     var reloadMetadata = true;
+    var session:WCSession!;
     override func viewDidLoad() {
         super.viewDidLoad();
+        
+        if (WCSession.isSupported()) {
+            session = WCSession.defaultSession()
+            session.delegate = self;
+            session.activateSession()
+        }
         
         refreshButtonDefaultColor = refreshButton.tintColor!;
         
@@ -31,6 +39,48 @@ class AnnouncementsTableViewController: UITableViewController {
             self.firsttime = false;
         }
         //}
+    }
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        if let ann = message["announcement"] as? String {
+            if(ann == "all") {
+                var array = [AnyObject]();
+                for a in announcements {
+                    if let arr = stringArrayForAnnouncement(a) {
+                        array.append(arr);
+                    }
+                }
+                print("sending...")
+                print(["data":array]);
+                replyHandler(["data":array])
+            } else {
+                
+            }
+        }
+    }
+    
+    private func stringArrayForAnnouncement(announcement:Announcement) -> [String : AnyObject]? {
+        if let annid = announcement.id {
+            if let announcementToSend = announcementForId(annid) {
+                let id = announcementToSend.id;
+                let title = announcementToSend.eventtitle;
+                let text = announcementToSend.text;
+                let date = announcementToSend.date;
+                return ["id":id, "title":title, "text":text, "date":date];
+            }
+        }
+        
+        return nil;
+    }
+    
+    private func announcementForId(id:Int) -> Announcement? {
+        for a in announcements {
+            if a.id == id {
+                return a;
+            }
+        }
+        
+        return nil;
     }
     
     override func viewDidAppear(animated: Bool) {
