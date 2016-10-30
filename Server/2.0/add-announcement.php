@@ -1,6 +1,9 @@
 <?php
 	// Make sure the user is logged in
-	include 'auth.php';
+	include 'whichauth.php';
+	if(which() <= 0) {
+		die("You must login first");
+	}
 	
 	// Has a convienence method used later
 	require 'nullcheck.php';
@@ -8,7 +11,7 @@
 	// Get database constants
 	require 'config.php';
 	
-	if(isComplete(array($_POST['title'],$_POST['text'],$_POST['image'],$_POST['creator']. $_POST['m'],$_POST['d'],$_POST['y'],$_POST['hr'],$_POST['min'])))
+	if(isComplete(array($_POST['title'],$_POST['text'],$_POST['image'], $_POST['m'],$_POST['d'],$_POST['y'],$_POST['hr'],$_POST['min'])))
 	{
 		include 'config.php';
 		$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name , $user, $pass);
@@ -77,8 +80,37 @@
     			$min = 999999999; // Set it to a number so high we can never realistically reach it.
     		}
     		
-    		$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors) VALUES(:creator,:title,:text,:image,:date,:m)");
-    		$sql->bindParam(':creator', $_POST['creator']);
+
+    		
+    		$teacherSQL = false;
+    		if(isset($_POST['teacher'])) {
+    			if($_POST['teacher'] == "yes") {
+    				if(isset($_POST['teacherclub'])) {
+    					$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors, clubid) VALUES (:creator,:title,:text,:image,:date,:m,:clubid)");
+    					$sql->bindParam(":clubid", $_POST['teacherclub']);
+    					
+    					$nsql = $conn->prepare("SELECT title FROM clubs WHERE internalid=:cid");
+    					$nsql->bindParam(":cid", $_POST['teacherclub']);
+    					$nsql->execute();
+					while($row=$sql->fetch()) {
+						$sql->bindParam(":creator", $row['title']); break;
+					}
+    					
+    					
+    					$teacherSQL = true;
+    				} else {
+    				
+    				}
+    			} else {
+    			
+    			}
+    		}
+    		if($teacherSQL == false) {
+    			$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors) VALUES(:creator,:title,:text,:image,:date,:m)");
+    		}
+    		if(!$teacherSQL) {
+    			$sql->bindParam(':creator', $_POST['creator']);
+    		}
     		$sql->bindParam(':title', $_POST['title']);
     		$sql->bindParam(':text', $_POST['text']);
     		$sql->bindParam(':image', $_POST['image']);
