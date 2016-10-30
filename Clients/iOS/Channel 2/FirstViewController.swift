@@ -12,10 +12,12 @@ import AVFoundation
 import SwiftyJSON
 class FirstViewController: UIViewController {
 
+    @IBOutlet weak var songOfTheDay: UITextField!
+    @IBOutlet weak var musicIcon: UIImageView!
     // Banner
     @IBOutlet weak var banner: UITextField!
     // Current Poll Object
-    var poll:Poll!
+    //var poll:Poll!
     
     // Interface Builder
     @IBOutlet weak var reconnectButton: UIButton!
@@ -34,6 +36,11 @@ class FirstViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        songOfTheDay.alpha = 0;
+        musicIcon.alpha = 0;
+        songOfTheDay.hidden = true;
+        musicIcon.hidden = true;
         
         let setup = InitialSetup(vc: self as UIViewController, message: "Performing initial setup", subMessage: "This is normally very quick", wait: false);
         
@@ -109,6 +116,27 @@ class FirstViewController: UIViewController {
                 }
             }
         }
+        
+        /*Async.background {
+            if let urlBase = NSUserDefaults.standardUserDefaults().valueForKey("phpserver") as? String {
+                if let url = NSURL(string: (urlBase) + "today.php") {
+                    if let data = NSData(contentsOfURL: url) {
+                        let json = JSON(data: data);
+                        if json["song"].stringValue != "" && json["artist"].stringValue != "" {
+                            Async.main {
+                                self.songOfTheDay.text = json["song"].stringValue + " by " + json["artist"].stringValue;
+                                UIView.animateWithDuration(2.0, animations: {
+                                    self.songOfTheDay.alpha = 1;
+                                    self.musicIcon.alpha = 1;
+                                })
+                                print("fading up...")
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }*/
     }
     
     @IBAction func reconnectToServer(sender: AnyObject) {
@@ -216,7 +244,7 @@ class FirstViewController: UIViewController {
     }
 }
 
-class Poll: NSObject {
+/*class Poll: NSObject {
     private var choices:[String]!;
     private var correct:Int!
     private var prompt = "";
@@ -246,4 +274,4 @@ class Poll: NSObject {
     internal func getprompt() -> String {
         return self.prompt;
     }
-}
+}*/

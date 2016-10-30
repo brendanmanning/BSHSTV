@@ -1,0 +1,9 @@
+[30-Oct-2016 16:41:27 America/New_York] PHP Parse error:  syntax error, unexpected '$replyVar' (T_VARIABLE) in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 27
+[30-Oct-2016 16:43:06 America/New_York] PHP Strict Standards:  Only variables should be passed by reference in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 30
+[30-Oct-2016 16:43:06 America/New_York] PHP Strict Standards:  Only variables should be passed by reference in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 31
+[30-Oct-2016 16:43:06 America/New_York] PHP Strict Standards:  Only variables should be passed by reference in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 32
+[30-Oct-2016 16:43:06 America/New_York] PHP Strict Standards:  Only variables should be passed by reference in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 33
+[30-Oct-2016 16:43:34 America/New_York] PHP Strict Standards:  Only variables should be passed by reference in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 30
+[30-Oct-2016 16:43:34 America/New_York] PHP Strict Standards:  Only variables should be passed by reference in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 31
+[30-Oct-2016 16:43:34 America/New_York] PHP Strict Standards:  Only variables should be passed by reference in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 32
+[30-Oct-2016 16:43:34 America/New_York] PHP Strict Standards:  Only variables should be passed by reference in /home/brenuzrr/public_html/brendanmanningapps/bshstv/pages/_feedback.php on line 33

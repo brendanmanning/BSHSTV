@@ -209,9 +209,27 @@ input.focus {
 p.big {
 	font-size: 200%;
 }
+textarea.large {
+	border-top: solid 2px #000;
+	border-bottom: solid 2px #000;
+	border-left: solid 2px #000;
+	border-right: solid 2px #000;
+	
+	font-weight: bold;
+	width: 100%;
+	font-size: 150%;
+}
+textarea.large:focus {
+	border-top: solid 2px #00AF33;
+	border-bottom: solid 2px #00AF33;
+	border-left: solid 2px #00AF33;
+	border-right: solid 2px #00AF33;
+	
+}
 input[type=text].large {
 	border:none;
-	color: .green;
+	color: #00AF33;
+	text-color: #00AF33;
 	font-size: 200%;
 	font-weight: bold;
 	width: 100%;
