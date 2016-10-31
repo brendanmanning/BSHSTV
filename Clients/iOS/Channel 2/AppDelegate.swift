@@ -8,11 +8,12 @@
 
 import UIKit
 import PopupDialog
+import WatchConnectivity
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     var window: UIWindow?
-
+    var session: WCSession!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -53,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("phpserver") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{server_url}", forKey: "phpserver");
+            NSUserDefaults.standardUserDefaults().setValue("http://apps.brendanmanning.com/bshstv/", forKey: "phpserver");
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("pollid") == nil)
@@ -99,17 +100,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("YTKEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{YT_KEY}", forKey: "YTKEY")
+            NSUserDefaults.standardUserDefaults().setValue("AIzaSyCSSTGtYT7xXBEoq37TSlIUo_uTy5iHFxs", forKey: "YTKEY")
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_KEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{API_KEY}", forKey: "API_KEY")
+            NSUserDefaults.standardUserDefaults().setValue("9306748", forKey: "API_KEY")
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_SECRET") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("{API_SECRET}", forKey: "API_SECRET");
+            NSUserDefaults.standardUserDefaults().setValue("afg1nIfEN1u8yu8", forKey: "API_SECRET");
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") == nil)
@@ -154,8 +155,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.buttonColor    = UIColor(red:0.14, green:0.55, blue:0.06, alpha:1.0)
         db.separatorColor = UIColor(red:0.44, green:0.49, blue:0.44, alpha:1.0)
 
-
-
+        if (WCSession.isSupported()) {
+            session = WCSession.defaultSession()
+            session.delegate = self;
+            session.activateSession()
+        }
+        
         return true;
     }
 

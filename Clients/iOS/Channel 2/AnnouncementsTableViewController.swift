@@ -23,12 +23,6 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
     override func viewDidLoad() {
         super.viewDidLoad();
         
-        if (WCSession.isSupported()) {
-            session = WCSession.defaultSession()
-            session.delegate = self;
-            session.activateSession()
-        }
-        
         refreshButtonDefaultColor = refreshButton.tintColor!;
         
         /* Setup UIRefreshControl */
@@ -39,6 +33,12 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
             self.firsttime = false;
         }
         //}
+        
+        broadCastAnnouncements();
+    }
+    
+    func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
+        broadCastAnnouncements()
     }
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
@@ -55,6 +55,27 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
                 replyHandler(["data":array])
             } else {
                 
+            }
+        }
+    }
+    
+    private func broadCastAnnouncements() {
+        var array = [AnyObject]();
+        for a in announcements {
+            if let arr = stringArrayForAnnouncement(a) {
+                array.append(arr);
+            }
+        }
+        print("sending...")
+        print(["data":array]);
+        if(session.reachable) {
+            session.sendMessage(["data":array], replyHandler: nil, errorHandler: {(error:NSError) -> Void in Popup().show("error", message: "send message failed", button: "dismiss", viewController: self as UIViewController); });
+        } else {
+            do {
+                try session.updateApplicationContext(["data": array])
+            } catch {
+                print("Application context update failed")
+                Popup().show("error", message: "application context update failed", button: "dismiss", viewController: self as UIViewController)
             }
         }
     }
