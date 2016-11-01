@@ -12,6 +12,7 @@ import AVFoundation
 import SwiftyJSON
 class FirstViewController: UIViewController {
 
+    @IBOutlet var swipeUpRecognizer: UISwipeGestureRecognizer!
     @IBOutlet weak var songOfTheDay: UITextField!
     @IBOutlet weak var musicIcon: UIImageView!
     // Banner
@@ -34,6 +35,7 @@ class FirstViewController: UIViewController {
     // LineByLineDownloader
     var downloader:LineByLineDownloader!;
     
+    var isfirstview = true;
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,8 +43,6 @@ class FirstViewController: UIViewController {
         musicIcon.alpha = 0;
         songOfTheDay.hidden = true;
         musicIcon.hidden = true;
-        
-        let setup = InitialSetup(vc: self as UIViewController, message: "Performing initial setup", subMessage: "This is normally very quick", wait: false);
         
         let topY = top.frame.origin.y;
         let logoX = logo.frame.origin.x;
@@ -104,6 +104,7 @@ class FirstViewController: UIViewController {
             if(!versionChecker.check(String(NSUserDefaults.standardUserDefaults().valueForKey("version_feature")!))) {
                 var forceUpdate:Bool = versionChecker.check("ForcedUpgrades")
                 Async.main {
+                    self.swipeUpRecognizer.enabled = false;
                     var selections = [LockViewControllerOption]();
                     let updateOption = LockViewControllerOption(optionTitle: "Update BSHS TV", optionUrl: "http://bshstv.com/update/index.php")
                     selections.append(updateOption)
@@ -113,6 +114,7 @@ class FirstViewController: UIViewController {
                     }
                     let lvc = LockViewController(viewController: self, selections: selections, lockedTitle: "App update needed", lockedMessage: versionChecker.message);
                     lvc.present();
+                    self.swipeUpRecognizer.enabled = true;
                 }
             }
         }
@@ -137,15 +139,20 @@ class FirstViewController: UIViewController {
                 }
             }
         }*/
+        Async.main {
+            self.privacyPolicyCheck();
+            }.main {
+        let setup = InitialSetup(vc: self as UIViewController, message: "Performing initial setup", subMessage: "This is normally very quick", wait: false);
+        }
     }
     
-    @IBAction func reconnectToServer(sender: AnyObject) {
-    }
-    
-    func connectToServers() {
-    }
-    // Socket handlers
-    func socketHandlers() {
+    override func viewDidAppear(animated: Bool) {
+        /* Make sure the user has agreed to the privacy policy */
+        if(!isfirstview) {
+            privacyPolicyCheck();
+        } else {
+            isfirstview = false;
+        }
     }
     
     func popupmessage (t: String, msg:String) {
@@ -161,16 +168,6 @@ class FirstViewController: UIViewController {
         {
             self.popup.dismissViewControllerAnimated(true, completion: nil)
         }
-    }
-    
-    func vote(choice:Int) {
-       // self.socket.emit("vote", poll.getchoices()[choice]);
-    }
-    
-    // Obligatory override method
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func canBecomeFirstResponder() -> Bool {
@@ -242,36 +239,30 @@ class FirstViewController: UIViewController {
         self.presentViewController(alertController,animated: true,completion: nil)
     
     }
-}
 
-/*class Poll: NSObject {
-    private var choices:[String]!;
-    private var correct:Int!
-    private var prompt = "";
-    init(_choices:[String], _correct:Int, _prompt:String)
-    {
-        self.choices = _choices;
-        self.correct = _correct;
-        self.prompt = _prompt;
+    private func privacyPolicyCheck() {
+        if(!NSUserDefaults.standardUserDefaults().boolForKey("agreedToPrivacyPolicy")) {
+            
+            askUserToAgreeToPrivacyPolicy();
+        }
     }
     
-    internal func hasCorrectAnswers() -> Bool
-    {
-        if(self.correct != -1) { return true }
-        return false;
-    }
+    private func askUserToAgreeToPrivacyPolicy() {
+        let privacPolicyAlertController = UIAlertController(title: "Privacy Policy", message: "Your use of this application is subject to its privacy policy", preferredStyle: .Alert)
+        let readAction = UIAlertAction(title: "View Privacy Policy", style: .Default, handler: {(_) -> Void in
+           self.performSegueWithIdentifier("segueToPrivacyPolicy", sender: self)
+        });
     
-    internal func isCorrect(selection: String) -> Bool
-    {
-        if(self.choices[correct] == selection) { return true }
-        return false;
-    }
+        let agreeAction = UIAlertAction(title: "Agree and Continue", style: .Default, handler: {(_) -> Void in
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "agreedToPrivacyPolicy");
+        })
     
-    internal func getchoices() -> [String] {
-        return self.choices;
+        privacPolicyAlertController.addAction(readAction)
+        privacPolicyAlertController.addAction(agreeAction)
+        privacPolicyAlertController.preferredAction = agreeAction;
+        
+        presentViewController(privacPolicyAlertController, animated: true, completion: {(_) -> Void in
+            self.privacyPolicyCheck();
+        })
     }
-    
-    internal func getprompt() -> String {
-        return self.prompt;
-    }
-}*/
+}

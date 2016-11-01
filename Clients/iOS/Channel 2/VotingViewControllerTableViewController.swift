@@ -44,8 +44,13 @@ class VotingViewControllerTableViewController: UITableViewController {
         // Get information from the server
         
         titleLabel.text = "Title: Loading..."
+        l1.text = "Loading..."
+        l2.text = "Loading..."
+        l3.text = "Loading..."
+        l4.text = "Loading..."
         voteButton.enabled = false;
         self.choiceSelector.selectedSegmentIndex = 0; // Just in case
+        (self as UIViewController).presentViewController(UIAlertController(title: "Loading...", message: "This should be quick", preferredStyle: .Alert), animated: false, completion: nil);
         Async.background {
             self.voter = OnlineVoter(poll:String(NSUserDefaults.standardUserDefaults().integerForKey("pollid")));
         }.main {
@@ -58,9 +63,12 @@ class VotingViewControllerTableViewController: UITableViewController {
                     self.voteButton.setTitle("Press here to submit your vote", forState: .Normal)
                     self.voteButton.enabled = true;
                 }
+            
+            
         }
         
         getPollInfo();
+        (self as UIViewController).dismissViewControllerAnimated(true, completion: nil);
         
         
         // Hide progress bars on iphone bc they are too small

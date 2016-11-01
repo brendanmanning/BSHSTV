@@ -34,4 +34,13 @@ public extension UIView
         
         self.addSubview(blurView);
     }
+
+}
+public extension UIAlertController
+{
+    func addActions(actions: [UIAlertAction]) {
+        for action in actions {
+            self.addAction(action)
+        }
+    }
 }

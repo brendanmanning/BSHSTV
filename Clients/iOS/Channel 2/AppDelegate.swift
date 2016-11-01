@@ -117,14 +117,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         {
             NSUserDefaults.standardUserDefaults().setValue([String](), forKey: "alreadyGoingToArray");
         }
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("onThisDayStatus") == nil) {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "onThisDayStatus");
+        }
 
+        if(NSUserDefaults.standardUserDefaults().objectForKey("agreedToPrivacyPolicy") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "agreedToPrivacyPolicy");
+        }
+        
         //NSUserDefaults.standardUserDefaults().setValue("11111111", forKey: "userid")
 
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
-
+        
         // Nav/Tab bar styling
         UITabBar.appearance().tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0)]
+        window?.tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
 
         // Popup customization
         let pv = PopupDialogDefaultView.appearance()

@@ -19,7 +19,8 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
     var refreshButtonDefaultColor = UIColor.blackColor();
     var firsttime = true;
     var reloadMetadata = true;
-    var session:WCSession!;
+    var defaultCellColor:UIColor!;
+    //var session:WCSession!;
     override func viewDidLoad() {
         super.viewDidLoad();
         
@@ -34,9 +35,9 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
         }
         //}
         
-        broadCastAnnouncements();
+        //broadCastAnnouncements();
     }
-    
+    /*
     func session(session: WCSession, didReceiveUserInfo userInfo: [String : AnyObject]) {
         broadCastAnnouncements()
     }
@@ -93,7 +94,7 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
         
         return nil;
     }
-    
+    */
     private func announcementForId(id:Int) -> Announcement? {
         for a in announcements {
             if a.id == id {
@@ -339,6 +340,11 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("AnnouncementCell", forIndexPath: indexPath) as! AnnouncementTableViewCell
         
+        /* We need to know the default color bc it can change based on iOS version */
+        if(defaultCellColor == nil) {
+            defaultCellColor = cell.backgroundColor;
+        }
+        
         /* Make sure the cell stays green even after selection */
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:0.4)
@@ -353,6 +359,8 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
             if(eventsAlreadyGoingTo.contains(String(announcements[indexPath.row].id)))
             {
                 cell.backgroundColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:0.5);
+            } else {
+                cell.backgroundColor = defaultCellColor;
             }
         }
         

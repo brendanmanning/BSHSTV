@@ -9,6 +9,7 @@
 import UIKit
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var onThisDaySwitch: UISwitch!
     @IBOutlet weak var easterEggsSwitch: UISwitch!
     @IBOutlet weak var listupdatestatuswheel: UIActivityIndicatorView!
     @IBOutlet weak var listupdatestatus: UILabel!
@@ -19,6 +20,7 @@ class SettingsTableViewController: UITableViewController {
         
         //eventaction.selectedSegmentIndex = defaults.integerForKey("announcementaction")
         easterEggsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("eastereggs")
+        onThisDaySwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("onThisDayStatus")
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +31,15 @@ class SettingsTableViewController: UITableViewController {
         NSUserDefaults.standardUserDefaults().setInteger(eventaction.selectedSegmentIndex, forKey: "announcementaction")
         NSUserDefaults.standardUserDefaults().synchronize();
         eventaction.selectedSegmentIndex = defaults.integerForKey("announcementaction")
+    }
+  
+    @IBAction func onThisDayToggled(sender: AnyObject) {
+        if let toggle = sender as? UISwitch {
+            NSUserDefaults.standardUserDefaults().setBool(toggle.on, forKey: "onThisDayStatus");
+            NSUserDefaults.standardUserDefaults().synchronize();
+        } else {
+            print("sender no good")
+        }
     }
     
     @IBAction func easterEggSwitchChanged(sender: AnyObject) {

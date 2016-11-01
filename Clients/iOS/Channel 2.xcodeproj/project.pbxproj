@@ -10,9 +10,6 @@
 		3790357D797D8F351FDDF9A3 /* Pods_Channel_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A84E10543766300FF806FE4 /* Pods_Channel_2.framework */; };
 		43CB2176D35E4E18D24B05B3 /* Pods_Channel_2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D601BCC7DEC53FFBD2BF330B /* Pods_Channel_2UITests.framework */; };
 		9F0452601641610462CD565D /* Pods_Channel_2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF192AB2D62B480CDA65303 /* Pods_Channel_2Tests.framework */; };
-		C606A19C1D75C3A1001150A2 /* SocketTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606A19B1D75C3A1001150A2 /* SocketTester.swift */; };
-		C606A19D1D75C3A1001150A2 /* SocketTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606A19B1D75C3A1001150A2 /* SocketTester.swift */; };
-		C606A19E1D75C3A1001150A2 /* SocketTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606A19B1D75C3A1001150A2 /* SocketTester.swift */; };
 		C606A3551D5E46D800DEBD8F /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606A3541D5E46D800DEBD8F /* Async.swift */; };
 		C606A3561D5E46D800DEBD8F /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606A3541D5E46D800DEBD8F /* Async.swift */; };
 		C606A3571D5E46D800DEBD8F /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = C606A3541D5E46D800DEBD8F /* Async.swift */; };
@@ -46,6 +43,27 @@
 		C651EFD81D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
 		C651EFD91D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
 		C651EFDA1D5E05F400802575 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C651EFD71D5E05F400802575 /* FirstViewController.swift */; };
+		C676F43C1DC75A620027BB63 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F43B1DC75A620027BB63 /* MoreTableViewController.swift */; };
+		C676F43D1DC75A620027BB63 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F43B1DC75A620027BB63 /* MoreTableViewController.swift */; };
+		C676F43E1DC75A620027BB63 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F43B1DC75A620027BB63 /* MoreTableViewController.swift */; };
+		C676F4401DC8DD440027BB63 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F43F1DC8DD430027BB63 /* PrivacyPolicyViewController.swift */; };
+		C676F4411DC8DD440027BB63 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F43F1DC8DD430027BB63 /* PrivacyPolicyViewController.swift */; };
+		C676F4421DC8DD440027BB63 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F43F1DC8DD430027BB63 /* PrivacyPolicyViewController.swift */; };
+		C676F4441DC8E0330027BB63 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4431DC8E0330027BB63 /* FeedbackViewController.swift */; };
+		C676F4451DC8E0330027BB63 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4431DC8E0330027BB63 /* FeedbackViewController.swift */; };
+		C676F4461DC8E0330027BB63 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4431DC8E0330027BB63 /* FeedbackViewController.swift */; };
+		C676F4481DC92A3E0027BB63 /* ClubsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4471DC92A3E0027BB63 /* ClubsCollectionViewController.swift */; };
+		C676F4491DC92A3E0027BB63 /* ClubsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4471DC92A3E0027BB63 /* ClubsCollectionViewController.swift */; };
+		C676F44A1DC92A3E0027BB63 /* ClubsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4471DC92A3E0027BB63 /* ClubsCollectionViewController.swift */; };
+		C676F44C1DC92A620027BB63 /* ClubsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F44B1DC92A620027BB63 /* ClubsCollectionViewCell.swift */; };
+		C676F44D1DC92A620027BB63 /* ClubsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F44B1DC92A620027BB63 /* ClubsCollectionViewCell.swift */; };
+		C676F44E1DC92A620027BB63 /* ClubsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F44B1DC92A620027BB63 /* ClubsCollectionViewCell.swift */; };
+		C676F4501DC92AC60027BB63 /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F44F1DC92AC60027BB63 /* Club.swift */; };
+		C676F4511DC92AC60027BB63 /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F44F1DC92AC60027BB63 /* Club.swift */; };
+		C676F4521DC92AC60027BB63 /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F44F1DC92AC60027BB63 /* Club.swift */; };
+		C676F4541DC932AB0027BB63 /* ClubsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */; };
+		C676F4551DC932AB0027BB63 /* ClubsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */; };
+		C676F4561DC932AB0027BB63 /* ClubsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */; };
 		C67D48001D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
 		C67D48011D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
 		C67D48021D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
@@ -162,7 +180,6 @@
 		2659F1B49B06DEC8CF656272 /* Pods-Channel 2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Channel 2.release.xcconfig"; path = "Pods/Target Support Files/Pods-Channel 2/Pods-Channel 2.release.xcconfig"; sourceTree = "<group>"; };
 		41E337D6D22FF4159C3571EE /* Pods-Channel 2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Channel 2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Channel 2Tests/Pods-Channel 2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A1B2EE7AA49D60798CE6F01D /* Pods-Channel 2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Channel 2UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Channel 2UITests/Pods-Channel 2UITests.release.xcconfig"; sourceTree = "<group>"; };
-		C606A19B1D75C3A1001150A2 /* SocketTester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTester.swift; sourceTree = "<group>"; };
 		C606A3541D5E46D800DEBD8F /* Async.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
 		C6082F671D934A41001A879C /* PollsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollsDownloader.swift; sourceTree = "<group>"; };
 		C6082F6B1D936E34001A879C /* PollDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollDownloader.swift; sourceTree = "<group>"; };
@@ -174,6 +191,13 @@
 		C642F4C51DB29CE800E17153 /* FeatureChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureChecker.swift; sourceTree = "<group>"; };
 		C64623281D8EF24500D832D3 /* VideoDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloader.swift; sourceTree = "<group>"; };
 		C651EFD71D5E05F400802575 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		C676F43B1DC75A620027BB63 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
+		C676F43F1DC8DD430027BB63 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		C676F4431DC8E0330027BB63 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		C676F4471DC92A3E0027BB63 /* ClubsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClubsCollectionViewController.swift; sourceTree = "<group>"; };
+		C676F44B1DC92A620027BB63 /* ClubsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClubsCollectionViewCell.swift; sourceTree = "<group>"; };
+		C676F44F1DC92AC60027BB63 /* Club.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Club.swift; sourceTree = "<group>"; };
+		C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClubsDownloader.swift; sourceTree = "<group>"; };
 		C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementDownloader.swift; sourceTree = "<group>"; };
 		C67D48031D8F621C00319A68 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C67EADDB1D5CC878003185F8 /* VideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewController.swift; sourceTree = "<group>"; };
@@ -297,7 +321,6 @@
 				C63E967F1DB6F2A9009BFB3B /* InitialSetup.swift */,
 				C642F4C51DB29CE800E17153 /* FeatureChecker.swift */,
 				C61FFE8E1DAEDE9600201285 /* LockViewController.swift */,
-				C606A19B1D75C3A1001150A2 /* SocketTester.swift */,
 				C6F58E731D652CB200C7D19B /* LineByLineDownloader.swift */,
 				C6FDA17E1D669D9100BED432 /* DayDownloader.swift */,
 				C64623281D8EF24500D832D3 /* VideoDownloader.swift */,
@@ -309,6 +332,13 @@
 				C6CD79CB1D5EC68B00BA277D /* SettingsTableViewController.swift */,
 				C6BF413B1D5F4BE4008C517A /* NSUserDefaultsList.swift */,
 				C6FCBA511D5AC60A00DC5FC3 /* Main.storyboard */,
+				C676F44F1DC92AC60027BB63 /* Club.swift */,
+				C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */,
+				C676F4471DC92A3E0027BB63 /* ClubsCollectionViewController.swift */,
+				C676F44B1DC92A620027BB63 /* ClubsCollectionViewCell.swift */,
+				C676F4431DC8E0330027BB63 /* FeedbackViewController.swift */,
+				C676F43F1DC8DD430027BB63 /* PrivacyPolicyViewController.swift */,
+				C676F43B1DC75A620027BB63 /* MoreTableViewController.swift */,
 				C6FC7EF11D90AEDC00D342E2 /* PollsTableViewController.swift */,
 				C6FC7EF51D90AEEE00D342E2 /* PollTableViewCell.swift */,
 				C69B21CF1D91F6E400BC6547 /* VotingViewControllerTableViewController.swift */,
@@ -626,6 +656,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C676F4541DC932AB0027BB63 /* ClubsDownloader.swift in Sources */,
 				C6E4C0221D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C67EADDC1D5CC878003185F8 /* VideosTableViewController.swift in Sources */,
 				C6AB5C621D6754EE0056F042 /* TodayViewController.swift in Sources */,
@@ -634,18 +665,23 @@
 				C60E36141D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C64623291D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C67EADE01D5CCC9D003185F8 /* Video.swift in Sources */,
+				C676F44C1DC92A620027BB63 /* ClubsCollectionViewCell.swift in Sources */,
 				C6F7E61A1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6FDA17F1D669D9100BED432 /* DayDownloader.swift in Sources */,
+				C676F4441DC8E0330027BB63 /* FeedbackViewController.swift in Sources */,
 				C67EADEA1D5CDD36003185F8 /* VideoTableViewCell.swift in Sources */,
+				C676F4401DC8DD440027BB63 /* PrivacyPolicyViewController.swift in Sources */,
 				C6082F681D934A41001A879C /* PollsDownloader.swift in Sources */,
 				C6F58E701D6525DA00C7D19B /* FM.swift in Sources */,
 				C61FFE8F1DAEDE9600201285 /* LockViewController.swift in Sources */,
 				C651EFD81D5E05F400802575 /* FirstViewController.swift in Sources */,
+				C676F4501DC92AC60027BB63 /* Club.swift in Sources */,
+				C676F43C1DC75A620027BB63 /* MoreTableViewController.swift in Sources */,
 				C6E4C0161D600B9C00DE6F85 /* AnnouncementsTableViewController.swift in Sources */,
+				C676F4481DC92A3E0027BB63 /* ClubsCollectionViewController.swift in Sources */,
 				C69B21D01D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
 				C6FC7EF21D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */,
 				C69B21CC1D91E3CB00BC6547 /* OnlinePoll.swift in Sources */,
-				C606A19C1D75C3A1001150A2 /* SocketTester.swift in Sources */,
 				C606A3551D5E46D800DEBD8F /* Async.swift in Sources */,
 				C6E939E81D5D1D7B00112834 /* YouTubeVideoViewController.swift in Sources */,
 				C67D48001D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */,
@@ -669,6 +705,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C676F4551DC932AB0027BB63 /* ClubsDownloader.swift in Sources */,
 				C6E4C01F1D600C4800DE6F85 /* Announcement.swift in Sources */,
 				C6E4C0231D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C6F58E711D6525DA00C7D19B /* FM.swift in Sources */,
@@ -677,18 +714,23 @@
 				C60E36151D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C646232A1D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C6E939E91D5D1D7B00112834 /* YouTubeVideoViewController.swift in Sources */,
+				C676F44D1DC92A620027BB63 /* ClubsCollectionViewCell.swift in Sources */,
 				C6F7E61B1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6E4C01B1D600BD400DE6F85 /* AnnouncementTableViewCell.swift in Sources */,
+				C676F4451DC8E0330027BB63 /* FeedbackViewController.swift in Sources */,
 				C6AB5C631D6754EE0056F042 /* TodayViewController.swift in Sources */,
+				C676F4411DC8DD440027BB63 /* PrivacyPolicyViewController.swift in Sources */,
 				C6082F691D934A41001A879C /* PollsDownloader.swift in Sources */,
 				C67EADEB1D5CDD36003185F8 /* VideoTableViewCell.swift in Sources */,
 				C61FFE901DAEDE9600201285 /* LockViewController.swift in Sources */,
 				C606A3561D5E46D800DEBD8F /* Async.swift in Sources */,
+				C676F4511DC92AC60027BB63 /* Club.swift in Sources */,
+				C676F43D1DC75A620027BB63 /* MoreTableViewController.swift in Sources */,
 				C6CD79CD1D5EC68B00BA277D /* SettingsTableViewController.swift in Sources */,
+				C676F4491DC92A3E0027BB63 /* ClubsCollectionViewController.swift in Sources */,
 				C69B21D11D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
 				C6FC7EF31D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */,
 				C69B21CD1D91E3CB00BC6547 /* OnlinePoll.swift in Sources */,
-				C606A19D1D75C3A1001150A2 /* SocketTester.swift in Sources */,
 				C6F58E751D652CB200C7D19B /* LineByLineDownloader.swift in Sources */,
 				C6FDA1801D669D9100BED432 /* DayDownloader.swift in Sources */,
 				C67D48011D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */,
@@ -712,6 +754,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C676F4561DC932AB0027BB63 /* ClubsDownloader.swift in Sources */,
 				C6E4C0201D600C4800DE6F85 /* Announcement.swift in Sources */,
 				C6E4C0241D60BF1E00DE6F85 /* Popup.swift in Sources */,
 				C6F58E721D6525DA00C7D19B /* FM.swift in Sources */,
@@ -720,18 +763,23 @@
 				C60E36161D983108005E3EB9 /* TodayItem.swift in Sources */,
 				C646232B1D8EF24500D832D3 /* VideoDownloader.swift in Sources */,
 				C6E939EA1D5D1D7B00112834 /* YouTubeVideoViewController.swift in Sources */,
+				C676F44E1DC92A620027BB63 /* ClubsCollectionViewCell.swift in Sources */,
 				C6F7E61C1DB3D12100F6D5EB /* AnnouncementDetailViewController.swift in Sources */,
 				C6E4C01C1D600BD400DE6F85 /* AnnouncementTableViewCell.swift in Sources */,
+				C676F4461DC8E0330027BB63 /* FeedbackViewController.swift in Sources */,
 				C6AB5C641D6754EE0056F042 /* TodayViewController.swift in Sources */,
+				C676F4421DC8DD440027BB63 /* PrivacyPolicyViewController.swift in Sources */,
 				C6082F6A1D934A41001A879C /* PollsDownloader.swift in Sources */,
 				C67EADEC1D5CDD36003185F8 /* VideoTableViewCell.swift in Sources */,
 				C61FFE911DAEDE9600201285 /* LockViewController.swift in Sources */,
 				C606A3571D5E46D800DEBD8F /* Async.swift in Sources */,
+				C676F4521DC92AC60027BB63 /* Club.swift in Sources */,
+				C676F43E1DC75A620027BB63 /* MoreTableViewController.swift in Sources */,
 				C6CD79CE1D5EC68B00BA277D /* SettingsTableViewController.swift in Sources */,
+				C676F44A1DC92A3E0027BB63 /* ClubsCollectionViewController.swift in Sources */,
 				C69B21D21D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
 				C6FC7EF41D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */,
 				C69B21CE1D91E3CB00BC6547 /* OnlinePoll.swift in Sources */,
-				C606A19E1D75C3A1001150A2 /* SocketTester.swift in Sources */,
 				C6F58E761D652CB200C7D19B /* LineByLineDownloader.swift in Sources */,
 				C6FDA1811D669D9100BED432 /* DayDownloader.swift in Sources */,
 				C67D48021D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */,

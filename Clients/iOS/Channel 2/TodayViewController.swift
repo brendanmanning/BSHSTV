@@ -100,16 +100,18 @@ class TodayViewController: UIViewController {
             Async.main {
                 if(!self.addedFact)
                 {
-                    let factItem = TodayItem();
-                    factItem.title = "This Day in History"
-                    factItem.content = "On this day " + self.chooseFact(today);
-                    self.items.append(factItem)
-                    self.addedFact = true;
+                    if(NSUserDefaults.standardUserDefaults().boolForKey("onThisDayStatus")) {
+                        let factItem = TodayItem();
+                        factItem.title = "This Day in History"
+                        factItem.content = "On this day " + self.chooseFact(today);
+                        self.items.append(factItem)
+                        self.addedFact = true;
                     
-                    self.slideTitleLabel.text = "This Day in History"
-                    self.contentLabel.text = factItem.content;
-                    self.pageLabel.text = "Page 1 of " + String(self.items.count);
-                    self.current = 0;
+                        self.slideTitleLabel.text = "This Day in History"
+                        self.contentLabel.text = factItem.content;
+                        self.pageLabel.text = "Page 1 of " + String(self.items.count);
+                        self.current = 0;
+                    }
                 }
             }
         } else {
