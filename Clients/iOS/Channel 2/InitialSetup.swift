@@ -37,3 +37,34 @@ class InitialSetup: NSObject {
     }
     }
 }
+
+class NameSetup:NSObject {
+    internal func askForName(vc:UIViewController) -> Bool {
+        var setName = false;
+        let alertController = UIAlertController(title: "What's your name", message: "* This information is used in accordance with the Privacy Policy you agreed to when you first opened this app *", preferredStyle: .Alert)
+        alertController.addTextFieldWithConfigurationHandler(
+            {(textField: UITextField!) in
+                textField.placeholder = "Your name here"
+        })
+    
+    
+        let action = UIAlertAction(title: "Save Name", style: .Default, handler: {[weak self](paramAction:UIAlertAction!) in
+            if let textFields = alertController.textFields{
+                let theTextFields = textFields as [UITextField]
+                let enteredText = theTextFields[0].text
+                
+                NSUserDefaults.standardUserDefaults().setValue(enteredText, forKey: "user_name");
+                setName = true;
+            }
+            });
+        
+        let noAction = UIAlertAction(title: "I'd rather not", style: .Default, handler: nil);
+        
+        alertController.addActions([noAction,action]);
+        alertController.preferredAction = action;
+        
+        vc.presentViewController(alertController, animated: true, completion: nil)
+        
+        return setName;
+    }
+}

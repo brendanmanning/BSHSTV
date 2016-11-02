@@ -9,6 +9,7 @@
 import UIKit
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var onThisDaySwitch: UISwitch!
     @IBOutlet weak var easterEggsSwitch: UISwitch!
     @IBOutlet weak var listupdatestatuswheel: UIActivityIndicatorView!
@@ -21,6 +22,13 @@ class SettingsTableViewController: UITableViewController {
         //eventaction.selectedSegmentIndex = defaults.integerForKey("announcementaction")
         easterEggsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("eastereggs")
         onThisDaySwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("onThisDayStatus")
+        
+        nameTextField.placeholder = "Set your name";
+        if let nameObj = NSUserDefaults.standardUserDefaults().valueForKey("user_name") {
+            if let name = nameObj as? String {
+                nameTextField.text = name;
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +39,15 @@ class SettingsTableViewController: UITableViewController {
         NSUserDefaults.standardUserDefaults().setInteger(eventaction.selectedSegmentIndex, forKey: "announcementaction")
         NSUserDefaults.standardUserDefaults().synchronize();
         eventaction.selectedSegmentIndex = defaults.integerForKey("announcementaction")
+    }
+    @IBAction func saveName(sender: AnyObject) {
+        if let text = nameTextField.text {
+            NSUserDefaults.standardUserDefaults().setValue(text, forKey: "user_name")
+        } else {
+            let alertController = UIAlertController(title: "Name Invalid", message: "Please enter a name", preferredStyle: .Alert)
+            let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
+            (self as UIViewController).presentViewController(alertController, animated: true, completion: nil)
+        }
     }
   
     @IBAction func onThisDayToggled(sender: AnyObject) {

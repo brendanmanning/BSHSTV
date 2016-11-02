@@ -139,20 +139,11 @@ class FirstViewController: UIViewController {
                 }
             }
         }*/
-        Async.main {
-            self.privacyPolicyCheck();
-            }.main {
-        let setup = InitialSetup(vc: self as UIViewController, message: "Performing initial setup", subMessage: "This is normally very quick", wait: false);
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
         /* Make sure the user has agreed to the privacy policy */
-        if(!isfirstview) {
-            privacyPolicyCheck();
-        } else {
-            isfirstview = false;
-        }
+        self.privacyPolicyCheck();
     }
     
     func popupmessage (t: String, msg:String) {
@@ -248,6 +239,7 @@ class FirstViewController: UIViewController {
     }
     
     private func askUserToAgreeToPrivacyPolicy() {
+        var agreed = false;
         let privacPolicyAlertController = UIAlertController(title: "Privacy Policy", message: "Your use of this application is subject to its privacy policy", preferredStyle: .Alert)
         let readAction = UIAlertAction(title: "View Privacy Policy", style: .Default, handler: {(_) -> Void in
            self.performSegueWithIdentifier("segueToPrivacyPolicy", sender: self)
@@ -255,14 +247,14 @@ class FirstViewController: UIViewController {
     
         let agreeAction = UIAlertAction(title: "Agree and Continue", style: .Default, handler: {(_) -> Void in
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "agreedToPrivacyPolicy");
+            agreed = true;
+            InitialSetup(vc: self as UIViewController, message: "Performing initial setup", subMessage: "This is normally very quick", wait: false);
         })
     
         privacPolicyAlertController.addAction(readAction)
         privacPolicyAlertController.addAction(agreeAction)
         privacPolicyAlertController.preferredAction = agreeAction;
         
-        presentViewController(privacPolicyAlertController, animated: true, completion: {(_) -> Void in
-            self.privacyPolicyCheck();
-        })
+        presentViewController(privacPolicyAlertController, animated: true, completion: { (_) -> Void in if (!agreed) { self.askUserToAgreeToPrivacyPolicy(); }})
     }
 }
