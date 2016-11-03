@@ -1,0 +1,1 @@
+<p>If this page doesn't close automatically, use the button at the bottom of your screen</p>

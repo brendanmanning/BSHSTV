@@ -79,7 +79,7 @@
 			$message = "Join code invalid";	
 		}
 	} else {
-		$message = "Operation Sucessful";
+		$message = "You will now recieve announcements from this club";
 		$status = "ok";
 	}
 	

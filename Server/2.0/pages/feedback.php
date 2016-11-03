@@ -9,7 +9,7 @@
 		<center>
 		<?php
 			if(isset($_GET['success'])) {
-				echo '<p class="green">Thanks for the feedback! Your help and opinions are greatly appreciated!</p>';
+				echo '<h1><p class="green">Thanks for the feedback! You can now exit Feedback!</p></h1>';
 			}
 			if(isset($_GET['error'])) {
 				echo '<p class="red">Feedback not submitted! Please try again!</p>';

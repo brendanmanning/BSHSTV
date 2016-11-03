@@ -92,7 +92,7 @@
     					$nsql = $conn->prepare("SELECT title FROM clubs WHERE internalid=:cid");
     					$nsql->bindParam(":cid", $_POST['teacherclub']);
     					$nsql->execute();
-					while($row=$sql->fetch()) {
+					while($row=$nsql->fetch()) {
 						$sql->bindParam(":creator", $row['title']); break;
 					}
     					
@@ -110,8 +110,9 @@
     		}
     		if(!$teacherSQL) {
     			$sql->bindParam(':creator', $_POST['creator']);
+    			 
     		}
-    		$sql->bindParam(':title', $_POST['title']);
+    		 $sql->bindParam(':title', $_POST['title']);
     		$sql->bindParam(':text', $_POST['text']);
     		$sql->bindParam(':image', $_POST['image']);
     		$sql->bindParam(':date', $date);
@@ -124,6 +125,7 @@
     			header("Location: addannouncement.php?error&event=" . $_POST['title']);
     		}
     	} else {
-    		header("Location: addannouncement.php?title=" . $_POST['title'] . "&text=" . $_POST['text'] . "&image=" . $_POST['image'] . "&creator=" . $_POST['creator']);
+    		echo "Input not complete. Please go back";
+    		//header("Location: addannouncement.php?title=" . $_POST['title'] . "&text=" . $_POST['text'] . "&image=" . $_POST['image'] . "&creator=" . $_POST['creator']);
     	}
    ?>

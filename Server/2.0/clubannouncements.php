@@ -6,8 +6,8 @@
 			if(!isset($_GET['userid'])) { die("User id not set"); }
 			$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name,$user,$pass);
 			$commandSuffix = getAnnouncementSQLSuffixForUserID($_GET['userid'], $conn);
-			$sql = "SELECT internalid,creator,title,text,date,image,minvisitors FROM announcements WHERE 1 " . $commandSuffix . " ORDER BY date DESC";
-			echo $sql;
+			$sql = "SELECT internalid,creator,title,text,date,image,minvisitors FROM announcements WHERE enabled=1 " . $commandSuffix . " ORDER BY date DESC";
+			
 			foreach ($conn->query($sql) as $row) {
 				$checkins = checkinsForID($conn, $row['internalid']);
 				$arr[] = array(

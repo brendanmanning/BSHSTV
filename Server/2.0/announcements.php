@@ -4,7 +4,7 @@
 		include 'config.php';
 		try {
 			$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name,$user,$pass);
-			$sql = "SELECT internalid,creator,title,text,date,image,minvisitors FROM announcements WHERE enabled = 1 ORDER BY date DESC";
+			$sql = "SELECT internalid,creator,title,text,date,image,minvisitors FROM announcements WHERE enabled = 1 AND clubid=0 ORDER BY date DESC";
 			foreach ($conn->query($sql) as $row) {
 				$checkins = checkinsForID($conn, $row['internalid']);
 				$arr[] = array(

@@ -6,13 +6,18 @@
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$arr = array();
 	
+	$rows = array();
 	foreach ($conn->query($sql) as $row)
 	{
+		$rows[] = $row;
+	}
+	
+	for($i = count($rows) - 1; $i >= 0; $i--) {
 		$arr[] = array(
-			"id" => $row['id'],
-			"prompt" => $row['prompt'],
-			"description" => $row['description'],
-			"icon" => $row['icon']
+			"id" => $rows[$i]['id'],
+			"prompt" => $rows[$i]['prompt'],
+			"description" => $rows[$i]['description'],
+			"icon" => $rows[$i]['icon']
 		);
 	}
 	
