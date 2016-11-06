@@ -1,6 +1,13 @@
 # BSHSTV
 This is an app I made for my school's television studio. I posted the app here primarily for resume and backup purposes. 
 
+## Project Structure
+* The Clients/iOS folder is the source for the actual app
+* The Server/2.0 folder contains the admin interface and API handlers for the iOS app
+* The Licenses folder contains copies of the license files I obtained when obtaining several dependencies used in this project
+* All the code in Clients/iOS/Pods is code from the app's dependencies and is not mine
+* The .framework files in Clients/iOS are for Google Ads and are not mine
+
 ### Third Party Licenses
 * [Async](https://github.com/duemunk/Async) by Tobias Due Munk
   * MIT License - [Read the License](https://raw.githubusercontent.com/brendanmanning/BSHSTV/master/Licenses/Async/LICENSE.txt)
