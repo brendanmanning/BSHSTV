@@ -17,6 +17,12 @@ class Popup: NSObject {
         viewController.presentViewController(popup, animated: true, completion: nil)
     }
     
+    internal func system(title:String, message:String, button:String, viewController: UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: button, style: .Default, handler: nil));
+        viewController.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     /*internal func yn(title:String, message:String, yesButton:String, noButton:String, viewController:UIViewController) -> Bool
     {
         let popup = PopupDialog(title: title, message: message);

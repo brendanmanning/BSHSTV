@@ -4,9 +4,9 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - AsyncSwift
-  - PopupDialog (~> 0.3)
-  - SwiftyJSON
+  - AsyncSwift (= 1.7.3)
+  - PopupDialog (= 0.3.2)
+  - SwiftyJSON (= 2.3.2)
 
 SPEC CHECKSUMS:
   AsyncSwift: f3ad5dd077bbd1477e7573e87071a532fedaca1a

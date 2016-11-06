@@ -36,6 +36,18 @@ public extension UIView
     }
 
 }
+
+public extension String {
+    func isAlphaNumeric() -> Bool {
+        let alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 "
+        for char in self.characters {
+            if(!alphabet.containsString(String(char))) { return false; }
+        }
+        
+        return true;
+    }
+}
+
 public extension UIAlertController
 {
     func addActions(actions: [UIAlertAction]) {

@@ -8,12 +8,12 @@
 
 import UIKit
 import PopupDialog
-import WatchConnectivity
+import GoogleMobileAds
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var session: WCSession!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
          * Simply by enabling or disabling features on the web interface, we can decide which user MUST update the app */
 
         /* Right below is where we define the constant */
-        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V1.1.2", forKey: "version_feature");
+        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V2.0", forKey: "version_feature");
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("videos") == nil)
         {
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("phpserver") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("http://apps.brendanmanning.com/bshstv/", forKey: "phpserver");
+            NSUserDefaults.standardUserDefaults().setValue("{server_url}", forKey: "phpserver");
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("pollid") == nil)
@@ -100,24 +100,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("YTKEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("AIzaSyCSSTGtYT7xXBEoq37TSlIUo_uTy5iHFxs", forKey: "YTKEY")
+            NSUserDefaults.standardUserDefaults().setValue("{YT_KEY}", forKey: "YTKEY")
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_KEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("9306748", forKey: "API_KEY")
+            NSUserDefaults.standardUserDefaults().setValue("{API_KEY}", forKey: "API_KEY")
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_SECRET") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("afg1nIfEN1u8yu8", forKey: "API_SECRET");
+            NSUserDefaults.standardUserDefaults().setValue("{API_SECRET}", forKey: "API_SECRET");
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") == nil)
         {
             NSUserDefaults.standardUserDefaults().setValue([String](), forKey: "alreadyGoingToArray");
         }
-        
+
         if(NSUserDefaults.standardUserDefaults().objectForKey("onThisDayStatus") == nil) {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "onThisDayStatus");
         }
@@ -126,11 +126,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         {
             NSUserDefaults.standardUserDefaults().setBool(false, forKey: "agreedToPrivacyPolicy");
         }
-        
+
+        if(NSUserDefaults.standardUserDefaults().objectForKey("hpanimations") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hpanimations");
+        }
+
         //NSUserDefaults.standardUserDefaults().setValue("11111111", forKey: "userid")
 
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
-        
+
         // Nav/Tab bar styling
         UITabBar.appearance().tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0)]
@@ -165,12 +170,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         db.buttonColor    = UIColor(red:0.14, green:0.55, blue:0.06, alpha:1.0)
         db.separatorColor = UIColor(red:0.44, green:0.49, blue:0.44, alpha:1.0)
 
-        if (WCSession.isSupported()) {
-            session = WCSession.defaultSession()
-            session.delegate = self;
-            session.activateSession()
-        }
-        
+
+        /*
+         *** Google Ads Setup ***
+         */
+
+        GADMobileAds.configureWithApplicationID("{APP_ID}");
+
+
+
         return true;
     }
 

@@ -9,6 +9,7 @@
 import UIKit
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var animationSwitch: UISwitch!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var onThisDaySwitch: UISwitch!
     @IBOutlet weak var easterEggsSwitch: UISwitch!
@@ -22,6 +23,7 @@ class SettingsTableViewController: UITableViewController {
         //eventaction.selectedSegmentIndex = defaults.integerForKey("announcementaction")
         easterEggsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("eastereggs")
         onThisDaySwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("onThisDayStatus")
+        animationSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("hpanimations")
         
         nameTextField.placeholder = "Set your name";
         if let nameObj = NSUserDefaults.standardUserDefaults().valueForKey("user_name") {
@@ -42,12 +44,20 @@ class SettingsTableViewController: UITableViewController {
     }
     @IBAction func saveName(sender: AnyObject) {
         if let text = nameTextField.text {
-            NSUserDefaults.standardUserDefaults().setValue(text, forKey: "user_name")
+            if text != "" {
+                if(text.isAlphaNumeric()) {
+                    NSUserDefaults.standardUserDefaults().setValue(text, forKey: "user_name")
+                }
+            }
         } else {
             let alertController = UIAlertController(title: "Name Invalid", message: "Please enter a name", preferredStyle: .Alert)
             let dismissAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil)
             (self as UIViewController).presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+    @IBAction func animationToggled(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setBool((sender as! UISwitch).on, forKey: "hpanimations")
+        NSUserDefaults.standardUserDefaults().synchronize();
     }
   
     @IBAction func onThisDayToggled(sender: AnyObject) {
@@ -119,6 +129,11 @@ class SettingsTableViewController: UITableViewController {
         openurl("http://www.thenounproject.com");
     }
     
+    @IBAction func viewPrivacyPolicy(sender: AnyObject) {
+        if let base = NSUserDefaults.standardUserDefaults().stringForKey("phpserver") {
+            openurl(base + "pages/privacy.html");
+        }
+    }
     // Utility method
     func openurl(url:String)
     {

@@ -106,10 +106,11 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
     }
     
     override func viewDidAppear(animated: Bool) {
-        if(!firsttime) {
+        /*if(!firsttime) {
             reloadMetadata = false;
             self.refreshTableData();
-        }
+        }*/
+        self.tableView.reloadData();
     }
     
     @IBAction func refreshButtonPressed(sender: AnyObject) {
@@ -132,12 +133,10 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
         // Download the announcements as JSON
         Async.background {
             do {
-                self.announcements = try AnnouncementDownloader().get()
-            } catch {
-                Async.main {
-                    Popup().show("Well this isn't good...", message: "The server failed to send the videos. Please try again later", button: "Dismiss", viewController: self as UIViewController)
-                }
-            }
+                let anndownloader = AnnouncementDownloader();
+                anndownloader.vc = self as UIViewController;
+                self.announcements = try anndownloader.get()
+            } catch {}
         }.main {
             self.refreshButton.enabled = true;
             UIView.animateWithDuration(1.0, animations: {
@@ -250,6 +249,8 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
         }
     }*/
     
+    
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         updatedefaults();
         /*Async.background {
@@ -338,6 +339,8 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
         }
     }*/
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+    
         let cell = tableView.dequeueReusableCellWithIdentifier("AnnouncementCell", forIndexPath: indexPath) as! AnnouncementTableViewCell
         
         /* We need to know the default color bc it can change based on iOS version */
@@ -370,14 +373,14 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
                 cell.img.image = image;
                 //cell.announcementdate.text = "Tap to share, hold to set reminder";//self.announcements[indexPath.item].date
                 cell.announcementtitle.text = self.announcements[indexPath.item].eventtitle
-                print(self.announcements[indexPath.item].peopleGoing);
+                print(self.announcements[indexPath.row].peopleGoing);
                 // cell.fulltext.text = self.announcements[indexPath.item].text;
-                if(self.announcements[indexPath.item].peopleGoing != -1) {
+                if(self.announcements[indexPath.row].peopleGoing != -1) {
                     //cell.fulltext.text = self.announcements[indexPath.item].text + "\n" + String(self.announcements[indexPath.item].peopleGoing) + "+ people are attending";
                 }
-                cell.creator.text = self.announcements[indexPath.item].creator;
+                cell.creator.text = self.announcements[indexPath.row].creator;
                 }.background {
-                    image = self.imageFromURL(self.announcements[indexPath.item].imagelink)
+                    image = self.imageFromURL(self.announcements[indexPath.row].imagelink)
                     self.announcements[indexPath.row].uiimg = image;
                 }.main {
                     cell.img.image = image;

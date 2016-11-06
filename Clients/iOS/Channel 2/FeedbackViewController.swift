@@ -21,7 +21,13 @@ class FeedbackViewController: UIViewController , UIWebViewDelegate{
     func loadFeedback() {
         if let server = NSUserDefaults.standardUserDefaults().valueForKey("phpserver") {
             if let serverstring = server as? String {
-                let feedbackURL = serverstring + "pages/feedback.php";
+                var feedbackURL = serverstring + "pages/feedback.php";
+                if NSUserDefaults.standardUserDefaults().objectForKey("user_name") != nil {
+                    if let name = NSUserDefaults.standardUserDefaults().stringForKey("user_name") {
+                        feedbackURL += "?name=" + name.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!;
+                        print(feedbackURL)
+                    }
+                }
                 if let url = NSURL(string: feedbackURL) {
                     webView.loadRequest(NSURLRequest(URL: url))
                     webView.delegate = self;
@@ -31,25 +37,6 @@ class FeedbackViewController: UIViewController , UIWebViewDelegate{
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        let errorAlert = UIAlertController(title: "Error", message: "You are not connected to the Internet", preferredStyle: .Alert)
-        let reloadButton = UIAlertAction(title: "Reload", style: .Default, handler: {(_) -> Void in
-            self.loadFeedback()
-        })
-        let closeButton = UIAlertAction(title: "Close", style: .Default, handler: {(_) -> Void in self.performSegueWithIdentifier("segueToExit", sender: self)
-        })
-        errorAlert.addAction(reloadButton)
-        errorAlert.addAction(closeButton)
-        
-        errorAlert.preferredAction = closeButton
-        
-        self.presentViewController(errorAlert, animated: false, completion: nil)
-    }
-    
-    @IBAction override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //
-    }
-    
-    @IBAction func exitFeedback(sender: AnyObject) {
-        self.performSegueWithIdentifier("segueToExit", sender: self)
+
     }
 }

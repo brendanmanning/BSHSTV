@@ -39,11 +39,25 @@ class ClubsDownloader: NSObject {
                 }
                 
                 // Get the user id
-                if let id = getUserId(vc) {
-                    USER_ID = id;
-                    errors = false;
+                let idInfo = IDSetup();
+                if(idInfo.isSetup()) {
+                    if let user_id = idInfo.getUserID() {
+                        USER_ID = user_id;
+                    } else {
+                        errors = true;
+                    }
                 } else {
-                    errors = true;
+                    if(!idInfo.generateUserID()) {
+                        errors = true;
+                    
+                    } else {
+                        if let user_id = idInfo.getUserID() {
+                            USER_ID = user_id;
+                        } else {
+                            errors = true;
+                        }
+
+                    }
                 }
                 
                 /* If there have been no errors so far, put those values in the tempate url */
@@ -83,6 +97,7 @@ class ClubsDownloader: NSObject {
                             club.imageURL = url;
                         }
                     }
+                    club.initilize();
                     clubs.append(club)
                 }
                 
@@ -91,21 +106,5 @@ class ClubsDownloader: NSObject {
         }
         
         return [];
-    }
-    
-    func getUserId(vc:UIViewController) -> String? {
-        if let idObj = NSUserDefaults.standardUserDefaults().valueForKey("userid") {
-            if let id = idObj as? String {
-                return id;
-            }
-        } else {
-            InitialSetup(vc: vc, message: "Getting some information from the server first", subMessage: "This will be quick", wait: false)
-            recursions++;
-            if(recursions < 3) {
-                return getUserId(vc)
-            }
-        }
-        
-        return nil;
     }
 }

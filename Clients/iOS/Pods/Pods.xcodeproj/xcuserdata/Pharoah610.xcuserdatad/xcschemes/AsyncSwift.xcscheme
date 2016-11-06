@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1F943FCB5CDDC3DB4D51C93E'
+               BlueprintIdentifier = '079A6B5D10EFB3CEFD8DC784'
                BlueprintName = 'AsyncSwift'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Async.framework'>

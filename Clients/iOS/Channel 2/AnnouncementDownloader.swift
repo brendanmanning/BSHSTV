@@ -11,13 +11,32 @@ import SwiftyJSON
 import PopupDialog
 
 class AnnouncementDownloader: NSObject {
+    internal var vc:UIViewController!;
     internal func get() throws -> [Announcement] {
         // Prepare the url
-        let API_URL = String(NSUserDefaults.standardUserDefaults().valueForKey("phpserver")!) + "announcements.php";
-            
+        var API_URL = String(NSUserDefaults.standardUserDefaults().valueForKey("phpserver")!) + "clubannouncements.php";
+        
+        let idinfo = IDSetup();
+        if let id = idinfo.getUserID() {
+            API_URL += "?userid=" + id;
+        } else {
+            if idinfo.generateUserID() {
+                if let id = idinfo.getUserID() {
+                    API_URL += "?userid=" + id;
+                }
+            }
+        }
+        var ok = false;
+        var error = false;
+        var loops = 0;
+
+        
         // Get it's contents
         if let apiContents = NSData(contentsOfURL: NSURL(string: API_URL)!) {
-            
+            guard !error else {
+                Popup().show("Error", message: "We couldn't get the announcements because you have to have Internet connection. (Error: AD 1)", button: "Dismiss", viewController: vc);
+                throw NetworkError.Failed;
+            }
             // Prepare SwiftyJSON
             let json = JSON(data: apiContents)
             

@@ -31,6 +31,6 @@ class PrivacyPolicyViewController: UIViewController, UIWebViewDelegate {
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        Popup().show("Error Loading Privacy Policy", message: "The privacy policy can be found at " + policyURL + ". If you choose to continue using this app, you confirm your consent to the aforementioned terms", button: "Close Message", viewController: self)
+        Popup().show("Error Loading Privacy Policy", message: "The privacy policy can be found at " + policyURL + ". If you choose to continue using this app, you confirm your consent to the terms located at the aforementioned Internet address", button: "Close Message", viewController: self)
     }
 }

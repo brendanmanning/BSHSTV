@@ -179,7 +179,7 @@ class AnnouncementDetailViewController: UIViewController {
                                 }
                             } else {
                                 print("No user id")
-                                let setup = InitialSetup(vc: self as UIViewController, message: "Error fixed!", subMessage: "Try that again and it should work!", wait: true);
+                                
                             }
                         }
                     }

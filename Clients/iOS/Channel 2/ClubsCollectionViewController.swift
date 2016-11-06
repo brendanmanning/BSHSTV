@@ -15,23 +15,21 @@ class ClubsCollectionViewController: UICollectionViewController {
     var API_KEY,API_SECRET,USER_ID,USER_NAME,CLUB_ID,CLUB_CODE:String!;
     var recursions = 0;
     var errors = false;
+    var getter:JSONGetter!;
     override func viewDidLoad() {
         super.viewDidLoad();
         
         collectionView?.reloadData();
         Async.background {
-            self.downloader = ClubsDownloader(vc: self as UIViewController);
-            self.clubs = self.downloader.getClubs();
-            if(self.downloader.errors) {
-                Async.main {
-                    Popup().show("Error Getting Clubs", message: "Please try again", button: "Dismiss", viewController: self as UIViewController)
-                }
-            } else {
-                Async.main {
-                    self.collectionView?.reloadData();
-                }
-            }
+            self.getData()
+        }.main {
+                self.collectionView?.reloadData();
         }
+    }
+    
+    func getData() {
+        self.downloader = ClubsDownloader(vc: self as UIViewController);
+        self.clubs = self.downloader.getClubs();
     }
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -47,6 +45,12 @@ class ClubsCollectionViewController: UICollectionViewController {
         cell.imageView.image = UIImage(named: "Loading");
         cell.titleLabel.text = clubs[indexPath.row].title
         cell.moderatorLabel.text = clubs[indexPath.row].admin
+        
+        if(clubs[indexPath.row].membership == 1) {
+            cell.titleLabel.font = UIFont.boldSystemFontOfSize(16)
+        } else {
+            cell.titleLabel.font = UIFont.systemFontOfSize(16)
+        }
         
         Async.background {
             if let url = self.clubs[indexPath.row].imageURL {
@@ -72,90 +76,92 @@ class ClubsCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("clubc", forIndexPath: indexPath) as! ClubsCollectionViewCell
         
-                /* Prepare the URL we'll use to enroll */
-        if let baseUrlObject = NSUserDefaults.standardUserDefaults().valueForKey("phpserver") {
-            /* Convert it to a string */
-            if let baseURL = baseUrlObject as? String {
-                /* Add the filename for this API method and placeholder for URL params */
-                var urlString = baseURL + "enroll.php?apikey={api_key}&apisecret={api_secret}&userid={user_id}&username={user_name}&clubid={club_id}&clubpassword={club_password}";
+        if(self.clubs[indexPath.row].membership == 1) {
+            /* Prepare the confirmation alert */
+            let alert = UIAlertController(title: "Leave " + clubs[indexPath.row].title + "?", message: "Are you sure?", preferredStyle: .Alert)
+            
+            /* Prepare the confirm action */
+            var success = false;
+            
+            let leaveAction = UIAlertAction(title: "Leave", style: .Destructive, handler: { (action: UIAlertAction) -> Void in
+                let (unenrolled,message) = self.clubs[indexPath.row].unenroll();
                 
-                /* Get those URL parameter values from preferences */
+                // Reload the collection view
+                self.collectionView?.reloadData();
                 
-                // Get the api key
-                if let keyObj = NSUserDefaults.standardUserDefaults().valueForKey("API_KEY") {
-                    if let key = keyObj as? String {
-                        API_KEY = key;
-                    }
+                // Make an alert to tell the user if it worked
+                Popup().system((unenrolled) ? "Unenrolled!" : "Error Unenrolling", message: message, button: "Dismiss", viewController: self as UIViewController)
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+            
+            alert.addAction(cancelAction)
+            alert.addAction(leaveAction)
+            
+            alert.preferredAction = leaveAction;
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        if(self.clubs[indexPath.row].membership == 0) {
+            
+            /* Make sure the user's name is set */
+            if NSUserDefaults.standardUserDefaults().objectForKey("user_name") == nil {
+                // Setup the user's name
+                let ns = NameSetup();
+                let gaveName = ns.askForName(self as UIViewController)
+                if(!gaveName) {
+                    return;
                 }
-                
-                // Get the api secret
-                if let secretObj = NSUserDefaults.standardUserDefaults().valueForKey("API_SECRET") {
-                    if let secret = secretObj as? String {
-                        API_SECRET = secret;
-                    }
-                }
-                
-                // Get the user id
-                if let id = getUserId(self as UIViewController) {
-                    USER_ID = id;
-                    errors = false;
-                } else {
-                    print("e1")
-                    errors = true;
-                }
-                
-                // Get the user's name
-                if let nameObj = NSUserDefaults.standardUserDefaults().valueForKey("user_name") {
-                    USER_NAME = nameObj as! String; // If this fails, that's really bad so a crash would be better
-                } else {
-                    var setName = NameSetup().askForName(self as UIViewController);
-                    if(!setName) {
-                        return;
-                    }
-                }
-                
-                // Get the club id
-                CLUB_ID = String(clubs[indexPath.row].id);
-                
-                // Ask the user for the club's password
-                var setCode = false;
-                let clubCodeAlert = UIAlertController(title: "Club password", message: "Please enter the code given to you by your moderator", preferredStyle: .Alert)
-                clubCodeAlert.addTextFieldWithConfigurationHandler(
-                    {(textField: UITextField!) in
-                        textField.placeholder = "Club password here"
-                })
-                
-                
-                let action = UIAlertAction(title: "Submit", style: .Default, handler: {(_) -> Void in
-                    if let textFields = clubCodeAlert.textFields{
-                        let theTextFields = textFields as [UITextField]
-                        let enteredText = theTextFields[0].text
-                        
-                        self.CLUB_CODE = enteredText!;
-                        self.submit(urlString)
-                    }
-                });
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                
-                clubCodeAlert.addAction(action)
-                clubCodeAlert.preferredAction = action;
-                
-                
-                self.presentViewController(clubCodeAlert, animated: true, completion: nil)
-                
-                
-                
-                /* If there have been no errors so far, put those values in the tempate url */
-                
             }
+            
+            var clubCodeAlert:UIAlertController!;
+            
+            if(self.clubs[indexPath.row].privacy) {
+                var setCode = false;
+                clubCodeAlert = UIAlertController(title: "Club password", message: "Please enter the code given to you by your moderator", preferredStyle: .Alert)
+                clubCodeAlert.addTextFieldWithConfigurationHandler({(textField:UITextField) -> Void in
+                    textField.placeholder = "Join code here";
+                });
+            } else {
+                clubCodeAlert = UIAlertController(title: "Join " + self.clubs[indexPath.row].title + "?", message: nil, preferredStyle: .Alert)
+            }
+                
+            let action = UIAlertAction(title: (self.clubs[indexPath.row].privacy) ? "Submit" : "Yes", style: .Default, handler: {[weak self](action:UIAlertAction) in
+                var enteredText = "";
+                if(self!.clubs[indexPath.row].privacy) {
+                    if let textFields = clubCodeAlert.textFields {
+                        let theTextFields = textFields as [UITextField]
+                        enteredText = theTextFields[(clubCodeAlert.textFields?.count)! - 1].text!
+                    }
+                } else {
+                    enteredText = "__no_pass_required__"
+                }
+                
+                // Enroll and get the result
+                let (enrolled,message) = self!.clubs[indexPath.row].enroll(enteredText)
+                    
+                // Reload the collection view
+                self!.collectionView?.reloadData();
+                    
+                Popup().system((enrolled) ? "Enrolled!" : "Error Enrolling", message: message, button: "Dismiss", viewController: self! as UIViewController)
+            });
+                
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+            
+            clubCodeAlert.addAction(cancelAction)
+            clubCodeAlert.addAction(action)
+            clubCodeAlert.preferredAction = action;
+                
+                
+            self.presentViewController(clubCodeAlert, animated: true, completion: nil)
         }
     }
     
-    func submit(urlStr:String) {
+    func submit(urlStr:String, cell: UICollectionViewCell?, getter: JSONGetter) {
         var urlString = urlStr;
         if((errors == false)) {
-            urlString = urlString.stringByReplacingOccurrencesOfString("{api_key}", withString: API_KEY)
+            /*urlString = urlString.stringByReplacingOccurrencesOfString("{api_key}", withString: API_KEY)
             urlString = urlString.stringByReplacingOccurrencesOfString("{api_secret}", withString: API_SECRET)
             urlString = urlString.stringByReplacingOccurrencesOfString("{user_id}", withString: USER_ID);
             urlString = urlString.stringByReplacingOccurrencesOfString("{user_name}", withString: USER_NAME)
@@ -165,13 +171,14 @@ class ClubsCollectionViewController: UICollectionViewController {
             urlString = urlString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             
             print(urlString)
-            
+            */
             /* Now submit read the contents of the URL to get the status message from the server */
             var alertTitle = "No Internet!";
             var alertMessage = "You must be connected to the Internet to enroll in a course"
-            if let url = NSURL(string: urlString) {
-                if let data = NSData(contentsOfURL: url) {
-                    let json = JSON(data: data);
+
+            let operationStatusAlert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
+            do {
+                if let json = try getter.json() {
                     
                     // Prepare the alert to tell the user if it worked
                     alertTitle = "Unknown Status";
@@ -180,6 +187,7 @@ class ClubsCollectionViewController: UICollectionViewController {
                     if(json["status"] == "ok") {
                         alertTitle = "You're enrolled!"
                         alertMessage = json["message"].stringValue;
+                        (cell! as! ClubsCollectionViewCell).titleLabel.font = UIFont.boldSystemFontOfSize(16)
                     }
                     
                     if(json["status"] == "error") {
@@ -187,36 +195,29 @@ class ClubsCollectionViewController: UICollectionViewController {
                         alertMessage = json["message"].stringValue;
                     }
                 } else {
-                    print("no data")
+                    alertTitle = "Error";
+                    alertMessage = "A server error occured (Code CCVC 1)";
                 }
-            } else {
-                print("url messed up")
+            } catch (JSONError.Failed) {
+                alertTitle = "Error";
+                alertMessage = "A server error occured (Code CCVC 2)";
+            } catch (JSONError.URLNotSet) {
+                alertTitle = "Error";
+                alertMessage = "A server error occured (Code CCVC 3)";
+            } catch (JSONError.URLNotValid) {
+                alertTitle = "Error";
+                alertMessage = "A server error occured (Code CCVC 4)";
+            } catch {
+                alertTitle = "Error";
+                alertMessage = "A server error occured (Code CCVC 5)";
             }
             
-            let operationStatusAlert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
-            let dismissOption = UIAlertAction(title: "Okay", style: .Default, handler: nil)
-            operationStatusAlert.addAction(dismissOption)
+            operationStatusAlert.addAction(UIAlertAction(title: "Dismiss", style: .Default, handler: nil));
             
-            (self as UIViewController).presentViewController(operationStatusAlert, animated: true, completion: nil)
+            (self as UIViewController).presentViewController(operationStatusAlert, animated: true, completion: nil);
         } else {
             print("there was some error")
             print(urlString)
         }
-    }
-    
-    func getUserId(vc:UIViewController) -> String? {
-        if let idObj = NSUserDefaults.standardUserDefaults().valueForKey("userid") {
-            if let id = idObj as? String {
-                return id;
-            }
-        } else {
-            InitialSetup(vc: vc, message: "Getting some information from the server first", subMessage: "This will be quick", wait: false)
-            recursions++;
-            if(recursions < 3) {
-                return getUserId(vc)
-            }
-        }
-        
-        return nil;
     }
 }
