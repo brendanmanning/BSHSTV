@@ -1,6 +1,12 @@
 # BSHSTV
 This is an app I made for my school's television studio. I posted the app here primarily for resume and backup purposes. 
 
+## Features
+### Client App (iOS)
+* View announcements, videos, polls, and other content added to the server
+### Server (PHP & MySQL)
+* Database Driven
+
 ## Project Structure
 * The Clients/iOS folder is the source for the actual app
 * The Server/2.0 folder contains the admin interface and API handlers for the iOS app
