@@ -154,11 +154,34 @@ public class SetupWizard
                     }
                 }
             } while(!uiPassOk);
-            
+            String userEmail = null;
+            boolean emailOk = false;
+            do {
+                userEmail = JOptionPane.showInputDialog(null, "Admin Email\nThis is the email that will recieve administrative emails", "");
+                if(userEmail == null) {
+                    ls.show();
+                } else {
+                    emailOk = new EmailValidator(userEmail).valid();
+                    if(!emailOk) {
+                        JOptionPane.showMessageDialog(null, "Email Invalid", "Email Invalid\nMake sure you are using a common provider (ex. Gmail)", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            } while(!emailOk);
+            String serverEmail = null;
+            boolean serverEmailOk = false;
+            do {
+                serverEmail = JOptionPane.showInputDialog(null, "Server Email\nThe server will send automated emails from this address.\nIt must exist on your server or email providers may block you as spam", "");
+                if(serverEmail == null) {
+                    ls.show();
+                } else {
+                    int server_email_confirmed = JOptionPane.showConfirmDialog(null,"Is this the correct email?\n" + serverEmail,"Confirm Server Email",JOptionPane.YES_NO_OPTION);
+                    serverEmailOk = (server_email_confirmed == JOptionPane.YES_OPTION);
+                }
+            } while(!serverEmailOk);
             /* Now that all the information is ready, write it to the file:
              * BSHSTV-master/Server/2.0/config.php
              */
-            ok = handler.replaceServerDBConstants(databaseUser,databasePass,databaseName,uiPass);
+            ok = handler.replaceServerDBConstants(databaseUser,databasePass,databaseName,uiPass, userEmail,serverEmail);
             if(!ok)
             {
                 JOptionPane.showMessageDialog(null, "The operation failed. Please try again", "Step 2: Failed", JOptionPane.WARNING_MESSAGE);

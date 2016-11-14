@@ -30,9 +30,16 @@ public class SetupWizardHandler
         FileEditor fe2 = new FileEditor(infoPlist);
         boolean two = fe2.replace("{server_url}",with);
         
-        return (one && two);
+        String configFileString = addTrailingSlash(baseDir.getAbsolutePath()) + "BSHSTV-master" + File.separator + 
+        "Server" + File.separator + "2.0" + File.separator + "config.php";
+        File configFile = new File(configFileString);
+        
+        FileEditor fe3 = new FileEditor(configFile);
+        boolean three = fe3.replace("{server_url}", with);
+        
+        return (one && two && three);
     }
-    public boolean replaceServerDBConstants(String user, String pass, String name,String uiPass)
+    public boolean replaceServerDBConstants(String user, String pass, String name,String uiPass, String userEmail, String serverEmail)
     {
         String configFileString = addTrailingSlash(baseDir.getAbsolutePath()) + "BSHSTV-master" + File.separator + 
         "Server" + File.separator + "2.0" + File.separator + "config.php";
@@ -48,9 +55,10 @@ public class SetupWizardHandler
         boolean pass_w = fe.replace("{dbpass}", pass);
         boolean name_w = fe.replace("{dbname}", name);
         boolean uipass_w = fe.replace("{admin_pass}", uiPass);
-        
+        boolean uemail_w = fe.replace("{admin_email}", userEmail);
+        boolean serveremail_w = fe.replace("{server_email}", serverEmail);
         /* If they were all sucessful, return true, else return false */
-        return (host_w && user_w && pass_w && name_w && uipass_w);
+        return (host_w && user_w && pass_w && name_w && uipass_w && uemail_w && serveremail_w);
     }
     public int setupServerSetupCode()
     {
