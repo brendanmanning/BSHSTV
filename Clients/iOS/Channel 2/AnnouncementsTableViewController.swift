@@ -26,9 +26,8 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
         
         refreshButtonDefaultColor = refreshButton.tintColor!;
         
-        /* Setup UIRefreshControl */
-        //self.presentViewController(LoadingViewController(), animated: false, completion: nil)
-        //Async.background {
+        self.tableView.backgroundColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0) : UIColor.whiteColor()
+
         Async.background {
             self.refreshTableData()
             self.firsttime = false;
@@ -106,11 +105,6 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
     }
     
     override func viewDidAppear(animated: Bool) {
-        /*if(!firsttime) {
-            reloadMetadata = false;
-            self.refreshTableData();
-        }*/
-        self.tableView.reloadData();
     }
     
     @IBAction func refreshButtonPressed(sender: AnyObject) {
@@ -338,23 +332,18 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
             }
         }
     }*/
+
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
     
         let cell = tableView.dequeueReusableCellWithIdentifier("AnnouncementCell", forIndexPath: indexPath) as! AnnouncementTableViewCell
+    
+        //31,33,36
         
-        /* We need to know the default color bc it can change based on iOS version */
-        if(defaultCellColor == nil) {
-            defaultCellColor = cell.backgroundColor;
-        }
-        
-        /* Make sure the cell stays green even after selection */
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:0.4)
-        cell.selectedBackgroundView = bgColorView
-        
+        print(UpgradeManager.sharedInstance.proEnabled())
         /* Make the cell green if the user already committed to this event */
-        if let eventsAlreadyGoingTo = NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") as? [String]
+        /*if let eventsAlreadyGoingTo = NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") as? [String]
         {
             /* The app saves an array containing every event the user has already committed to. This way they can't say they're going twice.
              * The server would stop that anyway
@@ -365,7 +354,7 @@ class AnnouncementsTableViewController: UITableViewController, WCSessionDelegate
             } else {
                 cell.backgroundColor = defaultCellColor;
             }
-        }
+        }*/
         
         if(reloadMetadata) {
             var image = UIImage(named: "loading")

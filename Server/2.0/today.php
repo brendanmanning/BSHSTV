@@ -5,11 +5,8 @@
 	try {
 	
 		/* Sanitize user input */
-		$date = $_GET['date'];
-		if(!isset($_GET['date']))
-		{
-			$date = date("m-d-Y");
-		}
+		$date = (!isset($_GET['date'])) ? date("m-d-Y") : $_GET['date'];
+		
 		$dateComponents = explode("-",$date);
 		
 		// Check month
@@ -51,8 +48,6 @@
 		}
 		
 		echo json_encode($arr);
-		
-		return $resultsCount;
 	} catch (PDOException $e) {
 		die("Error");
 	}

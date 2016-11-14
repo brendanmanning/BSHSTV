@@ -13,6 +13,7 @@ class FeatureChecker: NSObject {
     private var url = String(NSUserDefaults.standardUserDefaults().valueForKey("phpserver")!) + "isfeatureenabled.php?key={api_key}&secret={api_secret}&name={feature_name}";
     internal var message = "";
     internal var statusCode = -1;
+    private var defaultValue = true;
     internal func check(feature:String) -> Bool {
         url = url.stringByReplacingOccurrencesOfString("{api_key}", withString: String(NSUserDefaults.standardUserDefaults().valueForKey("API_KEY")!))
         url = url.stringByReplacingOccurrencesOfString("{api_secret}", withString: String(NSUserDefaults.standardUserDefaults().valueForKey("API_SECRET")!));
@@ -27,7 +28,11 @@ class FeatureChecker: NSObject {
             }
         }
         
-        /* Return true by default */
-        return true;
+        /* Return default value */
+        return defaultValue;
+    }
+    
+    internal func assumeFalse() {
+        self.defaultValue = false;
     }
 }

@@ -1,8 +1,11 @@
 <?php
 	// Make sure the user is logged in
 	include 'whichauth.php';
-	if(which() <= 0) {
-		die("You must login first");
+	$anonymous = 0;
+	if(which() < 0) {
+		die("You are logged in as a teacher and as a Channel 2 admin. Please don't do that.");
+	} else if (which() == 0) {
+		$anonymous = 1;
 	}
 	
 	// Has a convienence method used later
@@ -86,7 +89,7 @@
     		if(isset($_POST['teacher'])) {
     			if($_POST['teacher'] == "yes") {
     				if(isset($_POST['teacherclub'])) {
-    					$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors, clubid) VALUES (:creator,:title,:text,:image,:date,:m,:clubid)");
+    					$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors, clubid, anonymous) VALUES (:creator,:title,:text,:image,:date,:m,:clubid, :anon)");
     					$sql->bindParam(":clubid", $_POST['teacherclub']);
     					
     					$nsql = $conn->prepare("SELECT title FROM clubs WHERE internalid=:cid");
@@ -106,12 +109,13 @@
     			}
     		}
     		if($teacherSQL == false) {
-    			$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors) VALUES(:creator,:title,:text,:image,:date,:m)");
+    			$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors, anonymous) VALUES(:creator,:title,:text,:image,:date,:m,:anon)");
     		}
     		if(!$teacherSQL) {
     			$sql->bindParam(':creator', $_POST['creator']);
     			 
     		}
+    		$sql->bindParam(':anon', $anonymous);
     		 $sql->bindParam(':title', $_POST['title']);
     		$sql->bindParam(':text', $_POST['text']);
     		$sql->bindParam(':image', $_POST['image']);

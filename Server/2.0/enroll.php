@@ -20,6 +20,14 @@
 	$correctpassword = false;
 	$clubname = "Unnamed Club";
 	$sucess = false;
+	
+	$unenrolling = false;
+	if(isset($_GET['unenroll'])) {
+		if($_GET['userid'] != "" && $_GET['user_id'] != "1" && $_GET['user_id'] != "0") {
+			$unenrolling = true;
+		}
+	}
+	
 	/* Required files */
 	require 'config.php';
 	
@@ -50,38 +58,63 @@
 	}
 	
 	/* Check if the password is correct */
-	$sql = $conn->prepare("SELECT code FROM clubs WHERE internalid=:clubid");
+	$sql = $conn->prepare("SELECT privacy,code FROM clubs WHERE internalid=:clubid");
 	$sql->bindParam(":clubid", $clubid);
 	$sql->execute();
 	while($row=$sql->fetch()) {
-		$correctpassword = ($clubpassword == $row['code']);
+		$correctpassword = (($clubpassword == $row['code']) || ($row['privacy'] == 0));
 	}
 	
 	/* Make sure that all prerequisets are met, then proceed */
-	if($clubexists && (!$alreadyenrolled) && $correctpassword) {
-		/* Insert the data */
-		$sql = $conn->prepare("INSERT INTO clubmembers (clubid,userid,name) VALUES (:clubid,:userid,:username)");
-		/*$sql->bindParam(":userid", $userid);
-		$sql->bindParam(":clubid", $clubid);
-		$sql->bindParam(":username", $username);*/
-		$sucess = $sql->execute(array(":userid" => $userid, ":clubid" => $clubid, ":username" => $username));
-	}
-	
-	/* Echo a JSON array containing the status of the query */
-	$status = "error";
-	$message = "The server doesn't know if the previous action worked or not";
-	if(!$sucess) {
-		if(!$clubexists) {
-			$message = "The club you tried to join does not exist (anymore??)";
-		} else if($alreadyenrolled) {
-			$message = "You are already enrolled in " . $clubname;
-		} else if(!$correctpassword) {
-			$message = "Join code invalid";	
+	if($unenrolling == false) {
+		if($clubexists && (!$alreadyenrolled) && $correctpassword) {
+			/* Insert the data */
+			$sql = $conn->prepare("INSERT INTO clubmembers (clubid,userid,name) VALUES (:clubid,:userid,:username)");
+			/*$sql->bindParam(":userid", $userid);
+			$sql->bindParam(":clubid", $clubid);
+			$sql->bindParam(":username", $username);*/
+			$sucess = $sql->execute(array(":userid" => $userid, ":clubid" => $clubid, ":username" => $username));
 		}
 	} else {
-		$message = "You will now recieve announcements from this club";
-		$status = "ok";
+		if($clubexists && ($alreadyenrolled)) {
+			/* Some can't be unsubscribed from, make sure this isn't one */
+			$required = -1;
+			$sql = $conn->prepare("SELECT required FROM clubs WHERE internalid=:cid");
+			$sql->bindParam(":cid", $clubid);
+			$sql->execute();
+			while($row=$sql->fetch()) {
+				$required = $row['required'];
+			}
+			if($required == 0) {
+				$sql = $conn->prepare("DELETE FROM clubmembers WHERE userid=:uid AND clubid=:cid LIMIT 1");
+				$sucess = $sql->execute(array(":uid" => $userid, ":cid" => $clubid));
+				$message = ($sucess) ? "You have been unsubscribed from " . $clubname : "You were not unsubscribed. Please try again.";
+			} else {
+				$sucess = false;
+				$message = "Sorry, you can't unsubscribe from " . $clubname;
+			}
+		}
 	}
+		
+	/* Echo a JSON array containing the status of the query */
+	$status = "error";
+	if(!isset($message)) {
+		$message = "The server doesn't know if the previous action worked or not";
+		if(!$sucess) {
+			if(!$clubexists) {
+				$message = "The club you tried to join does not exist (anymore??)";
+			} else if($alreadyenrolled) {
+				$message = "You are already enrolled in " . $clubname;
+				$status = "ae";
+			} else if(!$correctpassword) {
+				$message = "Join code invalid";	
+			}
+		} else {
+			$message = "You will now recieve announcements from this club";
+		}
+	}
+	
+	if($sucess) { $status = "ok"; }
 	
 	echo json_encode(array("status" => $status, "message" => $message));
 ?>

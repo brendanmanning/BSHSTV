@@ -17,6 +17,7 @@ class AnnouncementTableViewCell: UITableViewCell {
     @IBOutlet weak var checkinButton: UIButton!
     @IBOutlet weak var checkinsLabel: UILabel!
     internal var checkins = -1;
+    @IBOutlet weak var cellView: UIView!
     
     @IBAction func doCheckin(sender: AnyObject) {
     }
@@ -26,6 +27,11 @@ class AnnouncementTableViewCell: UITableViewCell {
         // Initialization code
         
         //fulltext.userInteractionEnabled = false;
+        self.cellView.backgroundColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0) : UIColor.whiteColor()
+        
+        self.announcementtitle.textColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor.whiteColor() : UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
+        
+        self.creator.textColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor.grayColor() : UIColor.blackColor();
     }
        
     override func setSelected(selected: Bool, animated: Bool) {

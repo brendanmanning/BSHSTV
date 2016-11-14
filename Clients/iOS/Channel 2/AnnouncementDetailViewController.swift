@@ -25,6 +25,12 @@ class AnnouncementDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        self.view.backgroundColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor.grayColor() : UIColor.whiteColor();
+        
+        self.titleLabel.textColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor.greenColor() : UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
+        
+        self.goingButton.tintColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor.greenColor() : UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
+        
         goingButton.contentHorizontalAlignment = .Left
         
         goingButton.titleLabel?.adjustsFontSizeToFitWidth = true;
@@ -70,7 +76,7 @@ class AnnouncementDetailViewController: UIViewController {
         if(self.attendingEvent(self.id)) {
             goingButton.enabled = false;
             goingButton.tintColor = UIColor.blackColor();
-            goingButton.setTitle("people are attending", forState: .Normal)
+            goingButton.setTitle("You're going!", forState: .Normal)
         }
         
         Async.background {
@@ -196,7 +202,7 @@ class AnnouncementDetailViewController: UIViewController {
                 Async.main {
                     self.goingButton.enabled = false;
                     self.goingButton.tintColor = UIColor.blackColor();
-                    self.goingButton.setTitle("people are attending", forState: .Normal)
+                    self.goingButton.setTitle("You're going!", forState: .Normal)
                 }
             } else {
                 //print("no workey")

@@ -23,7 +23,7 @@ class VideosTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
     
-        
+        self.view.backgroundColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0) : UIColor.whiteColor();
         
         refreshButtonDefaultColor = refreshButton.tintColor!;
         

@@ -151,17 +151,17 @@ pre {
   }
 }
 /* Added new button types: primary and destructive */
-button.primary {
+button.primary, input[type=file] {
  	color: #00AF33;
 	background: #fff;
 	text-transform: uppercase;
 	border: 2px solid #00AF33;
 }
-button.large {
+button.large, input[type=file] {
   	font-size: 18px;
   	padding: 15px 32px;
 }
-button.round {
+button.round, input[type=file] {
   	border-radius: 6px;
 }
 button.destructive {
@@ -172,7 +172,7 @@ button.destructive {
 }
 
 /* Added hover effects for the buttons */
-button.primary:hover {
+button.primary:hover, input[type=file]:hover {
 	background: #00AF33;
 	color: #fff;
 	border: 2px solid #fff;
@@ -183,7 +183,7 @@ button.destructive:hover {
 	border: 2px solid #fff;;
 }
 /* Customized input tag */
-input[type=text] {
+input[type=text], input[type=email] {
 	border: none;
 	border-bottom: solid 2px #031E2E;
 	transition: border 0.3s;
@@ -214,7 +214,7 @@ textarea.large {
 	border-bottom: solid 2px #000;
 	border-left: solid 2px #000;
 	border-right: solid 2px #000;
-	
+
 	font-weight: bold;
 	width: 100%;
 	font-size: 150%;
@@ -224,7 +224,7 @@ textarea.large:focus {
 	border-bottom: solid 2px #00AF33;
 	border-left: solid 2px #00AF33;
 	border-right: solid 2px #00AF33;
-	
+
 }
 input[type=text].large {
 	border:none;

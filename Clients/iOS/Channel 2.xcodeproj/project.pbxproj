@@ -25,6 +25,9 @@
 		C60E36181D985554005E3EB9 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E36171D985554005E3EB9 /* LoadingViewController.swift */; };
 		C60E36191D985554005E3EB9 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E36171D985554005E3EB9 /* LoadingViewController.swift */; };
 		C60E361A1D985554005E3EB9 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60E36171D985554005E3EB9 /* LoadingViewController.swift */; };
+		C615D9161DD7A11B00E0E903 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615D9151DD7A11B00E0E903 /* UpgradeManager.swift */; };
+		C615D9171DD7A11B00E0E903 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615D9151DD7A11B00E0E903 /* UpgradeManager.swift */; };
+		C615D9181DD7A11B00E0E903 /* UpgradeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615D9151DD7A11B00E0E903 /* UpgradeManager.swift */; };
 		C61FFE8B1DAED79600201285 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8A1DAED79600201285 /* Extensions.swift */; };
 		C61FFE8C1DAED79600201285 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8A1DAED79600201285 /* Extensions.swift */; };
 		C61FFE8D1DAED79600201285 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61FFE8A1DAED79600201285 /* Extensions.swift */; };
@@ -85,6 +88,9 @@
 		C676F4541DC932AB0027BB63 /* ClubsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */; };
 		C676F4551DC932AB0027BB63 /* ClubsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */; };
 		C676F4561DC932AB0027BB63 /* ClubsDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */; };
+		C67B86B41DD4033600447A9C /* InterstitialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B86B31DD4033600447A9C /* InterstitialManager.swift */; };
+		C67B86B51DD4033600447A9C /* InterstitialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B86B31DD4033600447A9C /* InterstitialManager.swift */; };
+		C67B86B61DD4033600447A9C /* InterstitialManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67B86B31DD4033600447A9C /* InterstitialManager.swift */; };
 		C67D48001D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
 		C67D48011D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
 		C67D48021D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */; };
@@ -212,6 +218,7 @@
 		C6082F6B1D936E34001A879C /* PollDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollDownloader.swift; sourceTree = "<group>"; };
 		C60E36131D983108005E3EB9 /* TodayItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayItem.swift; sourceTree = "<group>"; };
 		C60E36171D985554005E3EB9 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		C615D9151DD7A11B00E0E903 /* UpgradeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpgradeManager.swift; sourceTree = "<group>"; };
 		C61FFE8A1DAED79600201285 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C61FFE8E1DAEDE9600201285 /* LockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		C63E967F1DB6F2A9009BFB3B /* InitialSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialSetup.swift; sourceTree = "<group>"; };
@@ -232,6 +239,7 @@
 		C676F44B1DC92A620027BB63 /* ClubsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClubsCollectionViewCell.swift; sourceTree = "<group>"; };
 		C676F44F1DC92AC60027BB63 /* Club.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Club.swift; sourceTree = "<group>"; };
 		C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClubsDownloader.swift; sourceTree = "<group>"; };
+		C67B86B31DD4033600447A9C /* InterstitialManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialManager.swift; sourceTree = "<group>"; };
 		C67D47FF1D8F5DF800319A68 /* AnnouncementDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnouncementDownloader.swift; sourceTree = "<group>"; };
 		C67D48031D8F621C00319A68 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C67EADDB1D5CC878003185F8 /* VideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewController.swift; sourceTree = "<group>"; };
@@ -382,6 +390,7 @@
 			children = (
 				C6EB1EE51DCAA627003F1768 /* JSONGetter.swift */,
 				C6FCBA4B1D5AC60A00DC5FC3 /* AppDelegate.swift */,
+				C67B86B31DD4033600447A9C /* InterstitialManager.swift */,
 				C651EFD71D5E05F400802575 /* FirstViewController.swift */,
 				C63E967F1DB6F2A9009BFB3B /* InitialSetup.swift */,
 				C6B574B31DCD4B9B00BDF12C /* ClubAPI.swift */,
@@ -398,6 +407,7 @@
 				C6CD79CB1D5EC68B00BA277D /* SettingsTableViewController.swift */,
 				C6BF413B1D5F4BE4008C517A /* NSUserDefaultsList.swift */,
 				C6FCBA511D5AC60A00DC5FC3 /* Main.storyboard */,
+				C615D9151DD7A11B00E0E903 /* UpgradeManager.swift */,
 				C676F44F1DC92AC60027BB63 /* Club.swift */,
 				C676F4531DC932AB0027BB63 /* ClubsDownloader.swift */,
 				C676F4471DC92A3E0027BB63 /* ClubsCollectionViewController.swift */,
@@ -528,6 +538,7 @@
 				TargetAttributes = {
 					C6FCBA471D5AC60A00DC5FC3 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 96X38HPDDK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -750,7 +761,9 @@
 				C69B21D01D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
 				C6FC7EF21D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */,
 				C69B21CC1D91E3CB00BC6547 /* OnlinePoll.swift in Sources */,
+				C67B86B41DD4033600447A9C /* InterstitialManager.swift in Sources */,
 				C606A3551D5E46D800DEBD8F /* Async.swift in Sources */,
+				C615D9161DD7A11B00E0E903 /* UpgradeManager.swift in Sources */,
 				C6E939E81D5D1D7B00112834 /* YouTubeVideoViewController.swift in Sources */,
 				C67D48001D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */,
 				C69194B41D9499FD00A3E6E8 /* OnlineVoter.swift in Sources */,
@@ -801,7 +814,9 @@
 				C69B21D11D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
 				C6FC7EF31D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */,
 				C69B21CD1D91E3CB00BC6547 /* OnlinePoll.swift in Sources */,
+				C67B86B51DD4033600447A9C /* InterstitialManager.swift in Sources */,
 				C6F58E751D652CB200C7D19B /* LineByLineDownloader.swift in Sources */,
+				C615D9171DD7A11B00E0E903 /* UpgradeManager.swift in Sources */,
 				C6FDA1801D669D9100BED432 /* DayDownloader.swift in Sources */,
 				C67D48011D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */,
 				C69194B51D9499FD00A3E6E8 /* OnlineVoter.swift in Sources */,
@@ -852,7 +867,9 @@
 				C69B21D21D91F6E400BC6547 /* VotingViewControllerTableViewController.swift in Sources */,
 				C6FC7EF41D90AEDC00D342E2 /* PollsTableViewController.swift in Sources */,
 				C69B21CE1D91E3CB00BC6547 /* OnlinePoll.swift in Sources */,
+				C67B86B61DD4033600447A9C /* InterstitialManager.swift in Sources */,
 				C6F58E761D652CB200C7D19B /* LineByLineDownloader.swift in Sources */,
+				C615D9181DD7A11B00E0E903 /* UpgradeManager.swift in Sources */,
 				C6FDA1811D669D9100BED432 /* DayDownloader.swift in Sources */,
 				C67D48021D8F5DF800319A68 /* AnnouncementDownloader.swift in Sources */,
 				C69194B61D9499FD00A3E6E8 /* OnlineVoter.swift in Sources */,
@@ -996,6 +1013,7 @@
 			baseConfigurationReference = D1136E97429B1761AD87EE67 /* Pods-Channel 2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1014,6 +1032,7 @@
 			baseConfigurationReference = 2659F1B49B06DEC8CF656272 /* Pods-Channel 2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

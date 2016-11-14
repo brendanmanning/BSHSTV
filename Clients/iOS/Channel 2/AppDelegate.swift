@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          * Simply by enabling or disabling features on the web interface, we can decide which user MUST update the app */
 
         /* Right below is where we define the constant */
-        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V2.0", forKey: "version_feature");
+        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V2.1", forKey: "version_feature");
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("videos") == nil)
         {
@@ -132,15 +132,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hpanimations");
         }
 
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "saidNoThisSession");
+
         //NSUserDefaults.standardUserDefaults().setValue("11111111", forKey: "userid")
 
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0;
 
         // Nav/Tab bar styling
-        UITabBar.appearance().tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
+       /* UITabBar.appearance().tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0)]
+        window?.tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0); */
+
+        if(UpgradeManager.sharedInstance.proEnabled()) {
+            UpgradeManager.sharedInstance.applyUIChanges();
+        } else {
+            UpgradeManager.sharedInstance.applyDefaultTheme();
+        }
+
         window?.tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
 
+        /*UITabBar.appearance().tintColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0);
+        UITabBar.appearance().barTintColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0);
+
+
+        UINavigationBar.appearance().backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0);
+
+        UINavigationBar.appearance().tintColor = UIColor(red:0.90, green:0.90, blue:0.90, alpha:1.0)
+        UINavigationBar.appearance().barTintColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0);*/
+       // UINavigationBar.appearance().translucent = false;
+        //UINavigationBar.appearance().tintColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 1.0);
+
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0)]
+
+        /*
         // Popup customization
         let pv = PopupDialogDefaultView.appearance()
         pv.titleFont    = UIFont(name: "HelveticaNeue-Light", size: 16)!
@@ -169,13 +193,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.titleColor     = UIColor.whiteColor()
         db.buttonColor    = UIColor(red:0.14, green:0.55, blue:0.06, alpha:1.0)
         db.separatorColor = UIColor(red:0.44, green:0.49, blue:0.44, alpha:1.0)
-
+        */
 
         /*
          *** Google Ads Setup ***
          */
 
-        GADMobileAds.configureWithApplicationID("{APP_ID}");
+        GADMobileAds.configureWithApplicationID("{admob_app_id}");
 
 
 

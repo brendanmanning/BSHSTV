@@ -17,8 +17,9 @@
 			$userid = rand(999,9999999);
 			$sql = $conn->prepare("SELECT * FROM userids WHERE userid = :userid");
 			$sql->bindParam(":userid", $userid);
-			$exisiting = 0;
-			foreach ($conn->query($sql) as $row) {
+			$existing = 0;
+			$sql->execute();
+			while($row=$sql->fetch()) {
 				$existing++;
 				break;
 			}

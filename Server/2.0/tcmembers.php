@@ -1,16 +1,16 @@
 <?php
 	// Require database constants
 	require 'config.php';
-	
+
 	// Make sure the user is a teacher
 	require 'whichauth.php';
 	$which = which();
 	if($which != 2 && $which != -1) { die("You have to be logged in to do that"); }
-	
+
 	// Prepare database connection
 	$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name , $user, $pass);
-    	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 	// Get the club id from GET
 	$club = -1;
 	if(isset($_GET['club'])) {
@@ -18,7 +18,7 @@
 	} else {
 		die("A URL parameter was missing");
 	}
-	
+
 	// Make sure this user controls this club
     	$sql = $conn->prepare("SELECT admin,title FROM clubs WHERE internalid=:id");
     	$sql->bindParam(":id", $club);
@@ -33,14 +33,14 @@
     			break;
     		}
     	}
-    	
+
     	// Tell the user if this isn't their club
     	if(!$correctUser) { die("You don't control this club. Sorry :("); }
-    	
+
     	// Select every user from the database in this club
     	$sql = $conn->prepare("SELECT name,userid,active FROM clubmembers WHERE clubid=:cid");
     	$sql->bindParam(":cid", $_GET['club']);
-    	
+
     	// Run the query and prepare an array of the results
     	$sql->execute();
     	$users = array();
@@ -49,9 +49,9 @@
     				"name" => $row['name'],
     				"id" => $row['id'],
     				"active" => $row['active']
-    				); 
+    				);
     	}
-    	
+
     	// Returns the string for the table row with the specified input
     	function makeRow($name,$id,$active) {
     		$row = "<tr>";
@@ -63,14 +63,14 @@
     			$row .= '<button type="submit" class="primary">Admit User<input type="hidden" name="newvalue" value="1">';
     		}
     		$row .= '</form></td></tr>';
-    		
+
     		return $row;
     	}
-    	
-    	// All the data has been selected and prepared. 
+
+    	// All the data has been selected and prepared.
     	//Below here is the HTML template with intermixed PHP to insert the data
  ?>
- 
+
  <html>
  	<head>
  		<title>Manage Users</title>

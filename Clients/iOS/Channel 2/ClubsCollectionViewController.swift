@@ -19,6 +19,8 @@ class ClubsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad();
         
+        self.collectionView?.backgroundColor = (UpgradeManager.sharedInstance.proEnabled()) ? UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0) : UIColor.whiteColor();
+
         collectionView?.reloadData();
         Async.background {
             self.getData()
