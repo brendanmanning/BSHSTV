@@ -16,14 +16,14 @@
 	// but it should be an address on this web server. If your mail
 	// settings are configured improperly, some email providers (Gmail)
 	// might reject or flag your emails
-	$server_email = "{admin_email}";
+	$server_email = "";
 	//
 	// Admin email
 	// All emails regarding site activity (ex. A new club is requested)
 	// will be sent to this email. Since we're sending the email to ourself,
 	// no unsubscribe link will be included. If you don't want to recieve emails,
 	// set a dummy account here
-	$admin_email = "you email";
+	$admin_email = "{admin_email}";
 	//
 	// Blind Carbon Copy
 	// Send a copy of feedback responses to yourself (at the $admin_email)
