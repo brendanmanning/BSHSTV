@@ -1,12 +1,12 @@
 <?php
-	$host = "normally localhost";
-	$user = "MySQL user";
-	$pass = "mysql pass";
-	$name = "sql name";
+	$host = "{dbhost}";
+	$user = "{dbuser}";
+	$pass = "{dbpass}";
+	$name = "{dbname}";
 
-	$password = "tvstudio";
+	$password = "{admin_pass}";
 
-	$url = "your url here";
+	$url = "{server_url}";
 
 	/* Email Settings */
 	//
@@ -16,7 +16,7 @@
 	// but it should be an address on this web server. If your mail
 	// settings are configured improperly, some email providers (Gmail)
 	// might reject or flag your emails
-	$server_email = "your email";
+	$server_email = "{admin_email}";
 	//
 	// Admin email
 	// All emails regarding site activity (ex. A new club is requested)
