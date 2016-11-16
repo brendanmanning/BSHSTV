@@ -14,7 +14,6 @@ public class main {
        if(new File(System.getProperty("user.home") + File.separator + "BSHS_TV_SETUP" + File.separator).exists())
        {
            deleteExisting();
-           System.out.println("Removed...");
        }
        System.out.println("Downloading source...");
        downloadSource();
