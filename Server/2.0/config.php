@@ -16,7 +16,7 @@
 	// but it should be an address on this web server. If your mail
 	// settings are configured improperly, some email providers (Gmail)
 	// might reject or flag your emails
-	$server_email = "";
+	$server_email = "{server_email}";
 	//
 	// Admin email
 	// All emails regarding site activity (ex. A new club is requested)
