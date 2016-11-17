@@ -1,16 +1,21 @@
 PODS:
   - AsyncSwift (1.7.3)
+  - Eureka (1.7.0)
   - PopupDialog (0.3.2)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - AsyncSwift (= 1.7.3)
+  - Eureka (= 1.7)
   - PopupDialog (= 0.3.2)
   - SwiftyJSON (= 2.3.2)
 
 SPEC CHECKSUMS:
   AsyncSwift: f3ad5dd077bbd1477e7573e87071a532fedaca1a
+  Eureka: 2020d9faeef7b7e9adeb9e3d8af779e5931c1897
   PopupDialog: 8575b6974bfe39be1735011ea3e8c72efc28e9e1
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 40924aab618905dcd6aec88e507b4bedf341f073
+
+COCOAPODS: 1.1.1

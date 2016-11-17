@@ -157,7 +157,7 @@ class FirstViewController: UIViewController {
                     
                     Async.main {
                         /* Ask the user if they want to upgrade */
-                        let popup = PopupDialog(title: "Free Pro Theme", message: "Watch a short video to unlock the dark theme for 24 hours?",completion: nil)
+                        let popup = PopupDialog(title: "Free Pro Theme", message: "Watch a short video to unlock the dark theme for 12 hours?",completion: nil)
                         let yesButton = PopupDialogButton(title: "YES", action: {
                             UpgradeManager.sharedInstance.upgrade(self)
                             if(UpgradeManager.sharedInstance.proEnabled()) {
@@ -176,28 +176,16 @@ class FirstViewController: UIViewController {
                 }
             }
             
-            //let adChecker = FeatureChecker();
-            //Async.background(after) {
-                /*if adChecker.check("ads") {
-                    self.adView.adUnitID = "ca-app-pub-7300192453759263/1790466434"
-                    self.adView.rootViewController = self
-                    let req = GADRequest();
-                    req.testDevices = [kGADSimulatorID]
-                    req.keywords = ["Bishop Shanahan", "Announcements", "School", "BSHS", "TV"]
-                    Async.main {
-                        
-                        self.adView.loadRequest(req)
-                        
-                    }
-                }*/
-            //}
-            
-           /* let manager = InterstitialManager();
+            /* Load the banner ad */
+            self.adView.adUnitID = "ca-app-pub-7300192453759263/1790466434"
+            self.adView.rootViewController = self
+            let req = GADRequest();
+            req.testDevices = [kGADSimulatorID]
+            req.keywords = ["Bishop Shanahan", "Announcements", "School", "BSHS", "TV", "High School", "Education"]
             Async.main {
-            
-                }.main(after: 5.0) {
-            manager.presentIfReady(self)
-            }*/
+                self.adView.loadRequest(req)
+                        
+            }
         }
     }
     

@@ -72,6 +72,13 @@
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Lo-IO-PMC" customClass="GADBannerView">
+                                <rect key="frame" x="20" y="401" width="560" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="nnz-2K-LIf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -83,8 +90,11 @@
                             <constraint firstItem="hUS-bJ-aw9" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="KLY-hs-mam"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JcS-0F-yg4" secondAttribute="trailing" constant="-20" id="RME-Ni-u3F"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="6ZX-IF-TvO" secondAttribute="bottom" constant="25" id="Ra0-gS-AkX"/>
+                            <constraint firstItem="1Lo-IO-PMC" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="YEN-VX-6qZ"/>
                             <constraint firstItem="np2-4B-Skg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="bGF-cp-zJS"/>
+                            <constraint firstItem="1Lo-IO-PMC" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="cei-Yl-IYp"/>
                             <constraint firstItem="hUS-bJ-aw9" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="j7p-hz-AVb"/>
+                            <constraint firstItem="1Lo-IO-PMC" firstAttribute="top" secondItem="np2-4B-Skg" secondAttribute="bottom" constant="8" id="k3f-wV-eAo"/>
                             <constraint firstItem="JcS-0F-yg4" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="smc-3P-dgu"/>
                             <constraint firstItem="hUS-bJ-aw9" firstAttribute="top" secondItem="n95-Q2-YtQ" secondAttribute="bottom" constant="8" id="vG3-84-hst"/>
                             <constraint firstItem="n95-Q2-YtQ" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="vlI-gv-jSQ"/>
@@ -95,8 +105,8 @@
                                 <exclude reference="6ZX-IF-TvO"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Ra0-gS-AkX"/>
                                 <exclude reference="Etv-xn-2L1"/>
+                                <exclude reference="Ra0-gS-AkX"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -104,8 +114,8 @@
                                 <include reference="6ZX-IF-TvO"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Ra0-gS-AkX"/>
                                 <include reference="Etv-xn-2L1"/>
+                                <include reference="Ra0-gS-AkX"/>
                             </mask>
                         </variation>
                         <connections>
@@ -120,14 +130,15 @@
                                 <segue destination="wNv-fP-K3v" kind="show" id="iVc-Ow-EKX"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Feedback" id="y0V-AE-Zl4">
+                        <barButtonItem key="rightBarButtonItem" title="Request Song" id="y0V-AE-Zl4">
                             <color key="tintColor" red="0.0" green="0.65976670449999997" blue="0.1536283557" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="xNv-xr-A7L" kind="show" id="08Y-T9-u9O"/>
+                                <segue destination="UbL-Px-z6q" kind="show" id="F9J-h4-CoY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="adView" destination="1Lo-IO-PMC" id="AvD-rj-QOD"/>
                         <outlet property="banner" destination="JcS-0F-yg4" id="o2F-QF-sdK"/>
                         <outlet property="bottom" destination="np2-4B-Skg" id="4pc-jL-ZyS"/>
                         <outlet property="clubButton" destination="59o-TJ-Vrx" id="NKZ-AF-eRQ"/>
@@ -922,8 +933,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="HOMEPAGE ANIMATION" id="V7c-O8-e3X">
-                                <string key="footerTitle">Easter Eggs are fun (and usually humorous) features for you to discover in the app. They don't have a practical purpose, they just entertain</string>
+                            <tableViewSection headerTitle="HOMEPAGE ANIMATION" footerTitle="When enabled, components from the home screen &quot;fly in&quot; from different parts of the screen" id="V7c-O8-e3X">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="yVf-xQ-KqG">
                                         <rect key="frame" x="0.0" y="368" width="600" height="44"/>
@@ -959,7 +969,7 @@
                             <tableViewSection headerTitle="THIS DAY IN HISTORY" footerTitle="Show events which happened on this date in history before Sports and Song of the Day (subject to availability)" id="uM9-pW-454">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="wwM-En-UrC">
-                                        <rect key="frame" x="0.0" y="495" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="479" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wwM-En-UrC" id="OYU-7L-DiC">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -992,7 +1002,7 @@
                             <tableViewSection headerTitle="Credits" footerTitle="* Not officially affiliated with Bishop Shanahan High School *" id="koZ-SU-F2f">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cBp-gx-fec">
-                                        <rect key="frame" x="0.0" y="622" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="606" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cBp-gx-fec" id="46f-f1-ulS">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1067,7 +1077,7 @@
                             <tableViewSection headerTitle="Icons" footerTitle="Icons from IconBeast and Jenie Tomboc are released under the Creative Commons Attribution License *Modifications were made" id="oyO-Cv-Msk">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="aAo-hG-EkI">
-                                        <rect key="frame" x="0.0" y="733" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="717" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aAo-hG-EkI" id="m3P-rQ-rqH">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1122,7 +1132,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="sfa-Ty-tEd">
-                                        <rect key="frame" x="0.0" y="777" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="761" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sfa-Ty-tEd" id="0ZT-9f-en0">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1177,7 +1187,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="mne-aD-GFU">
-                                        <rect key="frame" x="0.0" y="821" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="805" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mne-aD-GFU" id="DMw-wE-siN">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1236,7 +1246,7 @@
                             <tableViewSection headerTitle="Third Party Libraries" footerTitle="Unless otherwise noted, all projects are released under the MIT Liscense." id="KsG-K3-F4Q">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KEj-29-hh5">
-                                        <rect key="frame" x="0.0" y="948" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="932" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KEj-29-hh5" id="V7P-IG-mkA">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1296,7 +1306,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jTT-Gj-1zm">
-                                        <rect key="frame" x="0.0" y="992" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="976" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jTT-Gj-1zm" id="lHO-qQ-yjC">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1356,7 +1366,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Vq6-WC-ODG">
-                                        <rect key="frame" x="0.0" y="1036" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="1020" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vq6-WC-ODG" id="sl4-Q8-D3z">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -1420,7 +1430,7 @@
                             <tableViewSection headerTitle="PRIVACY POLICY" footerTitle="Use of BSHS TV is subject to the Privacy Policy found above." id="lf5-Xa-3nB">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="AlG-dD-eCw">
-                                        <rect key="frame" x="0.0" y="1147" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="1131" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AlG-dD-eCw" id="p0w-K5-0jj">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -2268,6 +2278,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nPf-h5-2Uf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1794" y="1440"/>
+        </scene>
+        <!--Request a Song-->
+        <scene sceneID="zYG-f7-l4j">
+            <objects>
+                <viewController id="UbL-Px-z6q" customClass="SongRequestViewController" customModule="Channel_2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hxi-M5-Zh3"/>
+                        <viewControllerLayoutGuide type="bottom" id="bbf-oa-KqS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SKP-p4-wXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBM-jG-nsb">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FBM-jG-nsb" firstAttribute="leading" secondItem="SKP-p4-wXZ" secondAttribute="leadingMargin" constant="-20" id="CtK-Kq-tvX"/>
+                            <constraint firstItem="FBM-jG-nsb" firstAttribute="top" secondItem="SKP-p4-wXZ" secondAttribute="topMargin" id="SKx-oX-hYX"/>
+                            <constraint firstItem="FBM-jG-nsb" firstAttribute="bottom" secondItem="SKP-p4-wXZ" secondAttribute="bottomMargin" id="WPw-gF-oET"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FBM-jG-nsb" secondAttribute="trailing" constant="-20" id="zwI-KV-sTR"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Request a Song" id="NHF-NJ-pVn">
+                        <barButtonItem key="backBarButtonItem" title="BSHS TV" id="UVH-tC-7ne"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="FBM-jG-nsb" id="iy2-1k-7qF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="23j-e7-klt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3852" y="-683"/>
         </scene>
     </scenes>
     <resources>

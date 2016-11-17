@@ -7,16 +7,19 @@ target 'Channel 2' do
 	pod 'PopupDialog', ‘0.3.2’
 	pod 'SwiftyJSON’, ‘2.3.2’
 	pod "AsyncSwift”, ‘1.7.3’
+	pod 'Eureka', '1.7'
 end
 
 target 'Channel 2Tests' do
 	pod 'PopupDialog', ‘0.3.2’
 	pod 'SwiftyJSON’, ‘2.3.2’
 	pod "AsyncSwift”, ‘1.7.3’
+	pod 'Eureka', '1.7'
 end
 
 target 'Channel 2UITests' do
 	pod 'PopupDialog', ‘0.3.2’
 	pod 'SwiftyJSON’, ‘2.3.2’
 	pod "AsyncSwift”, ‘1.7.3’
+	pod 'Eureka', '1.7'
 end

@@ -11,10 +11,12 @@ import GoogleMobileAds
 class InterstitialManager: NSObject {
     private var inter:GADInterstitial!;
     override init() {
-        self.inter = GADInterstitial(adUnitID: "{app_unit_id}");
+        self.inter = GADInterstitial(adUnitID: "ca-app-pub-7300192453759263/7794484032");
         let request = GADRequest();
         request.testDevices = [kGADSimulatorID];
         inter.loadRequest(request)
+        
+        print("inited")
     }
     func presentIfReady(vc:UIViewController) -> Bool {
         print("presenting...")
@@ -22,12 +24,12 @@ class InterstitialManager: NSObject {
             self.inter.presentFromRootViewController(vc)
             return true;
         }
-
+        
         return false;
     }
-
+    
     func ready() -> Bool {
         return inter.isReady;
     }
-
+    
 }

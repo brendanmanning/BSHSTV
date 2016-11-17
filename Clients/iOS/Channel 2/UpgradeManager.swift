@@ -26,7 +26,6 @@ class UpgradeManager:NSObject {
     }
 
     internal func upgrade(viewController: UIViewController) {
-        print("hello")
         if(ad.presentIfReady(viewController)) {
             defaults.setObject(NSDate(), forKey: "upgradeEarned");
             print("[upgrade earned]")
@@ -71,8 +70,8 @@ class UpgradeManager:NSObject {
     
     internal func proEnabled() -> Bool {
         if let earned = defaults.objectForKey("upgradeEarned") {
-            // Upgrade lasts for 24 hours
-            return NSDate().timeIntervalSinceDate(earned as! NSDate) < 86400
+            // Upgrade lasts for 12 hours
+            return (NSUserDefaults.standardUserDefaults().objectForKey("app_last_launched") as! NSDate).timeIntervalSinceDate(earned as! NSDate) < 43200
         }
 
         return false;
