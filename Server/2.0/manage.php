@@ -1,6 +1,8 @@
 <?php
 	/* Make sure user is logged in or redirect */
-	include 'auth.php';
+	include 'whichauth.php';
+	
+	if(which() >= 1);
 ?>
 <?php
 	/* Redirect ?type=X to ?X */
@@ -133,11 +135,11 @@
 		foreach ($conn->query($sql) as $row) {
 			if(isset($_GET['announcements'])) {
 				if($row['enabled'] == 1) {
-					echo "<tr><td>" . $row['title'] . "</td><td>" . $row['text'] . "</td><td>" . $row['creator'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='destructive'>Hide</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='0'><input type='hidden' name='type' value='0'></form></td></tr>";
+					echo "<tr><td>" . $row['title'] . "</td><td>" . $row['text'] . "</td><td>" . $row['creator'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='destructive'>Hide</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='0'><input type='hidden' name='type' value='0'></form><form action='deleteannouncement.php' method='POST'><input type='hidden' value='" . $row['internalid'] . "' name='id'><button type='submit'>Delete Forever</button></form></td></tr>";
 				}
 			
 				if($row['enabled'] == 0) {
-					echo "<tr><td>" . $row['title'] . "</td><td>" . $row['text'] . "</td><td>" . $row['creator'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='primary'>Show</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='1'><input type='hidden' name='type' value='0'></form></td></tr>";
+					echo "<tr><td>" . $row['title'] . "</td><td>" . $row['text'] . "</td><td>" . $row['creator'] . "</td><td><form action='toggle.php' method='POST'><button type='submit' class='primary'>Show</button><input type='hidden' name='id' value='" . $row['internalid'] . "'><input type='hidden' name='newstatus' value='1'><input type='hidden' name='type' value='0'></form><form action='deleteannouncement.php' method='POST'><input type='hidden' value='" . $row['internalid'] . "' name='id'><button type='submit'>Delete Forever</button></form></td></tr>";
 				}
 			} else if(isset($_GET['polls'])) {
 				if($row['enabled'] == 1) {

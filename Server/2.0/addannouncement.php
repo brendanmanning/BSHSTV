@@ -34,7 +34,9 @@
 			<input type="text" placeholder="Event text" class="most" name="text" required>
 			<br>
 			<br>
-			<input type="text" placeholder="Image URL" class="most" name="image" required>
+			<input type="text" placeholder="Image URL" class="most" name="image" value="<?php (isset($_GET['file'])) ? $_GET['file'] : "" ?>" required>
+			<br>
+			<a href="upload.php?reason=Upload a picture for your announcement&ul_path=img&sender=addannouncement.php">Need to upload a picture</a>
 			<?php
 				if($which == 1) {
 				echo "
