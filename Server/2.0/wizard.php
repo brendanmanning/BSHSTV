@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if(isset($_GET['login'])) {
+		if(isset($_SESSION['user_email'])) {
+			header("Location: tcadmin.php");
+		}
+	}
+?>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="mainstyle.css">
@@ -18,7 +26,6 @@
 				}
 			?>
 			<?php
-				session_start();
 				if($_SESSION['authed'])
 				{
 					echo "<strong><font color='#00AF33'>You are already logged in.</strong></font><br>

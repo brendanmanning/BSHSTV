@@ -1,6 +1,10 @@
 <?php
 	// Include database constants
-	include 'config.php';
+	require 'config.php';
+	
+	// Get the user information lib
+	require 'UserGetter.php';
+	
 	$conn = new PDO("mysql:host=" . $host . ";dbname=" . $name,$user,$pass);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -31,8 +35,12 @@
 				}
 			}
 
+			// Get the admin user's email
+			$getter = new UserGetter($row['admin']);
+			
+
 			// Now add the information for this club to the array
-			$arr[] = array("id"=> $row['internalid'], "title" => $row['title'], "description" => $row['description'], "image" => $row['image'], "admin" => $row['admin'], "private" => ($row['privacy'] == 1), "membership" => $joinedStatus);
+			$arr[] = array("id"=> $row['internalid'], "title" => $row['title'], "description" => $row['description'], "image" => $row['image'], "admin" => $row['admin'], "private" => ($row['privacy'] == 1), "membership" => $joinedStatus, "email" => $getter->userEmail());
 		}
 
 		echo json_encode($arr);

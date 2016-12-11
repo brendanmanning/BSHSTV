@@ -29,7 +29,7 @@
     	$cDesc;
     	$cPriv;
     	$cCode;
-    	
+    	$cImg;
     	// Run the query and get the results
     	$sql->execute();
     	$foundAResult = false;
@@ -41,6 +41,7 @@
     			$cPriv = $row['privacy'];
     			$cCode = $row['code'];
     			$cActive = $row['active'];
+    			$cImg = $row['image'];
     			break;
     		}
     	}
@@ -53,6 +54,14 @@
 	<head>
 		<title>Club Settings</title>
 		<link rel="stylesheet" type="text/css" href="mainstyle.css">
+		<script>
+			function openUploadForm() {
+				<?php
+					echo "var club={$_GET['club']};";
+				?>
+					window.location="upload.php?reason=Upload a new picture for your club's icon&ul_path=img&setamp&sender=tcsetclubpicture.php%3Fclub=" + club;
+			}
+		</script>
 	</head>
 	
 	<body>
@@ -67,7 +76,15 @@
 					echo "<center><p class='red'>Settings Update Failed</p></center>";
 				}
 			?>
+			
+			
 			<h1>Manage Club Settings</h1><hr><i>Club Name:</i><input type="text" class="large" name="title" placeholder="Club Name Here..." value=<?php echo '"' . $cName . '"'; ?> required>
+			<i>Club Image</i>
+			<br>
+			<img src=<?php echo "\"{$cImg}\""; ?> height="110px" width="110px" onclick="openUploadForm()">
+			<br>
+			<a onclick="openUploadForm()">Change Picture</a>
+			<br>
 			<i>Club Description</i>
 			<br>
 			<textarea rows="3" cols="50" name="description" form="settings" class="large" placeholder="Club Description here..." required><?php echo $cDesc; ?></textarea>

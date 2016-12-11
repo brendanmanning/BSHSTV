@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="mainstyle.css">
+		<title>Account Error</title>
+		<script>
+			function gotoSignup() {
+				window.location = "tcrequestclub.php";
+			}
+			
+			function gotoLogin() {
+				window.location = "login/index.php";	
+			}
+		</script>
+	</head>
+	<body>
+		<center>
+			<h1>Email Already Taken</h1>
+			<i>You can choose either one of the options below</i>
+			<hr>
+			<div class="row">
+				<div class="c g2">
+					<button class="primary round" onclick="gotoLogin()">Login & Add to Account</button>
+				</div>
+				<div class="c g2">
+					<button class="round" onclick="gotoSignup()">Reapply with a different email</button>
+				</div>
+			</div>
+		</center>
+	</body>
+</html>			

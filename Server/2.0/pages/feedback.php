@@ -16,7 +16,13 @@
 			}
 		?>
 		<h1>Give Feedback</h1>
-		<i>Something we forgot to say? Something we could improve? Let us know here!</i>
+		<?php
+			if(!isset($_GET['memo'])) {
+				echo '<i>Something we forgot to say? Something we could improve? Let us know here!</i>';
+			} else {
+				echo '<i>' . strip_tags($_GET['memo']) . '</i>';
+			}
+		?>
 		<hr>
 	<form action="_feedback.php" method="POST" id="feedbackform">
 		<div class="row">

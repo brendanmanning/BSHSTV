@@ -81,6 +81,11 @@
 	</head>
 	
 	<body>
+		<?php 
+			if(isset($_GET['nocontrol'])) {
+				echo '<p class="red"><strong>Failed! </strong>Sorry, you do not control that club!</p>';
+			}
+		?>
 		<h2>Manage <?php
 				if(isset($_GET['announcements']))
 				{
@@ -125,6 +130,20 @@
 		$sql = "";
 		if(isset($_GET['announcements'])) {
 			$sql = "SELECT creator,title,text,internalid,enabled FROM announcements";
+			if(which() == 2) {
+				require 'UserGetter.php';
+				$getter = new UserGetter($_SESSION['user_name']);
+				$clubs = $getter->clubs();
+				$suffix = "";
+				for($i = 0; $i < count($clubs); $i++) {
+					if($i == 0) {
+						$suffix .= " WHERE clubid=" . $clubs[$i];
+					} else {
+						$suffix .= " OR clubid=" . $clubs[$i];
+					}
+				}
+				$sql .= $suffix;
+			}
 		} else if(isset($_GET['polls'])){
 			$sql = "SELECT prompt,description,creator,id,enabled FROM polls";	
 		} else if(isset($_GET['features'])) {

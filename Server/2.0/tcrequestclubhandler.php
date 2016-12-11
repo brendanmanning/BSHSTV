@@ -7,6 +7,9 @@
 
   // Require database constants
   require 'config.php';
+  
+  // Start session
+  session_start();
 
   // Prepare database connection
   $conn = new PDO("mysql:host=" . $host . ";dbname=" . $name , $user, $pass);
@@ -19,6 +22,7 @@
     $email = strip_tags($_POST['email']);
     $clubname = strip_tags($_POST['clubname']);
     $clubpassword = strip_tags($_POST['clubpassword']);
+    $username = strip_tags((isset($_POST['username'])) ? $_POST['username'] : ""); 
 
     // Prepare default values
     $description = "This is a new club! Club moderator, you can describe your club here!";
@@ -27,6 +31,26 @@
     $active = 0;
     $required = 0;
     $president = "Not set";
+
+    // Make sure the user hasn't used an email that's already taken
+    $sql = $conn->prepare("SELECT * FROM users WHERE user_email LIKE :mail");
+    $sql->bindParam(":mail", $email);
+    $sql->execute();
+    $emailOkay = true;
+    while($row=$sql->fetch()) {
+    	if(isset($_SESSION['user_email'])) {
+    		if(strtolower($_SESSION['user_email']) != strtolower($email)) {
+    			$emailOkay = false;
+    		}
+    	} else {
+    		$emailOkay = false;
+    	}
+    }
+
+    if(!$emailOkay) {
+    	header("Location: tcemailtaken.html");
+    	exit(0);
+    }
 
     // Prepare the first SQL query
     $sql = $conn->prepare("INSERT INTO clubs (title,description,image,privacy,code,active,required,president) VALUES(:title,:description,:image,:privacy,:code,:active,:required,:president)");
@@ -61,10 +85,11 @@
       $clubid = $conn->lastInsertId();
 
       // Prepare the final SQL query
-      $second_sql = $conn->prepare("INSERT INTO teachertokens (token, course, email) VALUES (:token, :course, :email)");
+      $second_sql = $conn->prepare("INSERT INTO teachertokens (token, course, email, user_name) VALUES (:token, :course, :email, :uname)");
       $second_sql->bindParam(":token", $token);
       $second_sql->bindParam(":course", $clubid);
       $second_sql->bindParam(":email", $email);
+      $second_sql->bindParam(":uname", $username);
 
       // Execute it
       $second_sql_worked = $second_sql->execute();
@@ -77,7 +102,7 @@
           require 'Email.php';
 
           // Prepare a new email
-          $result = send_email($admin_email, $server_email, "Club Request " . $clubname, "Hello!<br><p>This is your BSHS TV instance letting you know that a user has requested to add a club to your app.</p><br><strong><i>Request Details</i></strong><hr><ul><li><strong>Club name: </strong>" . $clubname . "</li><li><strong>Teacher Name: </strong>" . $name . "</li><li><strong>Teacher Email: </strong>" . $email . "</li></ul><br><p>Please login to the admin console to approve/reject this club</p>");
+          $result = send_email($admin_email, $server_email, "Club Request " . $clubname, "Hello!<br><p>This is your BSHS TV instance letting you know that a user has requested to add a club to your app.</p><br><strong><i>Request Details</i></strong><hr><ul><li><strong>Club name: </strong>" . $clubname . "</li><li><strong>Teacher Name: </strong>" . $name . "</li><li><strong>Teacher Email: </strong>" . $email . "</li></ul><br><p>Please <a href='{$url}/clubrequests.php'>login to the admin console</a> to approve/reject this club</p>");
         }
 
         // Redirect the user

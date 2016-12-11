@@ -42,11 +42,13 @@
   <link rel="stylesheet" href="mainstyle.css">
   <script src="scripts/uploadHandler.js"></script>
 </head>
-<h1>Upload a File</h1>
-<i><?php echo $reason; ?></i>
+<h3 id="goBack"><a onclick="window.history.back()">Go Back</a></h3>
+<h1 id="title">Upload a File</h1>
+<i><?php echo "<p id=\"reason\">{$reason}</p>"; ?></i>
 <form action="uploadFile.php" method="POST" enctype="multipart/form-data" id="upload_form">
 
     <input type="file" name="fileToUpload" class="primary" id="fileToUpload" onchange="fileOnChange()">
   <input type="hidden" name="ul_path" value="<?php echo $path; ?>">
   <input type="hidden" name="sender" value="<?php echo $sender; ?>">
+  <?php if(isset($_GET['setamp'])) { echo "<input type=\"hidden\" name=\"setamp\">"; } ?>
 </form>

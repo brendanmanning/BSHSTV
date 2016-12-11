@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <html>
   <head>
     <title>Request a Club</title>
@@ -30,7 +33,14 @@
       <div class="row">
         <div class="c g2">
           <label for="email">Your email address</label>
-          <input type="email" name="email" id="email" placeholder="The one you will login in with" class="most" required>
+          <input type="email" name="email" id="email" placeholder="The one you will login in with" class="most" value=<?php if(isset($_SESSION['user_email'])) { echo '"' . $_SESSION['user_email'] . '" readOnly="readOnly" '; } else { echo '""'; } ?>required>
+          <?php
+          	if(isset($_SESSION['user_email'])) {
+          		echo '<input type="hidden" name="username" value="' . $_SESSION['user_name'] . '">';
+          	} else {
+          		echo '<br><a href="login/index.php">Already have an account? Login first</a>';
+          	}
+          ?>
         </div>
         <div class="c g2">
           <label for="name">Your name (full or with title)</label>

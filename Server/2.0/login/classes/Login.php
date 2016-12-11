@@ -88,7 +88,34 @@ class Login
                         $_SESSION['user_login_status'] = 1;
                         // This flag gets set for a superuser
                         $_SESSION['authed'] = $result_row->userlevel == 0;
-
+			$_SESSION['app_login'] = false;
+			/* The user DID login with the right information, but it doesn't matter
+			 * for users of the app because they also need to present a token when 
+			 * using their account, so here we need to create a token for this device */
+			 
+			 if(isset($_POST['user_id'])) {
+			 	require 'TokenMaker.php';
+			 	require_once 'TokenChecker.php';
+			 	// However, if this is their 2nd+ time logging in, they might already have a token
+			 	$tokenValid = false;
+			 	if(isset($_POST['token'])) {
+			 		$tokenChecker = new TokenChecker();
+			 		$tokenChecker->setToken($_POST['token']);
+			 		$tokenChecker->setUsername($_SESSION['user_name']);
+			 		$tokenValid = $tokenChecker->tokenValid();
+			 	}
+			 
+			 	if(!$tokenValid) {
+			 		$tokenMaker = new TokenMaker();
+			 		$tokenMaker->setUsername($_SESSION['user_name']);
+			 		$tokenMaker->setUserID($_POST['user_id']);
+			 		$token = $tokenMaker->addAndReturnToken();
+			 		$_SESSION['token'] = $token;
+				}
+				
+				$_SESSION['app_login'] = true;	
+			}
+			
                     } else {
                         $this->errors[] = "Wrong password. Try again.";
                     }

@@ -49,17 +49,39 @@
 <html>
 	<head>
 		<title>Teacher Admin Page</title>
+		<link rel="stylesheet" href="mainstyle.css">
 	</head>
 	<body>
 		<?php include 'tcmenu.html'; ?>
 		<h1>Hello <?php echo $name; ?>!</h1>
-		<form action="addannouncement.php">
-			<button type="submit">Send Club Members an Announcement</button>
-		</form>
-		
-		<form action="tcadmin.php" method="POST">
-		<i>Or Select a club to configure:</i><?php echo $clubSelect; ?><select name="page"><option value='tcsettings.php'>Change Club Settings</option><option value='tcmembers.php'>Manage Club Members</option>
-		<input type="submit" value="Submit">
-		</form>
+		<div class="row">
+			<h3>Add stuff to the app</h3>
+			<hr>
+			<div class="c g2">
+				<form action="addannouncement.php">
+					<button type="submit">Send Club Members an Announcement</button>
+				</form>
+			</div>
+			<div class="c g2">
+				<form action="tcsendpush.php">
+					<button type="submit">Send a Push Notification</button>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<h3>Change settings</h3>
+			<hr>
+			<div class="c">
+				<form action="tcadmin.php" method="POST">
+					<?php echo $clubSelect; ?>
+					
+					<select name="page">
+						<option value='tcsettings.php'>Change Club Settings</option>
+						<option value='tcmembers.php'>Manage Club Members</option>
+					</select>
+				<button type="submit" class="primary round">Submit</button>
+				</form>
+			</div>
+		</div>
 	</body>
 </html>

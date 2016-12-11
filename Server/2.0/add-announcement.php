@@ -5,7 +5,7 @@
 	if(which() < 0) {
 		die("You are logged in as a teacher and as a Channel 2 admin. Please don't do that.");
 	} else if (which() == 0) {
-		$anonymous = 1;
+		die("You need to log in first");
 	}
 	
 	// Has a convienence method used later
@@ -24,6 +24,7 @@
     		
     		// Make the date
     		$date = "";
+    		
     		if(strlen($_POST['m']) == 1)
     		{
     			$date .= "0" . $_POST['m'];
@@ -32,7 +33,6 @@
     		}
     		
     		$date .= "-";
-    		
     		if(strlen($_POST['d']) == 1)
     		{
     			$date .= "0" . $_POST['d'];
@@ -54,8 +54,10 @@
     		if(strlen($_POST['hr']) == 1)
     		{
     			$date .= "0" . $_POST['hr'];
+    			
     		} else {
     			$date .= $_POST['hr'];
+    			
     		}
     		
     		$date .= "-";
@@ -63,8 +65,10 @@
     		if(strlen($_POST['min']) == 1)
     		{
     			$date .= "0" . $_POST['min'];
+    			
     		} else {
     			$date .= $_POST['min'];
+    			
     		}
     		
     		$date .= "-";
@@ -72,8 +76,10 @@
     		if($_POST['ampm'] == "AM" || $_POST['ampm'] == "am")
     		{
     			$date .= "AM";
+    			
     		} else if($_POST['ampm'] == "PM" || $_POST['ampm'] == "pm") {
     			$date .= "PM";
+    			
     		} else {
     			echo 'AM/PM Field was incorrect. <a href="addannouncement.php?title=' . $_POST['title'] . "&text=" . $_POST['text'] . "&image=" . $_POST['image'] . "&creator=" . $_POST['creator'] . '">Go back</a>';
     		}
@@ -89,6 +95,21 @@
     		if(isset($_POST['teacher'])) {
     			if($_POST['teacher'] == "yes") {
     				if(isset($_POST['teacherclub'])) {
+    					// Make sure that teacher controls that club
+    					$teacherControlsClub = false;
+    					$clubname = null;
+    					$sql = $conn->prepare("SELECT title,active FROM clubs WHERE admin LIKE :teacher AND internalid=:clubid");
+    					$sql->bindParam(":clubid", $_POST['teacherclub']);
+    					$sql->bindParam(":teacher", $_SESSION['user_name']);
+    					$sql->execute();
+    					while($row=$sql->fetch()) {
+    						$teacherControlsClub = $row['active'] == 1;
+    						$clubname = $row['title'];
+    					}
+    					
+    					if(!$teacherControlsClub) {
+    						die("That isn't your club or it is waiting to be approved");
+    					}
     					$sql = $conn->prepare("INSERT INTO announcements (creator, title, text, image, date, minvisitors, clubid, anonymous) VALUES (:creator,:title,:text,:image,:date,:m,:clubid, :anon)");
     					$sql->bindParam(":clubid", $_POST['teacherclub']);
     					
@@ -121,6 +142,17 @@
     		$sql->bindParam(':image', $_POST['image']);
     		$sql->bindParam(':date', $date);
     		$sql->bindParam(':m', $min);
+    		
+    		if(isset($_POST['push'])) {
+    			if($_POST['push'] == "yes") {
+    				require 'ClubPusher.php';
+    				$pusher = new ClubPusher();
+    				$pusher->setTitle($clubname);
+    				$pusher->setMessage("Event scheduled for " . date_format(date_create_from_format("m-d-Y-h-i-A", strtolower($date)), "l, F jS"));
+    				$pusher->setClub($_POST['teacherclub']);
+    				$pusher->send();
+    			}
+    		}
     	
     		if($sql->execute())
     		{

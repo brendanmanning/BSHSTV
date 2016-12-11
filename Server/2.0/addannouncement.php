@@ -1,5 +1,6 @@
 <?php
 	include 'whichauth.php';
+	require 'config.php';
 	$which = which();
 	if($which == 0) {
 		echo "Please login as a <a href='wizard.php'>BSHS TV Admin</a> or as a <a href='login/index.php'>Club Moderator (Teacher)</a>";
@@ -11,6 +12,11 @@
 		<title>Add Announcment</title>
 		<link rel="stylesheet" type="text/css" href="mainstyle.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mu/0.3.0/mu.min.css" />
+		<script>
+			function showMeetingHelp() {
+			
+			}
+		</script>
 	</head>
 	
 	<body>
@@ -24,8 +30,8 @@
 				echo "<p class='red'>Error adding " . $_GET['event'] . "</p>";
 			}
 		?>
-		<h2>Add an Announcement</h2>
-		<i>Users will see this in the BSHS TV app</i>
+		<h2>Add <?php echo (($which == 1) ? "an Announcement" : "a Meeting")?></h2>
+		<i><?php echo (($which == 1) ? "Users will see this in the BSHS TV app" : "This be shown in the Events tab and in your club's meetings table")?></i>
 		<hr>
 		<form action="add-announcement.php" method="POST">
 			<input type="text" placeholder="Title" class="large" name="title" required>
@@ -34,7 +40,7 @@
 			<input type="text" placeholder="Event text" class="most" name="text" required>
 			<br>
 			<br>
-			<input type="text" placeholder="Image URL" class="most" name="image" value="<?php (isset($_GET['file'])) ? $_GET['file'] : "" ?>" required>
+			<input type="text" placeholder="Image URL" class="most" name="image" value="<?php echo (isset($_GET['file'])) ? $url . $_GET['file'] : "" ?>" required>
 			<br>
 			<a href="upload.php?reason=Upload a picture for your announcement&ul_path=img&sender=addannouncement.php">Need to upload a picture</a>
 			<?php
@@ -95,10 +101,12 @@
 					echo "</select>";
 					echo "<input type='hidden' value='no' name='minvisitors'>";
 					echo "<input type='hidden' value='yes' name='teacher'>";
+					echo "<br>";
+					echo "<input type='checkbox' value='yes' name='push' checked>Notify Club Members<br>";
 				}
 			?>
 				<br>
-				<button type="submit" class="primary">Submit</button>
+				<button type="submit" class="primary most round">Submit</button>
 		</form>
 	</body>
 </html>

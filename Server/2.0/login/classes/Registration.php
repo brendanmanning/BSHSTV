@@ -114,6 +114,7 @@ class Registration
                     			$rows++;
                     			$clubId = $row['course'];
                     			$tokenId = $row['internalid'];
+                    			
                     			if($row['user_name'] != "") { $addToAccount = true; $uname = $this->db_connection->real_escape_string(strip_tags($row['user_name']));}
                     		}
                     	}
@@ -178,7 +179,7 @@ class Registration
 			
                     	// if user has been added successfully
                     	if ($query_new_user_insert && $club_update && $token_update) {
-                       		 $this->messages[] = "Your account has been created successfully. You can now log in.";
+                       		 $this->messages[] = "created"; // will trigger a redirect
                  	   } else {
                        		 $this->errors[] = "Sorry, your registration failed. Please go back and try again.";
                    	 }

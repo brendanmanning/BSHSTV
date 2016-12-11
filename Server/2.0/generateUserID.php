@@ -40,6 +40,14 @@
 			{
 				$arr = array("status" => "ok","id"=>$userid);
 				echo json_encode($arr);
+				
+				// Account Created!
+				
+				// Enroll this user in all the default clubs
+				require 'DefaultEnroller.php';
+				$enroller = new DefaultEnroller($userid);
+				$enroller->setConn($conn);
+				$enroller->enrollInDefaultClubs();
 			} else {
 				$arr = array("status" => "error");
 				echo json_encode($arr);

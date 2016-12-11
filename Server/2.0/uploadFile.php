@@ -54,7 +54,8 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        header("Location: " . $_POST['sender'] . "?file=" . $target_file);
+    	$urlSep = (isset($_POST['setamp'])) ? "&" : "?";
+        header("Location: " . $_POST['sender'] . "{$urlSep}file=" . $target_file);
     } else {
         echo "Sorry, there was an error uploading your file.";
     }

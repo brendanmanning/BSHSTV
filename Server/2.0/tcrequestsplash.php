@@ -12,7 +12,7 @@
     <strong>What to do while you wait</strong>
     <ol>
       <li><p><a href="http://bshstv.com/update/index.php">Download the BSHS TV App</a> to get used to what your students will see</p></li>
-      <li><p><a href=<?php include 'config.php'; echo '"' . $url . "pages/feedback.php" . '"'; ?>>Let us know how this setup process has been so far</a></p></li>
+      <li><p><a href=<?php include 'config.php'; echo '"' . $url . "pages/feedback.php?memo=Let us know what you thought of adding a club to the BSHS TV app" . '"'; ?>>Let us know how this setup process has been so far</a></p></li>
     </ol>
   </body>
 </html>

@@ -183,11 +183,13 @@ button.destructive:hover {
 	border: 2px solid #fff;;
 }
 /* Customized input tag */
-input[type=text], input[type=email] {
+input[type=text], input[type=email], input[type=password] {
 	border: none;
 	border-bottom: solid 2px #031E2E;
 	transition: border 0.3s;
 	color: #000;
+	height: 40px;
+	font-size: 20px;
 }
 input:focus,
 input.focus {
@@ -240,3 +242,33 @@ input[type=text].large:focus {
 	border-left: solid 4px #00AF33;
 	border-right: solid 4px #00AF33;
 }
+body.loginback {
+	background-color:#2E8B57;
+background-image: linear-gradient(white 2px, transparent 2px),
+linear-gradient(90deg, white 2px, transparent 2px),
+linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px
+}
+div.login {
+   width:300px;
+	height:290px;
+	position:absolute;
+	left:50%;
+	top:50%;
+
+	margin: -150px 0 0 -150px;
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    background-color: white;
+}
+#nav ul {
+	list-style:none;
+    position:absolute;
+    left:-9999px;
+}
+#nav li:hover ul{ /* Display the dropdown on hover */
+    left:0; /* Bring back on-screen when needed */
+}​
