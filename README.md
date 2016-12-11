@@ -5,6 +5,7 @@ This is an app I made for my school's television studio. I posted the app here p
 ### Client App (iOS)
 * View announcements, videos, polls, and other content added to the server
 * Push notifications (WIP)
+
 ### Server (PHP & MySQL)
 * Database Driven
 
