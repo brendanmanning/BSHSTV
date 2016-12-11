@@ -16,6 +16,9 @@ This is an app I made for my school's television studio. I posted the app here p
 * The .framework files in Clients/iOS are for Google Ads and are not mine
 
 ### Third Party Licenses
+* [LNRSimpleNotifications](https://github.com/LISNR/LNRSimpleNotifications/) by LINSR Inc.
+  * MIT License - [Read the License](https://github.com/LISNR/LNRSimpleNotifications/blob/master/LICENSE.txt)
+  * Contains other third party code not cited here subject to their own licenses. Please view attributions to them in the LNRSimpleNotifications License linked to above.
 * [Async](https://github.com/duemunk/Async) by Tobias Due Munk
   * MIT License - [Read the License](https://raw.githubusercontent.com/brendanmanning/BSHSTV/master/Licenses/Async/LICENSE.txt)
 * [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) by Ruoyu Fu
