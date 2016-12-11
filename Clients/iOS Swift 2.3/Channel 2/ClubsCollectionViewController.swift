@@ -54,15 +54,31 @@ class ClubsCollectionViewController: UICollectionViewController {
             cell.titleLabel.font = UIFont.systemFontOfSize(16)
         }
         
+        let cacher = Cache();
+        
         Async.background {
             if let url = self.clubs[indexPath.row].imageURL {
-                if let data = NSData(contentsOfURL: url) {
+                print("Loading image " + url.absoluteString!);
+                if(cacher.cachedVersionExists(url)) {
+                    print("Found cached version! :)")
                     Async.main {
-                        cell.imageView.image = UIImage(data: data);
+                        let img = cacher.get(url);
+                        cell.imageView.image = img;
+                         self.clubs[indexPath.row].image = img;
                     }
                 } else {
-                    Async.main {
-                        cell.imageView.image = UIImage(named: "Image");
+                    print("Downloading image...")
+                    if let data = NSData(contentsOfURL: url) {
+                        Async.main {
+                            let img = UIImage(data: data);
+                            cell.imageView.image = img;
+                            self.clubs[indexPath.row].image = img;
+                            cacher.cache(img!, from: url)
+                        }
+                    } else {
+                        Async.main {
+                            cell.imageView.image = UIImage(named: "Image");
+                        }
                     }
                 }
             } else {
@@ -79,7 +95,13 @@ class ClubsCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("clubc", forIndexPath: indexPath) as! ClubsCollectionViewCell
         
         if(self.clubs[indexPath.row].membership == 1) {
-            
+            let manager = FM(l: "Documents", name: "clubImage.jpeg");
+            if manager.exists() { manager.delete(); }
+            if let image = self.clubs[indexPath.row].image {
+                if let data = UIImageJPEGRepresentation(image, 1.0) {
+                    print(manager.writeData(data))
+                }
+            }
             self.performSegueWithIdentifier("segueToClubDetail", sender: indexPath.row)
             /*
             /* Prepare the confirmation alert */
@@ -143,13 +165,16 @@ class ClubsCollectionViewController: UICollectionViewController {
                     enteredText = "__no_pass_required__"
                 }
                 
-                // Enroll and get the result
-                let (enrolled,message) = self!.clubs[indexPath.row].enroll(enteredText)
+                //Async.background {
+                    // Enroll and get the result
+                    let (enrolled,message) = self!.clubs[indexPath.row].enroll(enteredText)
                     
-                // Reload the collection view
-                self!.collectionView?.reloadData();
-                    
-                Popup().system((enrolled) ? "Enrolled!" : "Error Enrolling", message: message, button: "Dismiss", viewController: self! as UIViewController)
+                    // Reload the collection view
+                    self!.collectionView?.reloadData();
+                    Async.main {
+                        Popup().system((enrolled) ? "Enrolled!" : "Error Enrolling", message: message, button: "Dismiss", viewController: self! as UIViewController)
+                    }
+                //}
             });
                 
             let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
@@ -234,7 +259,30 @@ class ClubsCollectionViewController: UICollectionViewController {
             }
         }
     }
+    @IBAction func manageClubsAction(sender: AnyObject) {
+        
+        let question = UIAlertController(title: "Select an action", message: nil, preferredStyle: .Alert)
+        let add = UIAlertAction(title: "Add a Club", style: .Default, handler: { (_) -> Void in
+            self.addClub(sender)
+        })
+        let open = UIAlertAction(title: "Manage your Club", style: .Default, handler: { (_) -> Void in
+                self.openAdminUI(sender)
+        })
+        let close = UIAlertAction(title: "Close", style: .Default, handler: nil)
+        question.addAction(add)
+        question.addAction(open)
+        question.addAction(close)
+        
+        self.presentViewController(question, animated: true, completion: nil)
+    }
     
+    @IBAction func openAdminUI(sender: AnyObject) {
+        let website = WebViewController();
+        if let base = NSUserDefaults.standardUserDefaults().stringForKey("phpserver") {
+            website.url = base + "login/index.php";
+            self.showViewController(website, sender: self)
+        }
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "segueToClubDetail") {
             if let cellIndex = sender as? Int {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11129.15" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11103.10"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,39 +16,45 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="bfa-TO-4Wh">
-                                <rect key="frame" x="224" y="223" width="153" height="153"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="153" id="CoA-hb-avq"/>
-                                    <constraint firstAttribute="width" constant="153" id="RLS-Ag-Kf8"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Channel 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXZ-Lx-c9e">
-                                <rect key="frame" x="20" y="384" width="560" height="32"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <color key="textColor" red="0.0" green="0.54901960780000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© 2016 Brendan Manning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCv-Me-h5h">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel 2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWD-8L-cQa">
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" red="0.0" green="0.56470588235294117" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="eyc-4a-R8a">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="PSZ-z6-lNc"/>
+                                    <constraint firstAttribute="height" constant="240" id="Vip-gd-CpQ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bfa-TO-4Wh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="7tF-jf-I3z"/>
-                            <constraint firstItem="bfa-TO-4Wh" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jJX-Vb-5mw"/>
-                            <constraint firstItem="fXZ-Lx-c9e" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="lOG-Qq-ZBq"/>
-                            <constraint firstItem="fXZ-Lx-c9e" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="uQF-g1-APP"/>
-                            <constraint firstItem="fXZ-Lx-c9e" firstAttribute="top" secondItem="bfa-TO-4Wh" secondAttribute="bottom" constant="8" id="zLB-bR-R6D"/>
+                            <constraint firstItem="eyc-4a-R8a" firstAttribute="top" secondItem="sWD-8L-cQa" secondAttribute="bottom" constant="8" id="1bQ-Cr-Ans"/>
+                            <constraint firstItem="kCv-Me-h5h" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="9JU-Tu-NnX"/>
+                            <constraint firstItem="sWD-8L-cQa" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="Dcm-zu-xCK"/>
+                            <constraint firstItem="eyc-4a-R8a" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="LHD-Qh-nU3"/>
+                            <constraint firstItem="sWD-8L-cQa" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="WAE-8I-RWc"/>
+                            <constraint firstItem="kCv-Me-h5h" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="cWv-LE-kP4"/>
+                            <constraint firstItem="eyc-4a-R8a" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cdE-py-KVK"/>
+                            <constraint firstItem="kCv-Me-h5h" firstAttribute="top" secondItem="eyc-4a-R8a" secondAttribute="bottom" constant="8" id="qic-Cq-2tF"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-69" y="327"/>
+            <point key="canvasLocation" x="-21.09375" y="-33.382137628111273"/>
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="767" height="768"/>
+        <image name="logo" width="1536" height="1536"/>
     </resources>
 </document>

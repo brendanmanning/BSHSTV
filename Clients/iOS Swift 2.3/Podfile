@@ -9,6 +9,7 @@ target 'Channel 2' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Messaging'
 	pod 'Firebase/AdMob’
+	pod 'LNRSimpleNotifications', :git => 'https://github.com/LISNR/LNRSimpleNotifications.git', :branch => 'swift2.3'
 end
 
 target 'Channel 2Tests' do
@@ -17,6 +18,7 @@ target 'Channel 2Tests' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Messaging'
 	pod 'Firebase/AdMob’
+	pod 'LNRSimpleNotifications', :git => 'https://github.com/LISNR/LNRSimpleNotifications.git', :branch => 'swift2.3'
 end
 
 target 'Channel 2UITests' do
@@ -25,4 +27,5 @@ target 'Channel 2UITests' do
 	pod 'Firebase/Core'
 	pod 'Firebase/Messaging'
 	pod 'Firebase/AdMob’
+	pod 'LNRSimpleNotifications', :git => 'https://github.com/LISNR/LNRSimpleNotifications.git', :branch => 'swift2.3'
 end

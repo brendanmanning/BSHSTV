@@ -11,7 +11,7 @@ import GoogleMobileAds
 class InterstitialManager: NSObject {
     private var inter:GADInterstitial!;
     override init() {
-        self.inter = GADInterstitial(adUnitID: “{AD_UNIT_ID}”);
+        self.inter = GADInterstitial(adUnitID: "{AD_UNIT_ID}");
         let request = GADRequest();
         request.testDevices = [kGADSimulatorID];
         inter.loadRequest(request)

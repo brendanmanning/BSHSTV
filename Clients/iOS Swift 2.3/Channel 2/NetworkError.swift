@@ -12,3 +12,9 @@ enum NetworkError:ErrorType {
     case Failed;
     case UploadFailed;
 }
+
+enum NotificationError:ErrorType {
+    case NotRegistered;
+    case NoPermissions;
+    case NetworkError;
+}

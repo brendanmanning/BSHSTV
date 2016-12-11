@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import LNRSimpleNotifications
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet weak var cachingOn: UISwitch!
+    @IBOutlet weak var cachedFileCount: UILabel!
     @IBOutlet weak var animationSwitch: UISwitch!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var onThisDaySwitch: UISwitch!
@@ -24,18 +27,41 @@ class SettingsTableViewController: UITableViewController {
         easterEggsSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("eastereggs")
         onThisDaySwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("onThisDayStatus")
         animationSwitch.on = NSUserDefaults.standardUserDefaults().boolForKey("hpanimations")
-        
+        cachingOn.on = CacheManager.sharedInstance.cachingEnabled();
         nameTextField.placeholder = "Set your name";
         if let nameObj = NSUserDefaults.standardUserDefaults().valueForKey("user_name") {
             if let name = nameObj as? String {
                 nameTextField.text = name;
             }
         }
+        
+        updateCacheCount()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateCacheCount();
     }
 
+    private func updateCacheCount() {
+        cachedFileCount.text = "Cache contains " + String(CacheManager.sharedInstance.cacheSize()) + " files."
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func filecachingchanged(sender: AnyObject) {
+        NSUserDefaults.standardUserDefaults().setBool((sender as! UISwitch).on, forKey: "caching")
+        NSUserDefaults.standardUserDefaults().synchronize();
+    }
+    @IBAction func clearfilecache(sender: AnyObject) {
+        CacheManager.sharedInstance.clear { (itemsDeleted) in
+            let manager = LNRNotificationManager();
+            manager.showNotification("Cache Cleared!", body: "To completely stop using caching, turn it off in Settings", onTap: nil)
+            self.updateCacheCount();
+        }
     }
     @IBAction func eventactionchanged(sender: AnyObject) {
         NSUserDefaults.standardUserDefaults().setInteger(eventaction.selectedSegmentIndex, forKey: "announcementaction")
@@ -77,6 +103,9 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func mywebsite(sender: AnyObject) {
         openurl("http://www.brendanmanning.com/");
     }
+    @IBAction func lzrwebsite(sender: AnyObject) {
+        openurl("https://github.com/LISNR/LNRSimpleNotifications/blob/master/LICENSE.txt")
+    }
     @IBAction func iconwebsite(sender: AnyObject) {
         openurl("http://www.iconbeast.com/")
     }
@@ -92,6 +121,8 @@ class SettingsTableViewController: UITableViewController {
     @IBAction func nowifiwebsite(sender: AnyObject) {
         openurl("https://thenounproject.com/term/wifi-problem/579316")
     }
+
+    
     
    /* @IBAction func refreshOnThisDayList(sender: AnyObject) {
         var ok = false;
@@ -125,6 +156,25 @@ class SettingsTableViewController: UITableViewController {
             self.listupdatestatus.hidden = true;
         })
     }*/
+    @IBAction func fireBaseCredits(sender: AnyObject) {
+        let alert = UIAlertController(title: "Firebase Sample Code Attribution Options", message: "Select an action below", preferredStyle: .Alert)
+        let viewFileAction = UIAlertAction(title: "View Source Code", style: .Default, handler: { (_) -> Void in
+            UIApplication.sharedApplication().openURL(NSURL(string: "https://github.com/firebase/quickstart-ios/blob/master/messaging/MessagingExampleSwift/AppDelegate.swift#L66-L89")!);
+        })
+        let readApacheLicenseAction = UIAlertAction(title: "Read License", style: .Default, handler: {(_) -> Void in
+            UIApplication.sharedApplication().openURL(NSURL(string: "https://raw.githubusercontent.com/firebase/quickstart-ios/master/LICENSE")!);
+        });
+        let copyrightAction = UIAlertAction(title: "View Copyright", style: .Default, handler: {(_) -> Void in
+                let ipalert = UIAlertController(title: "Copyright Information", message: "Copyright 2016 Google Inc.", preferredStyle: .Alert)
+                let closeAction = UIAlertAction(title: "Dismiss", style: .Default, handler: nil);
+                ipalert.addAction(closeAction);
+            self.presentViewController(ipalert, animated: true, completion: {(_) -> Void in self.fireBaseCredits(self); });
+        })
+        let closeAction = UIAlertAction(title: "Close", style: .Default, handler: nil);
+        alert.addActions([viewFileAction,readApacheLicenseAction,copyrightAction,closeAction]);
+        alert.preferredAction = closeAction;
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
     @IBAction func viewNotificationIconCredit(sender: AnyObject) {
         openurl("http://www.thenounproject.com");
     }

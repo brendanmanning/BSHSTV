@@ -13,6 +13,7 @@ import GoogleMobileAds
 
 class FirstViewController: UIViewController {
 
+    @IBOutlet weak var upsellButton: UIButton!
     @IBOutlet var swipeUpRecognizer: UISwipeGestureRecognizer!
     @IBOutlet var adView: GADBannerView!
     @IBOutlet weak var clubButton: UIBarButtonItem!
@@ -23,10 +24,8 @@ class FirstViewController: UIViewController {
     //var poll:Poll!
     
     // Interface Builder
-    @IBOutlet weak var reconnectButton: UIButton!
     @IBOutlet var logo: UIImageView!
     @IBOutlet var top: UILabel!
-    @IBOutlet var bottom: UILabel!
     @IBOutlet weak var swipeupimage: UIImageView!
     
     // Popup
@@ -39,39 +38,45 @@ class FirstViewController: UIViewController {
     
     // Setup object
     var setup:IDSetup!;
+    
+    // Upsell button index
+    var upsellButtonIndex = -1;
+    
+    let upsellItems = ["notification:Get snow delay alerts", "notification:Get urgent school updates", "feedback:Give feedback"];
+    var approvedNotifications = false;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if(UpgradeManager.sharedInstance.proEnabled()) {
             applyProTheme();
         }
-    
-        if(NSUserDefaults.standardUserDefaults().boolForKey("hpanimations")) {
-            let topY = top.frame.origin.y;
-            let logoX = logo.frame.origin.x;
-            let bottomX = bottom.frame.origin.x;
-            let imageY = swipeupimage.frame.origin.y;
         
-            top.frame.origin.y = 0 - (top.frame.height / 2);
-            logo.frame.origin.x = 0 - (logo.frame.width / 2);
-            bottom.frame.origin.x = view.frame.width + (bottom.frame.width / 2);
+        if(NSUserDefaults.standardUserDefaults().boolForKey("hpanimations")) {
+            
+            top.alpha = 0;
+            logo.alpha = 0;
+            upsellButton.alpha = 0;
+            let imageY = swipeupimage.frame.origin.y
+            
             swipeupimage.frame.origin.y = view.frame.height + (swipeupimage.frame.height / 2);
         
             UIView.animateWithDuration(2.0, animations: {
-                self.top.frame.origin.y = topY;
-                self.logo.frame.origin.x = logoX;
-                self.bottom.frame.origin.x = bottomX;
+                self.top.alpha = 1;
+                self.logo.alpha = 1;
+                self.upsellButton.alpha = 1;
+                //self.bottom.frame.origin.x = bottomX;
                 self.swipeupimage.frame.origin.y = imageY;
             });
         }
         
-        // Setup the UI Before updating via sockets
+        //Setup the UI Before updating via sockets
         top.text = "Channel 2"
-        if(UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
+        /*if(UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
              bottom.text = "Use the tabs below to navigate. 👇 Portrait mode works best.";
         } else {
             bottom.text = "Use the tabs below to navigate. 👇 Landscape mode works best.";
-        }
+        }*/
         
         self.logo.image = UIImage(named: "green_logo");
         
@@ -92,6 +97,16 @@ class FirstViewController: UIViewController {
                             })
                         }
                         
+                    } else {
+                        if NSUserDefaults.standardUserDefaults().boolForKey("agreedToPrivacyPolicy") {
+                            /* Load the banner ad */
+                            self.adView.adUnitID = "{AD_UNIT_ID}"
+                            self.adView.rootViewController = self
+                            let req = GADRequest();
+                            req.testDevices = [kGADSimulatorID]
+                            req.keywords = [];
+                            self.adView.loadRequest(req)
+                        }
                     }
                 } catch {}
             }
@@ -119,21 +134,70 @@ class FirstViewController: UIViewController {
             }
         }
         
-        // Is the clubs feature enabled?
+        /* Is the clubs feature enabled?
         self.clubButton.title = "";
         self.clubButton.enabled = false;
         Async.background {
             let clubChecker = FeatureChecker();
-            clubChecker.assumeFalse();
             if(clubChecker.check("clubs")) {
                 Async.main {
-                    self.clubButton.enabled = true;
-                    self.clubButton.title = "Clubs";
+                    
                 }
             }
-        }
+        } */
+        
+        self.clubButton.enabled = true;
+        self.clubButton.title = "Clubs";
+        
+        nextButton();
+        // Refresh the button text every 5 seconds
+        NSTimer.scheduledTimerWithTimeInterval(8.0, target: self, selector: #selector(FirstViewController.nextButton), userInfo: nil, repeats: true)
     }
     
+    func nextButton() {
+        var ok = false;
+        repeat {
+            if((upsellButtonIndex == -1) || (upsellButtonIndex == (upsellItems.count - 1))){
+                upsellButtonIndex = 0;
+            } else {
+                upsellButtonIndex += 1;
+            }
+        
+            ok = true;
+        
+            upsellButton.setTitle(upsellItems[upsellButtonIndex].componentsSeparatedByString(":")[1], forState: .Normal);
+            
+            if(NotificationSettings.sharedInstance.isRegistered() || approvedNotifications) {
+                if upsellItems[upsellButtonIndex].componentsSeparatedByString(":")[0] == "notification" {
+                    ok = false;
+                    print("Choosing a different option...")
+                }
+            }
+        } while(!ok);
+        
+        if let title = upsellButton.currentTitle {
+            print("Current title = " + title)
+        } else {
+            print("Current title is nil");
+        }
+        print("Chose " + upsellItems[upsellButtonIndex].componentsSeparatedByString(":")[1])
+    }
+    
+    @IBAction func upsellButton(sender: AnyObject) {
+        if(upsellItems[upsellButtonIndex].hasPrefix("notification:")) {
+            approvedNotifications = true;
+            Async.background {
+                NotificationSettings.sharedInstance.register();
+                NotificationSettings.sharedInstance.saveRegistrationStatus();
+            }
+            nextButton();
+            NotificationSettings.sharedInstance.requestNotificationsPermissionsFromLocalDevice();
+        } else if(upsellItems[upsellButtonIndex].hasPrefix("feedback:")) {
+            let webview = WebViewController();
+            webview.url = NSUserDefaults.standardUserDefaults().stringForKey("phpserver")! + "pages/feedback.php";
+            self.showViewController(webview, sender: self)
+        }
+    }
     override func viewDidAppear(animated: Bool) {
         /* Make sure the user has agreed to the privacy policy */
         self.privacyPolicyCheck({(agreed: Bool) -> Void in
@@ -145,43 +209,58 @@ class FirstViewController: UIViewController {
         
         /* Yes, yes, yes, I know it will fall through the first time because this won't
          * evaulate to true until the completion handler above runs, but the user will
-         * probably appreciate having at least their first user be ad-free */
+         * probably appreciate having at least their first use be ad-free */
+        
+        
         if(NSUserDefaults.standardUserDefaults().boolForKey("agreedToPrivacyPolicy")) {
             
             if(!UpgradeManager.sharedInstance.proEnabled() && NSUserDefaults.standardUserDefaults().boolForKey("saidNoThisSession") == false) {
                 Async.background {
                     while(!UpgradeManager.sharedInstance.ready()) {}
                     
-                    Async.main {
-                        /* Ask the user if they want to upgrade */
-                        let popup = UIAlertController(title: "Free Pro Theme?", message: "Unlock the dark theme for 12 hours?", preferredStyle: .Alert)
-                        let yesButton = UIAlertAction(title: "Yes", style: .Default, handler: ({ (_) -> Void in
-                            UpgradeManager.sharedInstance.upgrade(self)
-                            if(UpgradeManager.sharedInstance.proEnabled()) {
-                                self.applyProTheme();
-                            }
-                        }));
-                        let noButton = UIAlertAction(title: "No", style: .Default, handler: ({ (_) -> Void in
-                            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "saidNoThisSession")
-                        }));
+                    let checker = FeatureChecker();
+                    checker.assumeFalse();
+                    if(checker.check("pro")) {
+                        Async.main {
                         
-                        popup.addActions([noButton,yesButton])
                         
-                        self.presentViewController(popup, animated: true, completion: nil)
-                        //UpgradeManager.sharedInstance.upgrade(self)
+                            /* Ask the user if they want to upgrade */
+                            let popup = UIAlertController(title: "Make Channel 2 Cooler?", message: "Get a cool theme for this app!", preferredStyle: .Alert)
+                            let yesButton = UIAlertAction(title: "Yes", style: .Default, handler: ({ (_) -> Void in
+                                UpgradeManager.sharedInstance.upgrade(self)
+                                if(UpgradeManager.sharedInstance.proEnabled()) {
+                                    self.applyProTheme();
+                                }
+                            }));
+                            let noButton = UIAlertAction(title: "No", style: .Default, handler: ({ (_) -> Void in
+                                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "saidNoThisSession")
+                            }));
+                        
+                            popup.addActions([noButton,yesButton])
+                        
+                            self.presentViewController(popup, animated: true, completion: nil)
+                            //UpgradeManager.sharedInstance.upgrade(self)
+                        }
                     }
                 }
             }
             
-            /* Load the banner ad */
-            self.adView.adUnitID = "ca-app-pub-7300192453759263/1790466434"
-            self.adView.rootViewController = self
-            let req = GADRequest();
-            req.testDevices = [kGADSimulatorID]
-            req.keywords = ["Bishop Shanahan", "Announcements", "School", "BSHS", "TV", "High School", "Education"]
-            Async.main {
-                self.adView.loadRequest(req)
-                        
+            /* Handle a url if there is one */
+            //handleUrl();
+        }
+    }
+    
+    func handleUrl() {
+        if let urlObject = NSUserDefaults.standardUserDefaults().valueForKey("__url")
+        {
+            if let url = urlObject as? String
+            {
+                let type = url.componentsSeparatedByString(":")[0];
+                let argument = url.componentsSeparatedByString(":")[1];
+                
+                if type == "club" {
+                  
+                }
             }
         }
     }
@@ -190,7 +269,6 @@ class FirstViewController: UIViewController {
         self.view.backgroundColor = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
         //self.view.backgroundColor = UIColor.grayColor();
         self.top.textColor = UIColor.greenColor();
-        self.bottom.textColor = UIColor.greenColor();
     }
     
     override func canBecomeFirstResponder() -> Bool {

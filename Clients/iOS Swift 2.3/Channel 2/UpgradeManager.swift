@@ -77,4 +77,12 @@ class UpgradeManager:NSObject {
         return false;
     }
     
+    internal func standardTextColor() -> UIColor {
+        return (UpgradeManager.sharedInstance.proEnabled()) ? UIColor.whiteColor() : UIColor.blackColor();
+    }
+    
+    internal func standardBackgroundColor() -> UIColor {
+        return (UpgradeManager.sharedInstance.proEnabled()) ? UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0) : UIColor.whiteColor();
+    }
+    
 }

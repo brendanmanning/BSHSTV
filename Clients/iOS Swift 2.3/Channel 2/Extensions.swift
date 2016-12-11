@@ -46,6 +46,42 @@ public extension String {
         
         return true;
     }
+    
+    func isAlphaNumericNoSpace() -> Bool {
+        if(self.isAlphaNumeric()) {
+            for char in self.characters {
+                if(char == " ") {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
+    func isNumeric() -> Bool {
+        let numerals = "0123456789";
+        for char in self.characters {
+            if(!numerals.containsString(String(char))) { return false; }
+        }
+        
+        return true;
+    }
+    
+    func superSanitize() -> String {
+        var result = "";
+        for char in self.characters {
+            if !String(char).isAlphaNumericNoSpace() {
+                result += "_";
+            } else {
+                result += String(char);
+            }
+        }
+        
+        return result;
+    }
 }
 
 public extension UIAlertController

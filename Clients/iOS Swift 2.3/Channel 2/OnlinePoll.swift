@@ -47,7 +47,7 @@ class OnlinePoll: NSObject {
     
     internal func choice(number:Int) -> String
     {
-        return options[number-1].text;
+        return options[number].text;
     }
     
     internal func choices() ->[String]

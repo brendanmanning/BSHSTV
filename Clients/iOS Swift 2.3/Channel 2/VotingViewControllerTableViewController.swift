@@ -63,8 +63,6 @@ class VotingViewControllerTableViewController: UITableViewController {
                     self.voteButton.setTitle("Press here to submit your vote", forState: .Normal)
                     self.voteButton.enabled = true;
                 }
-            
-            
         }
         
         getPollInfo();
@@ -78,7 +76,6 @@ class VotingViewControllerTableViewController: UITableViewController {
             p3.hidden = true;
             p4.hidden = true;
         }
-        
     }
 
     func getPollInfo()
@@ -131,7 +128,7 @@ class VotingViewControllerTableViewController: UITableViewController {
         if(!voter.didAlreadyVotedInPoll()) {
             pleaseVoteLabel.text = "Please vote!"
         } else {
-            pleaseVoteLabel.text = "Alredy voted! The question is below";
+            pleaseVoteLabel.text = "Already voted! The question is below";
         }
         
         l1.text = poll.choice(1) + " (" + votesToVoteString(String(Int(poll.getPercents()[0] * Float(poll.totalvotes))) + " votes)");

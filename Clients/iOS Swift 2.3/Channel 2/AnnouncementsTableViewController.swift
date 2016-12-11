@@ -389,13 +389,20 @@ class AnnouncementsTableViewController: UITableViewController {
         }
         if let url = NSURL(string: imageURL.stringByReplacingOccurrencesOfString("[slash]", withString: "/"))
         {
-            if let data = NSData(contentsOfURL: url)
-            {
-                return UIImage(data: data)!
+            let cacher = Cache();
+            if(cacher.cachedVersionExists(url)) {
+                return cacher.get(url)!
+            } else {
+                if let data = NSData(contentsOfURL: url)
+                {
+                    let img = UIImage(data: data)!
+                    cacher.cache(img, from: url)
+                    return img;
+                }
             }
         }
         
-        return UIImage(named: "ImageNotFound")!
+        return UIImage(named: "Image")!
     }
     
     func isInternetWorking() -> Bool

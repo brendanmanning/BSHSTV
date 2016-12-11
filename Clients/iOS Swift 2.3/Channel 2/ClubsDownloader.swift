@@ -91,6 +91,7 @@ class ClubsDownloader: NSObject {
                     club.admin = sub["admin"].stringValue;
                     club.privacy = sub["private"].boolValue;
                     club.membership = sub["membership"].intValue;
+                    club.email = sub["email"].stringValue;
                     let urlstr = sub["image"].stringValue
                     if let url = NSURL(string: urlstr) {
                         if(UIApplication.sharedApplication().canOpenURL(url)) {

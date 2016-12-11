@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>LNRSimpleNotifications.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Channel 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,7 +42,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>470970F3B76F9EAB6FB7368BCB60253A</key>
+		<key>5DEEE8B5B4F2B5E91978B2067FFD2000</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>778CA44C623114432C3844ACD1CF5C03</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>797566468E8CD0AC6870D4B85979C63B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,22 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ABADF0C66938542EDF6ADF58E8097D68</key>
+		<key>B5D838BEA7F20181FC660F89E1DF8DE5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BF493CD1736EEE46ABEBC29618BF78E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C5B80060FE8C664DF08841000F41D515</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E718BA2EF7A5C64E267B898785258ED2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EE5EBFAB2647ACD00C5F9994C085DC7F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

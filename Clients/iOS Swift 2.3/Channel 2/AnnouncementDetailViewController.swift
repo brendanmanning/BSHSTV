@@ -12,7 +12,6 @@ import Async
 class AnnouncementDetailViewController: UIViewController {
 
     @IBOutlet weak var profileIcon: UIImageView!
-    @IBOutlet weak var peopleAttendingTitleLabel: UILabel!
     @IBOutlet weak var goingButton: UIButton!
     @IBOutlet var peopleCountLabel: UILabel!
     @IBOutlet var creatorLabel: UILabel!
@@ -49,7 +48,7 @@ class AnnouncementDetailViewController: UIViewController {
                     goingButton.enabled = false;
                     goingButton.alpha = 0;
                     profileIcon.alpha = 0;
-                    peopleAttendingTitleLabel.alpha = 0;
+                   
                 } else {
                         peopleCountLabel.text = peopleAsString;
                 }

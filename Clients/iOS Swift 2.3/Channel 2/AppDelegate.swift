@@ -13,11 +13,15 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 import UserNotifications
+import SwiftyJSON
+import LNRSimpleNotifications
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, FIRMessagingDelegate {
 
     var window: UIWindow?
-
+    let notificationManager = LNRNotificationManager();
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
@@ -29,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          * Simply by enabling or disabling features on the web interface, we can decide which user MUST update the app */
 
         /* Right below is where we define the constant */
-        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V2.1", forKey: "version_feature");
+        NSUserDefaults.standardUserDefaults().setValue("iOS_APP_V2.2", forKey: "version_feature");
 
         /* Record the time the app launched */
         NSUserDefaults.standardUserDefaults().setObject(NSDate(), forKey: "app_last_launched")
@@ -60,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("phpserver") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue("http://apps.brendanmanning.com/bshstv/", forKey: "phpserver");
+            NSUserDefaults.standardUserDefaults().setValue("{server_url}", forKey: "phpserver");
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("pollid") == nil)
@@ -98,25 +102,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch(UIDevice.currentDevice().userInterfaceIdiom)
             {
                 /* iPads have their own page */
-            case .Pad: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPad.html", forKey: "starterVideo");
+            case .Pad: NSUserDefaults.standardUserDefaults().setValue("{starter_video_pad}", forKey: "starterVideo");
                 /* For everything else use the iPhone page */
-            default: NSUserDefaults.standardUserDefaults().setValue("http://bshstv.brendanmanning.com/p/defaultVideo-iPhone.html", forKey: "starterVideo");
+            default: NSUserDefaults.standardUserDefaults().setValue("{starter_video}", forKey: "starterVideo");
             }
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("YTKEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue(“{YT_KEY}”, forKey: "YTKEY")
+            NSUserDefaults.standardUserDefaults().setValue("{YT_KEY}", forKey: "YTKEY")
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_KEY") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue(“{API_KEY}”, forKey: "API_KEY")
+            NSUserDefaults.standardUserDefaults().setValue("{API_KEY}", forKey: "API_KEY")
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("API_SECRET") == nil)
         {
-            NSUserDefaults.standardUserDefaults().setValue(“{API_SECRET}”, forKey: "API_SECRET");
+            NSUserDefaults.standardUserDefaults().setValue("{API_SECRET}", forKey: "API_SECRET");
         }
 
         if(NSUserDefaults.standardUserDefaults().objectForKey("alreadyGoingToArray") == nil)
@@ -136,6 +140,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if(NSUserDefaults.standardUserDefaults().objectForKey("hpanimations") == nil)
         {
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hpanimations");
+        }
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("cachedfiles") == nil)
+        {
+            NSUserDefaults.standardUserDefaults().setObject([String](), forKey: "cachedfiles");
+        }
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("cachelimit") == nil) {
+            NSUserDefaults.standardUserDefaults().setInteger(25, forKey: "cachelimit")
+        }
+
+        if(NSUserDefaults.standardUserDefaults().objectForKey("caching") == nil) {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "caching")
         }
         
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "saidNoThisSession");
@@ -170,70 +187,75 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0)]
        
-        /*
-        // Popup customization
-        let pv = PopupDialogDefaultView.appearance()
-        pv.titleFont    = UIFont(name: "HelveticaNeue-Light", size: 16)!
-        pv.titleColor   = UIColor.whiteColor()
-        pv.messageFont  = UIFont(name: "HelveticaNeue", size: 14)!
-        pv.messageColor = UIColor(white: 0.8, alpha: 1)
-
-        // Customize the container view appearance
-        let pcv = PopupDialogContainerView.appearance()
-        pcv.backgroundColor = UIColor(red:0.11, green:0.43, blue:0.05, alpha:1.0)
-        pcv.cornerRadius    = 2
-        pcv.shadowEnabled   = true
-        pcv.shadowColor     = UIColor.blackColor()
-
-        // Overlay
-        let ov = PopupDialogOverlayView.appearance()
-        ov.blurEnabled = true
-        ov.blurRadius  = 30
-        ov.liveBlur    = true
-        ov.opacity     = 0.5
-        ov.color       = UIColor.blackColor()
-
-        // Customize default button appearance
-        let db = DefaultButton.appearance()
-        db.titleFont      = UIFont(name: "HelveticaNeue-Medium", size: 14)!
-        db.titleColor     = UIColor.whiteColor()
-        db.buttonColor    = UIColor(red:0.14, green:0.55, blue:0.06, alpha:1.0)
-        db.separatorColor = UIColor(red:0.44, green:0.49, blue:0.44, alpha:1.0)
-        */
-       
-        /* 
-         *** Google Ads Setup ***
-         */
+        /* Push Notification Customization */
+        notificationManager.notificationsPosition = LNRNotificationPosition.Top
+        notificationManager.notificationsBackgroundColor = UIColor(red:0.00, green:0.59, blue:0.00, alpha:1.0); // My wonderful custom color
+        notificationManager.notificationsTitleTextColor = UIColor.whiteColor(); // Looks better with the green
+        notificationManager.notificationsBodyTextColor = UIColor.whiteColor(); // Draw more attention to the title
+        notificationManager.notificationsSeperatorColor = UIColor.grayColor();
         
-        GADMobileAds.configureWithApplicationID(“{APP_ID}”);
+        /* Google Ads Setup */
+        GADMobileAds.configureWithApplicationID("{APP_ID}");
         
-        /*
-         *** Google Firebase Setup ***
-         */
+        /* Google Firebase Setup */
         FIRApp.configure();
         
-        /*
-         *** Firebase Remote Notification Configuration ***
-         */
+        /* Firebase Remote Notification Configuration */
         if #available(iOS 10.0, *) {
             let authOptions: UNAuthorizationOptions = [.Alert, .Badge, .Sound]
-            UNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions(authOptions,
-                completionHandler: {_, _ in })
+            //sUNUserNotificationCenter.currentNotificationCenter().requestAuthorizationWithOptions(
+                //authOptions,
+                //completionHandler: {_, _ in })
             
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.currentNotificationCenter().delegate = self
             // For iOS 10 data message (sent via FCM)
             FIRMessaging.messaging().remoteMessageDelegate = self
             
+            application.registerForRemoteNotifications();
+            
         } else {
             let settings: UIUserNotificationSettings =
                 UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
+            //application.registerUserNotificationSettings(settings)
+        }
+
+        /* Firebase Debugging */
+        if let tok = FIRInstanceID.instanceID().token() {
+            print("Token: " + tok);
+            saveFcmID();
+        } else {
+            print("token not set, trying to register");
+            Async.background {
+                NotificationSettings.sharedInstance.register();
+            }
+        }
+        print("User ID: " + String(NSUserDefaults.standardUserDefaults().valueForKey("userid")));
+        
+        
+        /* Finally we're here! */
+        return true;
+    }
+    
+    func tokenRefreshNotification(notification: NSNotification) {
+        if let refreshedToken = FIRInstanceID.instanceID().token() {
+            print("NEW TOKEN VALUE: \(refreshedToken)")
+            saveFcmID();
         }
         
-        application.registerForRemoteNotifications()
+        // Connect to FCM since connection may have failed when attempted before having a token.
+        connectToFcm()
+    }
+    
+    func applicationReceivedRemoteMessage(remoteMessage: FIRMessagingRemoteMessage) {
+        print("got message");
         
-        return true;
+        print(remoteMessage.appData)
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_: UNUserNotificationCenter, willPresent: UNNotification, withCompletionHandler: (UNNotificationPresentationOptions) -> Void) {
+        print("got 10 push")
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -252,6 +274,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -259,96 +282,162 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        UIApplication.sharedApplication().applicationIconBadgeNumber -= 1;
-    }
-
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        //bshstv://action=3?[param1, param2];
-        let action = url.absoluteString!.componentsSeparatedByString("action=")[0];
-        let params = url.absoluteString!.componentsSeparatedByString("?[")[0].substringToIndex(url.absoluteString!.endIndex).componentsSeparatedByString(",");
-        print("Action " + action);
-        print(params)
-        switch (action) {
-            case "settoken":
-                print(params[0]);
-            default :
-            print("didnt work");
-        }
         
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+       
+        /* Here is how URLs work:
+         * Any data will be passed as a string
+         * for example, a user token could be passed in a URL
+         * The first two characters should be numbers which indicate
+         * which action will be performed. For parity, the last four
+         * numbers will be the first two, followed by their sum
+ 
+         * For exmaple: 
+         * Token = bShS183sh35
+         * URL = bshstv://77bShS183sh357714 */
+        
+        var applicationUrl = url.absoluteString!;
+        
+        // Remove the bshstv://
+        applicationUrl = applicationUrl[applicationUrl.startIndex.advancedBy(9)..<applicationUrl.endIndex];
+        // Isolate the first two numbers
+        
+        let (valid, action,argument) = validateAndParseURL(applicationUrl);
+        print("URL Validity: " + String(valid))
+        print("URL Action: " + String(action));
+        
+        if(valid) {
+            switch action {
+            case 76:
+                NSUserDefaults.standardUserDefaults().setValue(argument, forKey: "account_token");
+                NSUserDefaults.standardUserDefaults().synchronize();
+                break;
+            case 65:
+                let controller:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("clubsVC") as! UIViewController
+               
+                UIApplication.sharedApplication().keyWindow?.rootViewController?.showViewController(controller, sender: UIApplication.sharedApplication().keyWindow?.rootViewController)
+                break;
+            default:
+                break;
+            }
+        }
         return true;
     }
     
-    // [START receive_message]
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSDictionary: Any]) {
-
-    }
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSDictionary: Any],
-                       fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-
-    }
-    // [END receive_message]
-    // [START refresh_token]
-    func tokenRefreshNotification(_ notification: NSNotification) {
-        if let refreshedToken = FIRInstanceID.instanceID().token() {
-            print("InstanceID token: \(refreshedToken)")
-        }
-        // Connect to FCM since connection may have failed when attempted before having a token.
-        connectToFcm()
-    }
-    // [END refresh_token]
-    // [START connect_to_fcm]
-    func connectToFcm() {
-        FIRMessaging.messaging().connectWithCompletion({(error) in
-            if error != nil {
-                print("Unable to connect with FCM. \(error)");
-            } else {
-                print("Connected to FCM.");
+    func validateAndParseURL(url:String) -> (Bool,Int,String) {
+        let actionNumeral = url[url.startIndex..<url.startIndex.advancedBy(2)];
+        let firstActionNumeral = url[url.startIndex..<url.startIndex.advancedBy(1)];
+        let secondActionNumeral = url[url.startIndex.advancedBy(1)..<url.startIndex.advancedBy(2)];
+        let parityRepeat = url[url.endIndex.advancedBy(-4)..<url.endIndex.advancedBy(-2)];
+        let parityAddition = url[url.endIndex.advancedBy(-2)..<url.endIndex];
+        let argument = url[url.startIndex.advancedBy(2)..<url.endIndex.advancedBy(-4)];
+        print("========== URL DEBUGGING ==========")
+        print("Action Numeral: " + actionNumeral);
+        print("First Part of Above: " + firstActionNumeral);
+        print("Second Part of Above: " + secondActionNumeral);
+        print("Partity Repeat: " + parityRepeat);
+        print("Addition of 1st & 2nd: " + parityAddition);
+        print("URL Argument: " + argument);
+        print("===================================")
+        
+        if(actionNumeral.isNumeric() && firstActionNumeral.isNumeric() && secondActionNumeral.isNumeric() && parityRepeat.isNumeric() && parityAddition.isNumeric()) {
+            if(actionNumeral == parityRepeat) {
+                if (Int(firstActionNumeral)! + Int(secondActionNumeral)!) == Int(parityAddition)! {
+                    return (true, Int(actionNumeral)!, argument);
+                }
             }
-        });
+        }
+        
+        return (false, 0, String())
     }
-    // [END connect_to_fcm]
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        print("Unable to register for remote notifications: \(error.localizedDescription)")
-    }
-    // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
-    // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
-    // the InstanceID token.
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        print("APNs token retrieved: \(deviceToken)")
-        // With swizzling disabled you must set the APNs token here.
-        // FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
-    }
-}
-// [START ios_10_message_handling]
-@available(iOS 10, *)
-extension AppDelegate : UNUserNotificationCenterDelegate {
-    // Receive displayed notifications for iOS 10 devices.
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                  willPresent notification: UNNotification,
-                                              withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        /*print(userInfo);
+        
         // Print message ID.
         print("Message ID: \(userInfo["gcm.message_id"]!)")
-        // Print full message.
-        print(userInfo)
+        
+        // Since the app's open, iOS won't show a notification for us
+        // Use the in-app notification manager
+        let json = JSON(userInfo)
+        let messageTitle = json["aps"]["alert"]["title"].stringValue;
+        let messageBody = json["aps"]["alert"]["body"].stringValue;
+      
+        if let __url = json["data"]["__url"].string {
+            if let type = json["data"]["__type"].string {
+                saveURLInfo(type + ":" + __url);
+            }
+        }
+        
+        showInAppNotification(messageTitle, message: messageBody);
+        */
     }
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                  didReceive response: UNNotificationResponse,
-                                             withCompletionHandler completionHandler: () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject],
+                       fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        
+        print(userInfo)
         // Print message ID.
         print("Message ID: \(userInfo["gcm.message_id"]!)")
-        // Print full message.
-        print(userInfo)
-    }
-}
-// [END ios_10_message_handling]
-// [START ios_10_data_message_handling]
-extension AppDelegate : FIRMessagingDelegate {
-    // Receive data message on iOS 10 devices while app is in the foreground.
-    func applicationReceivedRemoteMessage(_ remoteMessage: FIRMessagingRemoteMessage) {
-        print("App data from notiification while in app")
-        print(remoteMessage.appData)
-    }
-}
 
+        // Since the app's open, iOS won't show a notification for us
+        // Use the in-app notification manager
+        let json = JSON(userInfo)
+        let messageTitle = json["aps"]["alert"]["title"].stringValue;
+        let messageBody = json["aps"]["alert"]["body"].stringValue;
+        if let __url = json["data"]["__url"].string {
+            if let type = json["data"]["__type"].string {
+                saveURLInfo(type + ":" + __url);
+            }
+        }
+        showInAppNotification(messageTitle, message: messageBody);
+    }
+
+    func showInAppNotification(title:String, message:String) {
+        // Can't present two notifications at once
+        dismissInAppPopupIfActive();
+        // Show the notification
+        notificationManager.showNotification(title, body: message, onTap: {
+            // We're not handling this stuff yet
+            // Custom actions from popups will come later
+        })
+    }
+    
+    func dismissInAppPopupIfActive() {
+        if(notificationManager.activeNotification == nil) {
+            notificationManager.dismissActiveNotification(nil);
+        }
+    }
+    
+    func connectToFcm() {
+        FIRMessaging.messaging().connectWithCompletion(({ (error) in
+            if error != nil {
+                print("Unable to connect with FCM. \(error)")
+            } else {
+                print("Connected to FCM.")
+            }
+        }));
+    }
+    
+    func saveFcmID() {
+        NSUserDefaults.standardUserDefaults().setValue(FIRInstanceID.instanceID().token()!, forKey: "fcmid");
+    }
+    
+    func saveURLInfo(url:String) {
+        NSUserDefaults.standardUserDefaults().setValue(url, forKey: "__url");
+    }
+}
+ 
